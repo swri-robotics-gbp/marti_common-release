@@ -1,0 +1,16 @@
+ros-indigo-swri-image-util (0.0.2-1saucy) saucy; urgency=high
+
+  * Renames opencv_util package to swri_opencv_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>
+  * Renames math_util to swri_math_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Renames image_util package to swri_image_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Contributors: Edward Venator
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-image-util (0.0.1-1saucy) saucy; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
