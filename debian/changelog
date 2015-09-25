@@ -1,0 +1,14 @@
+ros-indigo-swri-prefix-tools (0.0.2-1saucy) saucy; urgency=high
+
+  * Renames prefix_tools to swri_prefix_tools. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Contributors: Edward Venator
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-prefix-tools (0.0.1-1saucy) saucy; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
