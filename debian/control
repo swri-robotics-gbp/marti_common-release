@@ -1,0 +1,12 @@
+Source: ros-indigo-opencv-util
+Section: misc
+Priority: extra
+Maintainer: Marc Alban <malban@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libopencv-dev, ros-indigo-catkin, ros-indigo-math-util
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-indigo-opencv-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libopencv-dev, ros-indigo-math-util
+Description: opencv_util
