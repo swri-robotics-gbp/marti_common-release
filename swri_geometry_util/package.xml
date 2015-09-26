@@ -1,6 +1,6 @@
 <package format="2">
   <name>swri_geometry_util</name>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <description>
 
      swri_geometry_util
@@ -15,4 +15,6 @@
   <depend>eigen</depend>  
   <depend>roscpp</depend>
   <depend>cmake_modules</depend>
+  <depend>libgeos++-dev</depend>
+  <depend>libopencv-dev</depend>
 </package>
