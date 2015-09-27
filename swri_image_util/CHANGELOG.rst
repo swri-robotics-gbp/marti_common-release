@@ -2,6 +2,9 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.4 (2015-09-27)
+------------------
+
 0.0.3 (2015-09-26)
 ------------------
 * Fixes missing depend on swri_opencv_util in swri_image_util.
