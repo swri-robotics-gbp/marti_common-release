@@ -2,6 +2,13 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.1 (2015-11-17)
+------------------
+* Adds a GetTF method to transform_util::Transform.
+* Installing the initialize_origin.py node.
+* Add extension type (e.g. png) in geo file
+* Contributors: Edward Venator, P. J. Reed, Vincent Rousseau
+
 0.1.0 (2015-09-29)
 ------------------
 * Updates lot_lon_tf_echo to use geometry_msgs/PoseStamped.
