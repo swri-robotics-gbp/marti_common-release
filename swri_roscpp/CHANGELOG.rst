@@ -2,9 +2,9 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.0.6 (2015-11-17)
+0.1.1 (2015-11-17)
 ------------------
-* First release of swri_roscpp
+* First jade release of swri_roscpp
 * Contributors: Edward Venator
 
 0.1.0 (2015-09-29)

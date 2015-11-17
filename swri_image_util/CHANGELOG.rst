@@ -2,10 +2,15 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.0.6 (2015-11-17)
+0.1.1 (2015-11-17)
 ------------------
 * Image normalization now supports normalization to a min/max range.
 * Contributors: Marc Alban
+
+0.1.0 (2015-09-29)
+------------------
+* Removes deprecated Eigen cmake module. (Issue `#245 <https://github.com/swri-robotics/marti_common/issues/245>`_)
+* Contributors: Edward Venator
 
 0.0.5 (2015-09-27)
 ------------------
