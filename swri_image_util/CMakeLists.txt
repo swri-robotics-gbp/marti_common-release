@@ -2,19 +2,21 @@ cmake_minimum_required(VERSION 2.8.3)
 project(swri_image_util)
 
 find_package(catkin REQUIRED COMPONENTS 
-  camera_calibration_parsers
-  cv_bridge
-  geometry_msgs
-  image_geometry
-  image_transport
-  nav_msgs
-  nodelet
   roscpp
   rospy
+  roslib
   std_msgs
+  nodelet
+  cv_bridge
+  tf
+  cmake_modules
+  geometry_msgs
+  image_geometry
+  nav_msgs
+  camera_calibration_parsers
   swri_math_util
   swri_opencv_util
-  tf
+  image_transport
 )
 
 find_package(OpenCV)
@@ -27,8 +29,8 @@ if(${Boost_LIB_VERSION} MATCHES "1_46*")
   add_definitions( -DBOOST_1_46 )
 endif(${Boost_LIB_VERSION} MATCHES "1_46*")
 
-find_package(Eigen3 REQUIRED)
-add_definitions(${EIGEN3_DEFINITIONS})
+find_package(Eigen REQUIRED)
+add_definitions(${EIGEN_DEFINITIONS})
 
 include(${QT_USE_FILE})
 
@@ -36,22 +38,24 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS 
-    camera_calibration_parsers
-    cv_bridge
-    geometry_msgs
-    image_geometry
-    image_transport
-    nav_msgs
-    nodelet
+    roscpp
     roscpp
     rospy
+    roslib
     std_msgs
+    nodelet
+    cv_bridge
+    tf
+    geometry_msgs
+    image_geometry
+    nav_msgs
+    camera_calibration_parsers
     swri_math_util
     swri_opencv_util
-    tf
+    image_transport
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${QT_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${QT_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} 
   src/image_normalization.cpp 

@@ -2,22 +2,12 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.0 (2015-09-29)
+0.0.6 (2015-11-17)
 ------------------
-* Updates lot_lon_tf_echo to use geometry_msgs/PoseStamped.
-  See issue `#246 <https://github.com/evenator/marti_common/issues/246>`_
-* Removes dependency on gps_common
-  The gps_common package was removed in ROS Jade, so a different message
-  type is needed for the local XY origin message. (Issue `#246 <https://github.com/swri-robotics/marti_common/issues/246>`_).
-  This replaces the gps_common/GPSFix message with a
-  geometry_msgs/PoseStamped message. The latitude is stored in
-  pose.position.y, the longitude is stored in pose.position.x, and the
-  altitude is stored in pose.position.z. As before, the local xy frame is
-  fixed in rotation such that the Z axis points away from the center of
-  the Earth and the Y axis points north. However, the choice of
-  geometry_msgs/PoseStamped allows for headings to be added in the future.
-* Refactors initialize origin and fixes a bug.
-* Contributors: Edward Venator
+* Adds a GetTF method to transform_util::Transform.
+* Properly installs the initialize_origin.py node.
+* Add extension type (e.g. png) in geo file
+* Contributors: Edward Venator, P. J. Reed, Vincent Rousseau
 
 0.0.5 (2015-09-27)
 ------------------

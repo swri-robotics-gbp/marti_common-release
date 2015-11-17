@@ -8,7 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   topic_tools
   geographic_msgs
-  geometry_msgs
+  gps_common
   diagnostic_msgs
   swri_math_util
   swri_yaml_util
@@ -27,7 +27,7 @@ catkin_package(
     pluginlib
     topic_tools
     geographic_msgs
-    geometry_msgs
+    gps_common
     diagnostic_msgs
     swri_math_util
     swri_yaml_util
@@ -82,6 +82,10 @@ install(TARGETS ${PROJECT_NAME} lat_lon_tf_echo transformer_plugins
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
+
+### Install Python Nodes/Scripts ###
+catkin_install_python(PROGRAMS nodes/initialize_origin.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(FILES transformer_plugins.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
