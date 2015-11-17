@@ -1,6 +1,6 @@
 // *****************************************************************************
 //
-// Copyright (c) 2014, Southwest Research Institute® (SwRI®)
+// Copyright (c) 2015, Southwest Research Institute® (SwRI®)
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -17,7 +17,7 @@
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-// ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+// ARE DISCLAIMED. IN NO EVENT SHALL SOUTHWEST RESEARCH INSTITUTE BE LIABLE FOR ANY
 // DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 // (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 // LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -26,54 +26,25 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // *****************************************************************************
+#ifndef SWRI_ROSCPP_PUBLISHER_H_
+#define SWRI_ROSCPP_PUBLISHER_H_
 
-#include <gtest/gtest.h>
+#include <ros/node_handle.h>
 
-#include <ros/ros.h>
-
-#include <swri_transform_util/georeference.h>
-
-TEST(GeoreferenceTests, Load)
+namespace swri
 {
-  std::string filename;
-  ASSERT_TRUE(ros::param::get("geo_file", filename));
-
-  swri_transform_util::GeoReference georeference(filename);
-  ASSERT_TRUE(georeference.Load());
-
-  EXPECT_EQ(std::string("wgs84"), georeference.Datum());
-  EXPECT_EQ(std::string("utm"), georeference.Projection());
-  EXPECT_EQ(29184, georeference.Width());
-  EXPECT_EQ(15872, georeference.Height());
-  EXPECT_EQ(512, georeference.TileSize());
-  EXPECT_EQ("jpg", georeference.Extension());
-}
-
-TEST(GeoreferenceTests, LoadExtension)
+template<typename M>
+ros::Publisher advertise(
+  ros::NodeHandle &nh,
+  const std::string name,
+  uint32_t queue_size,
+  bool latched=false)
 {
-  std::string filename;
-  ASSERT_TRUE(ros::param::get("geo_file_extension", filename));
-
-  swri_transform_util::GeoReference georeference(filename);
-  ASSERT_TRUE(georeference.Load());
-
-  EXPECT_EQ(std::string("wgs84"), georeference.Datum());
-  EXPECT_EQ(std::string("utm"), georeference.Projection());
-  EXPECT_EQ(29184, georeference.Width());
-  EXPECT_EQ(15872, georeference.Height());
-  EXPECT_EQ(512, georeference.TileSize());
-  EXPECT_EQ("png", georeference.Extension());
-}
-
-// TODO(malban): Test coordinate/pixel transforms.
-
-// Run all the tests that were declared with TEST()
-int main(int argc, char **argv)
-{
-  testing::InitGoogleTest(&argc, argv);
-
-  // Initialize the ROS core parameters can be loaded from the launch file
-  ros::init(argc, argv, "test_georeference");
-
-  return RUN_ALL_TESTS();
-}
+  const std::string resolved_name = nh.resolveName(name);
+  ROS_INFO("Publishing [%s] to '%s'.",
+           name.c_str(),
+           resolved_name.c_str());
+  return nh.advertise<M>(name, queue_size, latched);
+}    
+}  // namespace swri
+#endif  // SWRI_ROSCPP_PUBLISHER_H_
