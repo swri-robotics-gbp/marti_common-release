@@ -2,6 +2,11 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.6 (2015-11-17)
+------------------
+* Image normalization now supports normalization to a min/max range.
+* Contributors: Marc Alban
+
 0.0.5 (2015-09-27)
 ------------------
 
