@@ -1,0 +1,62 @@
+ros-jade-swri-transform-util (0.1.1-0utopic) utopic; urgency=high
+
+  * Adds a GetTF method to transform_util::Transform.
+  * Installing the initialize_origin.py node.
+  * Add extension type (e.g. png) in geo file
+  * Contributors: Edward Venator, P. J. Reed, Vincent Rousseau
+
+ -- Marc Alban <malban@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-jade-swri-transform-util (0.1.0-0utopic) utopic; urgency=high
+
+  * Updates lot_lon_tf_echo to use geometry_msgs/PoseStamped.
+    See issue #246 <https://github.com/evenator/marti_common/issues/246>
+  * Removes dependency on gps_common
+    The gps_common package was removed in ROS Jade, so a different message
+    type is needed for the local XY origin message. (Issue #246 <https://github.com/swri-robotics/marti_common/issues/246>).
+    This replaces the gps_common/GPSFix message with a
+    geometry_msgs/PoseStamped message. The latitude is stored in
+    pose.position.y, the longitude is stored in pose.position.x, and the
+    altitude is stored in pose.position.z. As before, the local xy frame is
+    fixed in rotation such that the Z axis points away from the center of
+    the Earth and the Y axis points north. However, the choice of
+    geometry_msgs/PoseStamped allows for headings to be added in the future.
+  * Refactors initialize origin and fixes a bug.
+  * Contributors: Edward Venator
+
+ -- Marc Alban <malban@swri.org>  Tue, 29 Sep 2015 05:00:00 -0000
+
+ros-jade-swri-transform-util (0.0.5-0utopic) utopic; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-jade-swri-transform-util (0.0.4-0utopic) utopic; urgency=high
+
+  * Fixes missing dependencies. `#239<https://github.com/swri-robotics/marti_common/issues/239>`_.
+  * Contributors: Ed Venator
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-jade-swri-transform-util (0.0.3-0utopic) utopic; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-jade-swri-transform-util (0.0.2-0utopic) utopic; urgency=high
+
+  * Renames yaml_util to swri_yaml_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Renames transform_util to swri_transform_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Contributors: Edward Venator
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-jade-swri-transform-util (0.0.1-0utopic) utopic; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
