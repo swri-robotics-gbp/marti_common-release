@@ -1,0 +1,43 @@
+ros-indigo-swri-transform-util (0.0.6-0trusty) trusty; urgency=high
+
+  * Adds a GetTF method to transform_util::Transform.
+  * Properly installs the initialize_origin.py node.
+  * Add extension type (e.g. png) in geo file
+  * Contributors: Edward Venator, P. J. Reed, Vincent Rousseau
+
+ -- Marc Alban <malban@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-indigo-swri-transform-util (0.0.5-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-transform-util (0.0.4-0trusty) trusty; urgency=high
+
+  * Fixes missing dependencies. `#239<https://github.com/swri-robotics/marti_common/issues/239>`_.
+  * Contributors: Ed Venator
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-transform-util (0.0.3-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-transform-util (0.0.2-0trusty) trusty; urgency=high
+
+  * Renames yaml_util to swri_yaml_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Renames transform_util to swri_transform_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Contributors: Edward Venator
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-indigo-swri-transform-util (0.0.1-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
