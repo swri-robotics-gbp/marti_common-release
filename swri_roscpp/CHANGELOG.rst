@@ -2,13 +2,14 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.1 (2015-11-17)
+0.0.7 (2015-11-18)
 ------------------
-* First jade release of swri_roscpp
-* Contributors: Edward Venator
+* Fixes broken changelog `#279<https://github.com/swri-robotics/marti_common/issues/279>`_.
 
-0.1.0 (2015-09-29)
+0.0.6 (2015-11-17)
 ------------------
+* First release of swri_roscpp
+* Contributors: Edward Venator
 
 0.0.5 (2015-09-27 15:27)
 ------------------------
