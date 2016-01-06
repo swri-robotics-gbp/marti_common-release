@@ -31,7 +31,6 @@
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
 
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
@@ -45,19 +44,16 @@
 
 namespace swri_image_util
 {
-  class ContrastStretchNodelet : public nodelet::Nodelet
+  class NormalizeResponseNodelet : public nodelet::Nodelet
   {
   public:
-    ContrastStretchNodelet() :
-      bins_(8),
-      max_min_(0.0),
-      min_max_(0.0),
-      over_exposure_threshold_(255.0),
-      over_exposure_dilation_(3)
+    NormalizeResponseNodelet() :
+      filter_size_(9),
+      filter_cap_(31)
     {
     }
 
-    ~ContrastStretchNodelet()
+    ~NormalizeResponseNodelet()
     {
     }
 
@@ -66,64 +62,44 @@ namespace swri_image_util
       ros::NodeHandle &node = getNodeHandle();
       ros::NodeHandle &priv = getPrivateNodeHandle();
 
-      priv.param("bins", bins_, bins_);
-      priv.param("max_min", max_min_, max_min_);
-      priv.param("min_max", min_max_, min_max_);
-      priv.param("over_exposure_threshold", over_exposure_threshold_, over_exposure_threshold_);
-      priv.param("over_exposure_dilation", over_exposure_dilation_, over_exposure_dilation_);
-      
-      std::string mask;
-      priv.param("mask", mask, std::string(""));
-      if (!mask.empty())
-      {
-        mask_ = cv::imread(mask, 0);
-      }
+      priv.param("filter_size", filter_size_, filter_size_);
+      priv.param("filter_cap", filter_cap_, filter_cap_);
+
+      buffer_.create(1, 10000000, CV_8U);
 
       image_transport::ImageTransport it(node);
       image_pub_ = it.advertise("normalized_image", 1);
-      image_sub_ = it.subscribe("image", 1, &ContrastStretchNodelet::ImageCallback, this);
+      image_sub_ = it.subscribe("image", 1, &NormalizeResponseNodelet::ImageCallback, this);
     }
 
     void ImageCallback(const sensor_msgs::ImageConstPtr& image)
     {
-      cv_bridge::CvImagePtr cv_image = cv_bridge::toCvCopy(image);
+      cv_bridge::CvImageConstPtr cv_image = cv_bridge::toCvShare(image);
 
-      cv::Mat mask;
-
-      if (over_exposure_threshold_ < 255 && over_exposure_threshold_ > 0)
+      if (image->encoding == sensor_msgs::image_encodings::MONO8)
       {
-        cv::Mat over_exposed = cv_image->image > over_exposure_threshold_;
-        cv::Mat element = cv::getStructuringElement(
-          cv::MORPH_ELLIPSE,
-          cv::Size(2 * over_exposure_dilation_ + 1, 2 * over_exposure_dilation_ + 1 ),
-          cv::Point(over_exposure_dilation_, over_exposure_dilation_ ));
-        cv::dilate(over_exposed, over_exposed, element);
-        
-        mask = mask_.clone();
-        mask.setTo(0, over_exposed);
+        swri_image_util::NormalizeResponse(cv_image->image, normalized_, filter_size_, filter_cap_, buffer_.ptr());
+        cv_bridge::CvImage normalized_image;
+        normalized_image.header = image->header;
+        normalized_image.encoding = image->encoding;
+        normalized_image.image = normalized_;
+        image_pub_.publish(normalized_image.toImageMsg());
       }
       else
       {
-        mask = mask_;
+        ROS_WARN("Unsupported image encoding: %s", image->encoding.c_str());
       }
-
-      swri_image_util::ContrastStretch(bins_, cv_image->image, cv_image->image, mask, max_min_, min_max_);
-
-      image_pub_.publish(cv_image->toImageMsg());
     }
 
   private:
-    int32_t bins_;
-    double max_min_;
-    double min_max_;
-    double over_exposure_threshold_;
-    int32_t over_exposure_dilation_;
+    int32_t filter_size_;
+    int32_t filter_cap_;
     
-    cv::Mat mask_;
+    cv::Mat normalized_;
+    cv::Mat buffer_;
 
     image_transport::Subscriber image_sub_;
     image_transport::Publisher image_pub_;
-
   };
 }
 
@@ -131,6 +107,6 @@ namespace swri_image_util
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_DECLARE_CLASS(
     swri_image_util,
-    contrast_stretch,
-    swri_image_util::ContrastStretchNodelet,
+    normalize_response,
+    swri_image_util::NormalizeResponseNodelet,
     nodelet::Nodelet)
