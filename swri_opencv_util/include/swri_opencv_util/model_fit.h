@@ -57,8 +57,8 @@ namespace swri_opencv_util
     cv::Mat model;
     
     // Put data into the expected format.
-    std::vector<cv::Vec4f> matched_points;
-    if (!ConvertToVec4f(points1, points2, matched_points))
+    cv::Mat correspondences;
+    if (!ZipCorrespondences(points1, points2, correspondences))
     {
       return model;
     }
@@ -68,7 +68,7 @@ namespace swri_opencv_util
     swri_math_util::Ransac<Model> ransac(rng);
 
     model = ransac.FitModel(
-      matched_points, max_error, confidence, max_iterations, good_points, iterations);
+      correspondences, max_error, confidence, max_iterations, good_points, iterations);
     
     if (good_points.empty())
     {
@@ -125,6 +125,7 @@ namespace swri_opencv_util
     int32_t max_iterations = 1000,
     swri_math_util::RandomGeneratorPtr rng = swri_math_util::RandomGeneratorPtr());
     
+  // Returns a 2x3 transform that can be applied to points1 to align them to points2.
   cv::Mat FitRigidTransform2d(const cv::Mat& points1, const cv::Mat& points2);
   
   cv::Mat FindAffineTransform2d(
