@@ -2,6 +2,9 @@
 Changelog for package swri_prefix_tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.2 (2016-01-06)
+------------------
+
 0.1.1 (2015-11-17)
 ------------------
 * Properly installs the prefix scripts to the package share destination.
