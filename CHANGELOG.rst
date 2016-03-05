@@ -2,6 +2,11 @@
 Changelog for package swri_yaml_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.9 (2016-03-04)
+------------------
+* Adds uint16 support to swri_yaml_util
+* Contributors: P. J. Reed
+
 0.0.8 (2016-01-06)
 ------------------
 
