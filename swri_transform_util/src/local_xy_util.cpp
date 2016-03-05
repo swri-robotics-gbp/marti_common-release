@@ -36,11 +36,12 @@
 #include <tf/transform_datatypes.h>
 
 #include <geographic_msgs/GeoPose.h>
-#include <geometry_msgs/PoseStamped.h>
+#include <gps_common/GPSFix.h>
 
 #include <swri_math_util/constants.h>
 #include <swri_math_util/trig_util.h>
 #include <swri_transform_util/earth_constants.h>
+#include <swri_transform_util/transform_util.h>
 
 namespace swri_transform_util
 {
@@ -136,16 +137,16 @@ namespace swri_transform_util
     
       try
       {
-        const geometry_msgs::PoseStampedConstPtr origin = msg->instantiate<geometry_msgs::PoseStamped>();
-        reference_latitude_ = origin->pose.position.y * swri_math_util::_deg_2_rad;
-        reference_longitude_ = origin->pose.position.x * swri_math_util::_deg_2_rad;
-        reference_altitude_ = origin->pose.position.z;
-
+        const gps_common::GPSFixConstPtr origin = msg->instantiate<gps_common::GPSFix>();
+        reference_latitude_ = origin->latitude * swri_math_util::_deg_2_rad;
+        reference_longitude_ = origin->longitude * swri_math_util::_deg_2_rad;
+        reference_altitude_ = origin->altitude;
+        
         if (!ignore_reference_angle)
         {
-          reference_angle_ = tf::getYaw(origin->pose.orientation);
+          reference_angle_ = ToYaw(origin->track);
         }
-
+        
         std::string frame = origin->header.frame_id;
 
         if (frame.empty()) 
