@@ -2,6 +2,9 @@
 Changelog for package swri_opencv_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.9 (2016-03-04)
+------------------
+
 0.0.8 (2016-01-06)
 ------------------
 * Marks some constructors explicit.
