@@ -2,6 +2,9 @@
 Changelog for package swri_math_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.3 (2016-03-04)
+------------------
+
 0.1.2 (2016-01-06)
 ------------------
 * Refactors RANSAC matching code to use more matrix operations.
