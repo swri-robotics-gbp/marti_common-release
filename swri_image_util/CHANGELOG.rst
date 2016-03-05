@@ -2,13 +2,10 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.0.9 (2016-03-04)
+0.1.3 (2016-03-04)
 ------------------
-* Properly installs the normalize_response node.
-* No longer installs the geometry_util.test file.
-* Contributors: P. J. Reed
 
-0.0.8 (2016-01-06)
+0.1.2 (2016-01-06)
 ------------------
 * Fixes nodelet description for normalize_response.
 * Tweaks contrast stretching to increase blending of min/max bounds across grid.
@@ -17,13 +14,15 @@ Changelog for package swri_image_util
 * Adds normalize response image normalization method.
 * Contributors: Marc Alban
 
-0.0.7 (2015-11-18)
-------------------
-
-0.0.6 (2015-11-17)
+0.1.1 (2015-11-17)
 ------------------
 * Image normalization now supports normalization to a min/max range.
 * Contributors: Marc Alban
+
+0.1.0 (2015-09-29)
+------------------
+* Removes deprecated Eigen cmake module. (Issue `#245 <https://github.com/swri-robotics/marti_common/issues/245>`_)
+* Contributors: Edward Venator
 
 0.0.5 (2015-09-27)
 ------------------

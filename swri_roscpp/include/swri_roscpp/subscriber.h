@@ -367,7 +367,7 @@ void Subscriber::setTimeout(const double time_out)
 inline
 bool Subscriber::blockTimeouts(bool block)
 {
-  return impl_->blockTimeouts(block);
+  impl_->blockTimeouts(block);
 }
 
 inline
