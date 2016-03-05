@@ -1,3 +1,37 @@
+## marti_common (jade) - 0.1.3-0
+
+The packages in the `marti_common` repository were released into the `jade` distro by running `/usr/bin/bloom-release marti_common --rosdistro jade --track jade` on `Sat, 05 Mar 2016 04:29:10 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_console_util`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `0.1.2-0`
+- old version: `0.1.2-0`
+- new version: `0.1.3-0`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.4`
+- rosdistro version: `0.4.4`
+- vcstools version: `0.1.38`
+
+
 ## marti_common (indigo) - 0.0.9-1
 
 The packages in the `marti_common` repository were released into the `indigo` distro by running `/usr/bin/bloom-release marti_common --track indigo --rosdistro indigo` on `Sat, 05 Mar 2016 04:16:39 -0000`
