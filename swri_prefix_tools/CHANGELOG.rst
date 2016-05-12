@@ -2,6 +2,11 @@
 Changelog for package swri_prefix_tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.10 (2016-05-12)
+-------------------
+* Adds missing dependency for swri_prefix_tools
+* Contributors: Edward Venator
+
 0.0.9 (2016-03-04)
 ------------------
 
