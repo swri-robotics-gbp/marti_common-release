@@ -2,10 +2,28 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.3 (2016-03-04)
-------------------
+0.0.10 (2016-05-12)
+-------------------
+* Update contrast stretch nodelet to automatically scale image mask to correct size.
+* Fixed compile error when ros-indigo-opencv3 is installed (`#307 <https://github.com/evenator/marti_common/issues/307>`_)
+  * Fixed compile error when package ros-indigo-opencv3 is installed.
+  swri_geometry_util uses wrong version of OpenCV when the package
+  ros-indigo-opencv3 is installed. This patch fixes the issue.
+  * Updated all CMakeFiles.txt to specify OpenCV version 2
+  The find_package for OpenCV is now:
+  ./swri_opencv_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
+  ./swri_geometry_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
+  ./swri_image_util/CMakeLists.txt:find_package(OpenCV 2)
+  ./swri_transform_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
+* Contributors: Kim Mathiassen, Marc Alban
 
-0.1.2 (2016-01-06)
+0.0.9 (2016-03-04)
+------------------
+* Properly installs the normalize_response node.
+* No longer installs the geometry_util.test file.
+* Contributors: P. J. Reed
+
+0.0.8 (2016-01-06)
 ------------------
 * Fixes nodelet description for normalize_response.
 * Tweaks contrast stretching to increase blending of min/max bounds across grid.
@@ -14,15 +32,13 @@ Changelog for package swri_image_util
 * Adds normalize response image normalization method.
 * Contributors: Marc Alban
 
-0.1.1 (2015-11-17)
+0.0.7 (2015-11-18)
+------------------
+
+0.0.6 (2015-11-17)
 ------------------
 * Image normalization now supports normalization to a min/max range.
 * Contributors: Marc Alban
-
-0.1.0 (2015-09-29)
-------------------
-* Removes deprecated Eigen cmake module. (Issue `#245 <https://github.com/swri-robotics/marti_common/issues/245>`_)
-* Contributors: Edward Venator
 
 0.0.5 (2015-09-27)
 ------------------

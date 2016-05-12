@@ -2,19 +2,24 @@
 Changelog for package swri_prefix_tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.3 (2016-03-04)
-------------------
-
-0.1.2 (2016-01-06)
-------------------
-
-0.1.1 (2015-11-17)
-------------------
-* Properly installs the prefix scripts to the package share destination.
+0.0.10 (2016-05-12)
+-------------------
+* Adds missing dependency for swri_prefix_tools
 * Contributors: Edward Venator
 
-0.1.0 (2015-09-29)
+0.0.9 (2016-03-04)
 ------------------
+
+0.0.8 (2016-01-06)
+------------------
+
+0.0.7 (2015-11-18)
+------------------
+
+0.0.6 (2015-11-17)
+------------------
+* Properly installs prefix scripts to the package share destination.
+* Contributors: Edward Venator
 
 0.0.5 (2015-09-27)
 ------------------

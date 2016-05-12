@@ -8,13 +8,13 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   topic_tools
   geographic_msgs
-  geometry_msgs
+  gps_common
   diagnostic_msgs
   swri_math_util
   swri_yaml_util
 ) 
 
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 2 REQUIRED)
 find_package(Boost REQUIRED)
 
 catkin_package(
@@ -27,7 +27,7 @@ catkin_package(
     pluginlib
     topic_tools
     geographic_msgs
-    geometry_msgs
+    gps_common
     diagnostic_msgs
     swri_math_util
     swri_yaml_util
