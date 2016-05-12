@@ -2,15 +2,8 @@
 Changelog for package swri_geometry_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.4 (2016-05-12)
-------------------
-* Fixing Jade compilation issues
-  1. For some reason, Eigen3 wasn't being properly detected by CMake.  I
-  added a few lines that will make it try using PkgConfig if CMake
-  fails.
-  2. swri_image_util's geometry_util.test was being installed but should
-  not have been; nothing else is in its "launch" directory, so I removed
-  the whole directory from the install.
+0.0.10 (2016-05-12)
+-------------------
 * Fixed compile error when ros-indigo-opencv3 is installed (`#307 <https://github.com/evenator/marti_common/issues/307>`_)
   * Fixed compile error when package ros-indigo-opencv3 is installed.
   swri_geometry_util uses wrong version of OpenCV when the package
@@ -21,23 +14,19 @@ Changelog for package swri_geometry_util
   ./swri_geometry_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
   ./swri_image_util/CMakeLists.txt:find_package(OpenCV 2)
   ./swri_transform_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
-  Conflicts:
-  swri_geometry_util/CMakeLists.txt
-* Contributors: Kim Mathiassen, P. J. Reed
+* Contributors: Kim Mathiassen
 
-0.1.3 (2016-03-04)
+0.0.9 (2016-03-04)
 ------------------
 
-0.1.2 (2016-01-06)
+0.0.8 (2016-01-06)
 ------------------
 
-0.1.1 (2015-11-17)
+0.0.7 (2015-11-18)
 ------------------
 
-0.1.0 (2015-09-29)
+0.0.6 (2015-11-17)
 ------------------
-* Removes deprecated Eigen cmake module. (Issue `#245 <https://github.com/swri-robotics/marti_common/issues/245>`_)
-* Contributors: Edward Venator
 
 0.0.5 (2015-09-27)
 ------------------
