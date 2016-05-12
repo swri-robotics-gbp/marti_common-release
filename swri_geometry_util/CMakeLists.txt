@@ -4,14 +4,23 @@ project(swri_geometry_util)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  cmake_modules
   tf
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
+
 find_package(GEOS REQUIRED)
-find_package(Eigen REQUIRED)
-add_definitions(${EIGEN_DEFINITIONS})
+
+find_package(Eigen3)
+if(NOT EIGEN3_FOUND)
+  # Fallback to pkg-config
+  find_package(PkgConfig)
+  pkg_check_modules(EIGEN3 REQUIRED eigen3)
+else()
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
+add_definitions(${EIGEN3_DEFINITIONS})
+
 find_package(OpenCV 2 REQUIRED)
 
 catkin_package(
@@ -22,7 +31,7 @@ catkin_package(
     tf
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${GEOS_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${GEOS_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME}
   src/intersection.cpp

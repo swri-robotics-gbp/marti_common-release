@@ -50,13 +50,8 @@ namespace swri
 //
 // - Implements timeout logic and timeout counting.
 //
-// This implementation provides two interfaces.  It supports the
-// traditional ROS callback interface (though it is deliberately
-// limited to callbacks that take a *ConstPtr& type), and an interface
-// where the message is simply assigned to *ConstPtr variable that is
-// specified at creation.  The second interface replaces the previous
-// swri_roscpp::LatchedSubscriber and allows you to avoid writing
-// trivial callback functions.
+// This implementation is deliberately limited to a single callback
+// signature.
 
 class Subscriber
 {
@@ -83,17 +78,6 @@ class Subscriber
              T *obj,
              const ros::TransportHints &transport_hints=ros::TransportHints());
 
-  // This is an alternate interface that stores a received message in
-  // a variable without calling a user-defined callback function.
-  // This is useful for cases where you just want to store a message
-  // for usage later and avoids having to write a trivial callback
-  // function.
-  template<class M>
-  Subscriber(ros::NodeHandle &nh,
-             const std::string &topic,
-             boost::shared_ptr< M const > *dest,
-             const ros::TransportHints &transport_hints=ros::TransportHints());
-  
   Subscriber& operator=(const Subscriber &other);
 
   // Reset all statistics, including message and timeout counts.
@@ -216,18 +200,6 @@ Subscriber::Subscriber(ros::NodeHandle &nh,
   impl_ = boost::shared_ptr<SubscriberImpl>(
     new TypedSubscriberImpl<M,T>(
       nh, topic, queue_size, fp, obj, transport_hints));
-}
-
-template<class M>
-inline
-Subscriber::Subscriber(ros::NodeHandle &nh,
-                       const std::string &topic,
-                       boost::shared_ptr< M const > *dest,
-                       const ros::TransportHints &transport_hints)
-{
-  impl_ = boost::shared_ptr<SubscriberImpl>(
-    new StorageSubscriberImpl<M>(
-      nh, topic, dest, transport_hints));
 }
 
 inline
@@ -412,7 +384,7 @@ void Subscriber::timeoutParam(
 inline
 bool Subscriber::blockTimeouts(bool block)
 {
-  return impl_->blockTimeouts(block);
+  impl_->blockTimeouts(block);
 }
 
 inline

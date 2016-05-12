@@ -1,6 +1,6 @@
 <package format="2">
   <name>swri_geometry_util</name>
-  <version>0.0.10</version>
+  <version>0.1.4</version>
   <description>
 
      swri_geometry_util
@@ -12,8 +12,6 @@
   <url>https://github.com/swri-robotics/marti_common</url>
   
   <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>cmake_modules</depend>
   <depend>eigen</depend>
   <depend>libgeos++-dev</depend>
   <depend>libopencv-dev</depend>
