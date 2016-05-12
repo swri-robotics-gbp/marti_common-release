@@ -1,6 +1,6 @@
 // *****************************************************************************
 //
-// Copyright (c) 2014, Southwest Research Institute® (SwRI®)
+// Copyright (c) 2016, Southwest Research Institute® (SwRI®)
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,43 +26,66 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // *****************************************************************************
+#include <swri_route_util/route_point.h>
 
-#ifndef YAML_UTIL_YAML_UTIL_H_
-#define YAML_UTIL_YAML_UTIL_H_
-
-#include <stdint.h>
-#include <memory>
-
-#include <yaml-cpp/yaml.h>
-
-#include <swri_yaml_util/version.h>
-
-#ifndef YAMLCPP_OLD_API
-namespace YAML
+namespace swri_route_util
 {
-  void operator >> (const YAML::Node& node, float& value);
-  void operator >> (const YAML::Node& node, double& value);
-  void operator >> (const YAML::Node& node, bool& value);
-  void operator >> (const YAML::Node& node, int16_t& value);
-  void operator >> (const YAML::Node& node, uint16_t& value);
-  void operator >> (const YAML::Node& node, int32_t& value);
-  void operator >> (const YAML::Node& node, uint32_t& value);
-  void operator >> (const YAML::Node& node, int64_t& value);
-  void operator >> (const YAML::Node& node, uint64_t& value);
-  void operator >> (const YAML::Node& node, std::string& value);
-}
-#endif  // YAMLCPP_OLD_API
-
-namespace swri_yaml_util
+std::vector<std::string> RoutePoint::getPropertyNames() const
 {
-  bool LoadFile(const std::string& path, YAML::Node& yaml);
-  bool LoadString(const std::string& input, YAML::Node& yaml);
-  bool LoadMap(const std::map<std::string, std::string>& dict, YAML::Node& yaml);
-  bool FindValue(const YAML::Node& node, const std::string& name);
+  std::vector<std::string> names;
+  // Add native properties first.
+  // But we don't have any yet.
+  // names.push_back("name");
+
+  for (auto const &it : properties_) {
+    names.push_back(it.first);
+  }
   
-  std::auto_ptr<YAML::Node> Clone(const YAML::Node& node);
-  
-  std::string ToString(double value, int32_t precision);
+  return names;
 }
 
-#endif  // YAML_UTIL_YAML_UTIL_H_
+std::string RoutePoint::getProperty(const std::string &name) const
+{
+  // Check for native properties first.
+  // But we don't have any yet.
+  // if (name == "name") {
+  //   return name_;
+  // } else
+  if (properties_.count(name)) {
+    return properties_.at(name);
+  } else {
+    return "";
+  }
+}
+
+bool RoutePoint::hasProperty(const std::string &name) const
+{
+  // Check for native properties first.
+  // But we don't have any yet.
+  // if (name == "name") {
+  //   return true;
+  // } else
+  return properties_.count(name);
+}
+
+void RoutePoint::setProperty(const std::string &name, const std::string &value)
+{
+  // Check for native properties first.
+  // But we don't have any yet.
+  // if (name == "name") {
+  //   name_ = value;
+  // } else {
+    properties_[name] = value;
+  // }   
+}
+
+void RoutePoint::deleteProperty(const std::string &name)
+{
+  // If we add "native" properties that are erasable, we should check
+  // for those here first and mark them as deleted when appropriate.
+  
+  // Otherwise, fall back to the generic properties.
+  // std::map::erase() ignores the call if the key is not found.
+  properties_.erase(name);
+}
+}  // namespace swri_route_util
