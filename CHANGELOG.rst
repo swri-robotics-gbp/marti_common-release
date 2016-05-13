@@ -2,6 +2,11 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.5 (2016-05-13)
+------------------
+* Add an explicit dependency on pkg-config
+* Contributors: P. J. Reed
+
 0.1.4 (2016-05-12)
 ------------------
 * Update contrast stretch nodelet to automatically scale image mask to correct size.
