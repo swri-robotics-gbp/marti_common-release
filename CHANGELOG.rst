@@ -2,6 +2,9 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.11 (2016-05-13)
+-------------------
+
 0.0.10 (2016-05-12)
 -------------------
 * Add great circle distance method for tf::Vector3 type.
