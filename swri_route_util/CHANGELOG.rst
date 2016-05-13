@@ -2,6 +2,9 @@
 Changelog for package swri_route_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.1.5 (2016-05-13)
+------------------
+
 0.1.4 (2016-05-12)
 ------------------
 * Fix distances in routeDistances for points before start point.
