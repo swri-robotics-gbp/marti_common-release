@@ -2,6 +2,9 @@
 Changelog for package swri_yaml_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.0 (2016-06-21)
+------------------
+
 0.1.5 (2016-05-13)
 ------------------
 * Add an explicit dependency on pkg-config
