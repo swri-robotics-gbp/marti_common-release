@@ -1,3 +1,42 @@
+## marti_common (indigo) - 0.0.12-0
+
+The packages in the `marti_common` repository were released into the `indigo` distro by running `/usr/bin/bloom-release marti_common --track indigo --rosdistro indigo` on `Mon, 15 Aug 2016 04:12:58 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_console_util`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_nodelet`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_rospy`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `0.0.11-0`
+- old version: `0.0.11-0`
+- new version: `0.0.12-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.21`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.4.7`
+- vcstools version: `0.1.38`
+
+
 ## marti_common (kinetic) - 0.2.0-1
 
 The packages in the `marti_common` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --track kinetic --ros-distro kinetic marti_common` on `Wed, 22 Jun 2016 00:15:24 -0000`
