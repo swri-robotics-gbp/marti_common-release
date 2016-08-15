@@ -2,6 +2,12 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.12 (2016-08-14)
+-------------------
+* Add explicit getOrientation function for Utm transformer
+* Improve georeferencing warnings.
+* Contributors: Jason Gassaway, Marc Alban
+
 0.0.11 (2016-05-13)
 -------------------
 
