@@ -2,10 +2,22 @@
 Changelog for package swri_geometry_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.6 (2016-10-23)
+0.2.1 (2016-10-23)
 ------------------
+
+0.2.0 (2016-06-21)
+------------------
+* Update FindGEOS to generate linker flags correctly in Ubuntu 16.04 (`#348 <https://github.com/swri-robotics/marti_common/issues/348>`_).
+  The regexes to find the link directory and library name from the
+  output of geos-config were too liberal, so the library name
+  regex would match on the `-linux` portion of the link directory,
+  resulting in broken linker flags. This tightens up those regexes
+  a bit to yield the correct library directory and name.
+* Fix a typedef conflict in Ubuntu 16.04 (`#347 <https://github.com/swri-robotics/marti_common/issues/347>`_)
+  Wrapping geos includes in #define statements forces geos to typedef
+  int64 to int64_t so that it matches opencv's typedef.
 * Add cubic spline interface for tf::Vector3 type.
-* Contributors: Marc Alban
+* Contributors: Ed Venator, Marc Alban
 
 0.1.5 (2016-05-13)
 ------------------
