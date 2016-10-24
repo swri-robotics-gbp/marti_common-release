@@ -26,71 +26,31 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // *****************************************************************************
-#include <swri_route_util/route_point.h>
 
-namespace swri_route_util
-{
-RoutePoint::RoutePoint()
-{
-  id_ = "<not-initialized>";
-  stop_point_ = false;
+#ifndef SWRI_NODELET_CLASS_LIST_MACROS_H_
+#define SWRI_NODELET_CLASS_LIST_MACROS_H_
+
+#include <pluginlib/class_list_macros.h>
+
+/*
+ Macro to define a nodelet with a factory function, so that it can be used in
+ boilerplate wrapper nodes that do not rely on dynamic class loading.
+ 
+ The macro calls PLUGINLIB_EXPORT_CLASS with plugin type nodelet::Nodelet and
+ creates a factory function NS::createCLASS() that returns a 
+ boost::shared_ptr<nodelet::Nodelet> to NS::CLASS
+ 
+ @param NS The namespace of the class to be used for the nodelet
+ @param CLASS The classname of the class to be used for the nodelet
+*/
+#define SWRI_NODELET_EXPORT_CLASS(NS, CLASS) PLUGINLIB_EXPORT_CLASS(NS::CLASS, nodelet::Nodelet);\
+namespace NS\
+{\
+  boost::shared_ptr<nodelet::Nodelet> create ## CLASS()\
+  {\
+    return boost::make_shared<CLASS>();\
+  }\
 }
 
-std::vector<std::string> RoutePoint::getPropertyNames() const
-{
-  std::vector<std::string> names;
-  names.push_back("stop_point");
-  names.push_back("stop_point_delay");
+#endif  // SWRI_NODELET_CLASS_LIST_MACROS_H_
 
-  for (auto const &it : properties_) {
-    names.push_back(it.first);
-  }
-  
-  return names;
-}
-
-std::string RoutePoint::getProperty(const std::string &name) const
-{
-  if (name == "stop_point") {
-    return stop_point_ ? "true" : "false";
-  }
-
-  if (name == "stop_point_delay") {
-    return boost::lexical_cast<std::string>(stop_point_delay_);
-  }
-
-  if (properties_.count(name)) {
-    return properties_.at(name);
-  } else {
-    return "";
-  }
-}
-
-bool RoutePoint::hasProperty(const std::string &name) const
-{
-  if (name == "stop_point") { return true; }
-  if (name == "stop_point_delay") { return true; }
-  return properties_.count(name);
-}
-
-void RoutePoint::setProperty(const std::string &name, const std::string &value)
-{
-  if (name == "stop_point") {
-    stop_point_ = (value == "1");
-  } else if (name == "stop_point_delay") {
-    stop_point_delay_ = boost::lexical_cast<double>(value);
-  } else {
-    properties_[name] = value;
-  }
-}
-
-void RoutePoint::deleteProperty(const std::string &name)
-{
-  // If we add "native" properties that are erasable, we should check
-  // for those here first and mark them as deleted when appropriate.
-  
-  // Otherwise, fall back to the generic properties.
-  // std::map::erase() ignores the call if the key is not found.
-  properties_.erase(name);
-}
-}  // namespace swri_route_util
