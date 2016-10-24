@@ -2,6 +2,9 @@
 Changelog for package swri_geometry_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.13 (2016-10-23)
+-------------------
+
 0.0.12 (2016-08-14)
 -------------------
 * Adds cubic spline interface for tf::Vector3 type.
