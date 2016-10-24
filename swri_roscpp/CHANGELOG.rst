@@ -2,6 +2,13 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.13 (2016-10-23)
+-------------------
+* Add swri_roscpp functions for reading float values.
+  These add support for reading float values directly instead of
+  doubles.
+* Contributors: Elliot Johnson
+
 0.0.12 (2016-08-14)
 -------------------
 
