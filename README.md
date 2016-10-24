@@ -1,12 +1,12 @@
 marti_common
 ==============
 
-[![Build Status](https://travis-ci.org/swri-robotics/marti_common.svg?branch=indigo-devel)](https://travis-ci.org/swri-robotics/marti_common)
+[![Build Status](https://travis-ci.org/swri-robotics/marti_common.svg?branch=jade-devel)](https://travis-ci.org/swri-robotics/marti_common)
 
 This repository provides various utility packages created at [Southwest Reseach Institute](http://www.swri.org)'s [Intelligent Vehicle Systems](http://www.swri.org/4org/d10/isd/ivs/default.htm) section for working with [Robot Operating System(ROS)](http://www.ros.org).
 
 Installation (ROS Indigo, Jade)
--------------
+------------
 
 If you have installed ROS Indigo or Jade, you can install any of the packages in this repository with apt-get:
 
