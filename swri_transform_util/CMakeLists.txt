@@ -8,13 +8,13 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   topic_tools
   geographic_msgs
-  geometry_msgs
+  gps_common
   diagnostic_msgs
   swri_math_util
   swri_yaml_util
 ) 
 
-find_package(OpenCV 3.1 COMPONENTS core highgui imgproc video REQUIRED)
+find_package(OpenCV 2 REQUIRED)
 find_package(Boost REQUIRED)
 
 catkin_package(
@@ -27,7 +27,7 @@ catkin_package(
     pluginlib
     topic_tools
     geographic_msgs
-    geometry_msgs
+    gps_common
     diagnostic_msgs
     swri_math_util
     swri_yaml_util
@@ -43,8 +43,7 @@ add_library(${PROJECT_NAME}
   src/transformer.cpp
   src/transform_manager.cpp
   src/transform_util.cpp)
-link_directories(${OpenCV_LIBRARY_DIRS})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBS} proj)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} proj)
 
 add_library(transformer_plugins
   src/utm_transformer.cpp

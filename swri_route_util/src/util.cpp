@@ -143,13 +143,13 @@ void nearestDistanceToLineSegment(
   bool extrapolate_end)
 {
   tf::Vector3 v = p1 - p0;
-  double v_len = v.dot(v);
+  const double v_len_sq = v.dot(v);
 
   // s will be the normalized distance along v that is closest to the
   // desired point.
   double s = 0.0;
-  if (v_len > 1e-6) {
-    s = v.dot(p - p0) / v_len;
+  if (v_len_sq > 1e-6) {
+    s = v.dot(p - p0) / v_len_sq;
   } else {
     // The two points are too close to define a reasonable line
     // segment, so just pick p1 as the closest point.
@@ -167,7 +167,7 @@ void nearestDistanceToLineSegment(
   tf::Vector3 x_nearest = p0 + s*v;
 
   min_distance_from_line = x_nearest.distance(p);
-  min_distance_on_line = s*v_len;
+  min_distance_on_line = s*std::sqrt(v_len_sq);
 }
 
 bool projectOntoRoute(mnm::RoutePosition &position,
@@ -225,14 +225,29 @@ bool projectOntoRoute(mnm::RoutePosition &position,
                                  route.points[i+1].position(),
                                  point,
                                  true, false);
-  } else if (extrapolate_past_end && min_segment_index + 2 == route.points.size()) {
-    size_t i = min_segment_index - 1;
+  } else if (min_segment_index + 2 == route.points.size()) {
+    // The end of the route is a special case.  If we go past the end,
+    // we want to return a position with the id of the last point and
+    // the distance past it.  This annoying complicates things in a
+    // number of places, but makes it easy to check if a point is past
+    // the end of a route.    
+    size_t i = min_segment_index;
     nearestDistanceToLineSegment(min_distance_from_line,
                                  min_distance_on_line,
                                  route.points[i+0].position(),
                                  route.points[i+1].position(),
                                  point,
                                  false, true);
+
+    double last_length = (route.points[i+1].position() - route.points[i+0].position()).length();
+    if (min_distance_on_line > last_length) {
+      min_segment_index++;
+      min_distance_on_line -= last_length;
+    }
+
+    if (!extrapolate_past_end) {
+      min_distance_on_line = 0.0;
+    }
   }
 
   position.id = route.points[min_segment_index].id();
