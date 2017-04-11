@@ -2,39 +2,32 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.7 (2017-04-11)
+0.2.4 (2017-04-11)
 ------------------
-* Increase queue_size in swri_roscpp/Subscriber.
-  This commit increases the queue size for subscribers that use the
-  store mechanism instead of a callback.  The queue size was set to 1,
-  which we have seen problems with, so this will increase it to 2.
-* Deprecate LatchedSubscriber. (`#392 <https://github.com/swri-robotics/marti_common/issues/392>`_)
-  This commit adds an alternative to LatchedSubscriber and deprecates
-  the LatchedSubscriber interface.  LatchedSubscriber should be replaced
-  with a swri::Subscriber that is initialized with the address of a
-  location to store messages.  For example, instead of:
-  swri::LatchedSubscriber<my_package::MyMessage> msg\_;
-  ...
-  msg\_.initialize(nh\_, "topic_name");
-  ...
-  ROS_INFO("msg->field = %f", msg->field);
-  this becomes:
-  swri::Subscriber sub\_;
-  my_package::MyMessageConstPtr msg\_;
-  ...
-  sub\_ = swri::SubscribeR(nh\_, "topic_name", &msg\_);
-  ...
-  ROS_INFO("msg->field = %f", msg->field).
-  This change makes for a simpler and more consistent interface, and
-  avoids the confusion that comes from overloading the -> operator.
-* Contributors: Elliot Johnson, P. J. Reed
+* Port `#385 <https://github.com/swri-robotics/marti_common/issues/385>`_ and `#419 <https://github.com/swri-robotics/marti_common/issues/419>`_ to kinetic. (`#420 <https://github.com/swri-robotics/marti_common/issues/420>`_)
+  A common error when using unfamiliar ROS nodes is to accidentally set parameters
+  by the wrong name. This feature allows the node author to output a WARNING
+  for any unused parameters.
+  Ported forward from indigo-devel
+* Contributors: Edward Venator
 
-0.1.6 (2016-10-23)
+0.2.3 (2016-12-09)
 ------------------
-* Add swri_roscpp functions for reading float values.
-  These add support for reading float values directly instead of
-  doubles.
-* Contributors: Elliot Johnson
+
+0.2.2 (2016-12-07)
+------------------
+* Deprecate LatchedSubscriber. (`#391 <https://github.com/swri-robotics/marti_common/issues/391>`_)
+  LatchedSubscriber should be replaced with a swri::Subscriber that is
+  initialized with the address of a location to store messages. This change
+  makes for a simpler and more consistent interface, and avoids the confusion
+  that comes from overloading the -> operator.
+* Contributors: P. J. Reed
+
+0.2.1 (2016-10-23)
+------------------
+
+0.2.0 (2016-06-21)
+------------------
 
 0.1.5 (2016-05-13)
 ------------------

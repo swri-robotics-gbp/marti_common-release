@@ -2,19 +2,35 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.7 (2017-04-11)
+0.2.4 (2017-04-11)
 ------------------
-* Image blending jade (`#430 <https://github.com/swri-robotics/marti_common/issues/430>`_)
+* Image blending kinetic (`#429 <https://github.com/swri-robotics/marti_common/issues/429>`_)
   * Initial commit of image blending
   * Adding launch file and various bug fixes
   * Making the base and top image encoding match. Lets us do things like blend a grayscale image onto a color image
   * Removing file globbing from CMakeLists that made QtCreator happy
   * Adding message_filters as a ROS package dependency
-* Fix issue with contrast stretching when a grid cell is completely masked out.
-* Contributors: Marc Alban, danthony06
+* Contributors: danthony06
 
-0.1.6 (2016-10-23)
+0.2.3 (2016-12-09)
 ------------------
+* Fix OpenCV dependencies for Kinetic build (`#400 <https://github.com/swri-robotics/marti_common/issues/400>`_)
+* Contributors: P. J. Reed
+
+0.2.2 (2016-12-07)
+------------------
+* Fix issue with contrast stretching when a grid cell is completely masked out.
+* Migrated OpenCV to 3.1 (default in Kinetic)
+* Contributors: Brian Holt, Marc Alban
+
+0.2.1 (2016-10-23)
+------------------
+
+0.2.0 (2016-06-21)
+------------------
+* Replace legacy OpenCV BruteForceMatcher with new cv::BFMatcher.
+* Upgrade Qt to version 5.
+* Contributors: Ed Venator
 
 0.1.5 (2016-05-13)
 ------------------

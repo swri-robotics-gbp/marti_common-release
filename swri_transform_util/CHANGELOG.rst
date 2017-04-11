@@ -2,18 +2,31 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.7 (2017-04-11)
+0.2.4 (2017-04-11)
 ------------------
 * Ignore invalid fixes
   Fixes `#431 <https://github.com/swri-robotics/marti_common/issues/431>`_.
+* Remove unused gps_common dependency (`#422 <https://github.com/swri-robotics/marti_common/issues/422>`_)
+  Fix `#421 <https://github.com/swri-robotics/marti_common/issues/421>`_ by removing gps_common from the swri_transform_util CMakeLists.txt in kinetic.
 * Simplify dynamic reconfigure usage.
 * Add nodelet for publishing a dynamically reconfigurable TF transform.
-* Contributors: Marc Alban, P. J. Reed
+* Contributors: Edward Venator, Marc Alban, P. J. Reed
 
-0.1.6 (2016-10-23)
+0.2.3 (2016-12-09)
+------------------
+
+0.2.2 (2016-12-07)
+------------------
+* Migrated OpenCV to 3.1 (default in Kinetic)
+* Contributors: Brian Holt
+
+0.2.1 (2016-10-23)
 ------------------
 * Improve georeferencing warnings.
 * Contributors: Marc Alban
+
+0.2.0 (2016-06-21)
+------------------
 
 0.1.5 (2016-05-13)
 ------------------
