@@ -412,7 +412,7 @@ void Subscriber::timeoutParam(
 inline
 bool Subscriber::blockTimeouts(bool block)
 {
-  return impl_->blockTimeouts(block);
+  impl_->blockTimeouts(block);
 }
 
 inline

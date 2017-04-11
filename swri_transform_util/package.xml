@@ -1,6 +1,6 @@
 <package format="2">
   <name>swri_transform_util</name>
-  <version>0.0.14</version>
+  <version>0.1.7</version>
   <description>
 
      The swri_transform_util package contains utility functions and classes for
@@ -18,7 +18,7 @@
   <depend>diagnostic_msgs</depend>
   <depend>dynamic_reconfigure</depend>
   <depend>geographic_msgs</depend>
-  <depend>gps_common</depend>
+  <depend>geometry_msgs</depend>
   <depend>libgeos++-dev</depend>
   <depend>nodelet</depend>
   <depend>libopencv-dev</depend>
@@ -26,6 +26,7 @@
   <depend>proj</depend>
   <depend>roscpp</depend>
   <depend>rospy</depend>
+  <exec_depend>sensor_msgs</exec_depend>
   <depend>swri_math_util</depend>
   <depend>swri_roscpp</depend>
   <depend>swri_yaml_util</depend>

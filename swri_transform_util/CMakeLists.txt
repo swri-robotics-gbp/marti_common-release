@@ -5,7 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   diagnostic_msgs
   dynamic_reconfigure
   geographic_msgs
-  gps_common
+  geometry_msgs
   nodelet
   pluginlib
   roscpp
@@ -31,7 +31,7 @@ catkin_package(
     diagnostic_msgs
     dynamic_reconfigure
     geographic_msgs
-    gps_common
+    geometry_msgs
     nodelet
     pluginlib
     roscpp

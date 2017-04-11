@@ -2,22 +2,20 @@ cmake_minimum_required(VERSION 2.8.3)
 project(swri_image_util)
 
 find_package(catkin REQUIRED COMPONENTS 
-  roscpp
-  rospy
-  roslib
-  std_msgs
-  nodelet
+  camera_calibration_parsers
   cv_bridge
-  tf
-  cmake_modules
   geometry_msgs
   image_geometry
   image_transport
   message_filters
   nav_msgs
-  camera_calibration_parsers
+  nodelet
+  roscpp
+  rospy
+  std_msgs
   swri_math_util
   swri_opencv_util
+  tf
 )
 
 find_package(OpenCV 2)
@@ -30,8 +28,15 @@ if(${Boost_LIB_VERSION} MATCHES "1_46*")
   add_definitions( -DBOOST_1_46 )
 endif(${Boost_LIB_VERSION} MATCHES "1_46*")
 
-find_package(Eigen REQUIRED)
-add_definitions(${EIGEN_DEFINITIONS})
+find_package(Eigen3)
+if(NOT EIGEN3_FOUND)
+  # Fallback to pkg-config
+  find_package(PkgConfig)
+  pkg_check_modules(EIGEN3 REQUIRED eigen3)
+else()
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
+add_definitions(${EIGEN3_DEFINITIONS})
 
 include(${QT_USE_FILE})
 
@@ -39,25 +44,23 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS 
-    roscpp
-    roscpp
-    rospy
-    roslib
-    std_msgs
-    nodelet
+    camera_calibration_parsers
     cv_bridge
-    tf
     geometry_msgs
     image_geometry
     image_transport
     message_filters
     nav_msgs
-    camera_calibration_parsers
+    nodelet
+    roscpp
+    rospy
+    std_msgs
     swri_math_util
     swri_opencv_util
+    tf
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${QT_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${QT_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} 
   src/image_normalization.cpp 
@@ -104,7 +107,7 @@ target_link_libraries(blend_images ${catkin_LIBRARIES})
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest_gtest(test_geometry_util test/geometry_util.test test/test_geometry_util.cpp)
+  add_rostest_gtest(test_geometry_util launch/geometry_util.test test/test_geometry_util.cpp)
   target_link_libraries(test_geometry_util ${PROJECT_NAME})
 endif()
 
