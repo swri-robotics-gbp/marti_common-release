@@ -1,0 +1,85 @@
+ros-jade-marti-data-structures (0.1.7-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.6-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.5-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.4-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.3-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.2-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.1-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-jade-marti-data-structures (0.1.0-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 29 Sep 2015 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.0.5-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.0.4-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.0.3-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.0.2-0trusty) trusty; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-jade-marti-data-structures (0.0.1-0trusty) trusty; urgency=high
+
+  * update cmake version to squash the CMP0003 warning
+  * remove dependencies on build_tools
+  * use format 2 package definition
+  * fix missing organization in license text
+  * catkinize marti_common
+  * change license to BSD
+  * Contributors: Marc Alban
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
