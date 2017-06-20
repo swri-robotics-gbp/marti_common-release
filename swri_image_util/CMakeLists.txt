@@ -13,16 +13,15 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  swri_geometry_util
   swri_math_util
   swri_opencv_util
   tf
 )
 
-find_package(OpenCV 3.1 REQUIRED)
+find_package(OpenCV REQUIRED)
 
-find_package(Qt5Gui REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-add_definitions(${Qt5Gui_DEFINITIONS})
 
 find_package(Boost REQUIRED COMPONENTS filesystem system random)
 
@@ -43,7 +42,7 @@ endif()
 add_definitions(${EIGEN3_DEFINITIONS})
 
 catkin_package(
-  DEPENDS OpenCV Qt5Gui EIGEN3
+  DEPENDS OpenCV EIGEN3
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS 
@@ -63,26 +62,36 @@ catkin_package(
     tf
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-
+include_directories(include
+  ${catkin_INCLUDE_DIRS} 
+  ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+)
 
 add_library(${PROJECT_NAME} 
-  src/image_normalization.cpp 
-  src/rolling_normalization.cpp 
-  src/image_matching.cpp
+  src/blend_images_util.cpp
   src/draw_util.cpp
   src/geometry_util.cpp
-  src/blend_images_util.cpp
-  src/image_warp_util.cpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Qt5Gui_LIBRARIES} ${OpenCV_LIBRARIES} ${Boost_LIBRARIES})
+  src/image_matching.cpp
+  src/image_normalization.cpp 
+  src/image_warp_util.cpp
+  src/rolling_normalization.cpp 
+)
+target_link_libraries(${PROJECT_NAME} 
+  ${catkin_LIBRARIES} 
+  ${OpenCV_LIBRARIES} 
+  ${Boost_LIBRARIES}
+)
 
 add_library(${PROJECT_NAME}_nodelets
-  src/nodelets/rotate_image_nodelet.cpp
+  src/nodelets/blend_images_nodelet.cpp
   src/nodelets/contrast_stretch_nodelet.cpp
-  src/nodelets/normalize_response_nodelet.cpp
-  src/nodelets/scale_image_nodelet.cpp
   src/nodelets/draw_text_nodelet.cpp
-  src/nodelets/blend_images_nodelet.cpp)
+  src/nodelets/normalize_response_nodelet.cpp
+  src/nodelets/rotate_image_nodelet.cpp
+  src/nodelets/scale_image_nodelet.cpp
+)
 target_link_libraries(${PROJECT_NAME}_nodelets ${PROJECT_NAME})
 
 add_executable(normalization_image_generator_node src/nodes/normalization_image_generator_node.cpp)
@@ -111,7 +120,7 @@ target_link_libraries(blend_images ${catkin_LIBRARIES})
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest_gtest(test_geometry_util launch/geometry_util.test test/test_geometry_util.cpp)
+  add_rostest_gtest(test_geometry_util test/geometry_util.test test/test_geometry_util.cpp)
   target_link_libraries(test_geometry_util ${PROJECT_NAME})
 endif()
 
