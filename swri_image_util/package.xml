@@ -1,6 +1,6 @@
 <package format="2">
   <name>swri_image_util</name>
-  <version>0.2.4</version>
+  <version>0.3.0</version>
   <description>
 
      swri_image_util
@@ -20,14 +20,13 @@
   <depend>geometry_msgs</depend>
   <depend>image_geometry</depend>
   <depend>image_transport</depend>
-  <depend>libqt5-opengl-dev</depend>
-  <depend>libqt5-gui</depend>
   <depend>message_filters</depend>
   <depend>nav_msgs</depend>
   <depend>nodelet</depend>
   <depend>roscpp</depend>
   <depend>rospy</depend>
   <depend>std_msgs</depend>
+  <depend>swri_geometry_util</depend>
   <depend>swri_math_util</depend>
   <depend>swri_opencv_util</depend>
   <depend>tf</depend>
