@@ -37,10 +37,12 @@
 
 #include <geographic_msgs/GeoPose.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <gps_common/GPSFix.h>
 
 #include <swri_math_util/constants.h>
 #include <swri_math_util/trig_util.h>
 #include <swri_transform_util/earth_constants.h>
+#include <swri_transform_util/transform_util.h>
 
 namespace swri_transform_util
 {
@@ -134,6 +136,36 @@ namespace swri_transform_util
       bool ignore_reference_angle = false;
       node.param("/local_xy_ignore_reference_angle", ignore_reference_angle, ignore_reference_angle);
     
+      try
+      {
+        const gps_common::GPSFixConstPtr origin = msg->instantiate<gps_common::GPSFix>();
+        reference_latitude_ = origin->latitude * swri_math_util::_deg_2_rad;
+        reference_longitude_ = origin->longitude * swri_math_util::_deg_2_rad;
+        reference_altitude_ = origin->altitude;
+        
+        if (!ignore_reference_angle)
+        {
+          reference_angle_ = ToYaw(origin->track);
+        }
+        
+        std::string frame = origin->header.frame_id;
+
+        if (frame.empty()) 
+        {
+          // If the origin has an empty frame id, look for a frame in
+          // the global parameter /local_xy_frame.  This provides
+          // compatibility with older bag files.
+          node.param("/local_xy_frame", frame, frame_);
+        }
+
+        frame_ = frame;
+
+        Initialize();
+        origin_sub_.shutdown();
+        return;
+      }
+      catch (...) {}
+
       try
       {
         const geometry_msgs::PoseStampedConstPtr origin = msg->instantiate<geometry_msgs::PoseStamped>();
