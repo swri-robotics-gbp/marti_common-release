@@ -27,11 +27,12 @@ configure_file(version.h.in ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DEST
 
 find_package(Boost REQUIRED)
 
-include_directories(include 
-  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_INCLUDE_DESTINATION}
-  ${Boost_INCLUDE_DIRS}
+include_directories(include
   ${catkin_INCLUDE_DIRS}
-  ${YamlCpp_INCLUDE_DIR})
+  ${Boost_INCLUDE_DIRS}
+  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+  ${YamlCpp_INCLUDE_DIR}
+)
 
 add_library(${PROJECT_NAME}
   src/yaml_util.cpp
