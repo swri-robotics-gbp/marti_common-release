@@ -4,7 +4,9 @@ project(swri_transform_util)
 find_package(catkin REQUIRED COMPONENTS
   diagnostic_msgs
   dynamic_reconfigure
+  geographic_msgs
   geometry_msgs
+  gps_common
   nodelet
   pluginlib
   roscpp
@@ -16,7 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
   topic_tools
 )
 
-find_package(OpenCV 3.1 COMPONENTS core highgui imgproc video REQUIRED)
+find_package(OpenCV  REQUIRED core highgui imgproc video)
 find_package(Boost REQUIRED)
 
 generate_dynamic_reconfigure_options(
@@ -31,6 +33,7 @@ catkin_package(
     dynamic_reconfigure
     geographic_msgs
     geometry_msgs
+    gps_common
     nodelet
     pluginlib
     roscpp
@@ -42,7 +45,11 @@ catkin_package(
     topic_tools
 )
 
-include_directories(include ${Boost_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+include_directories(include 
+  ${catkin_INCLUDE_DIRS} 
+  ${Boost_INCLUDE_DIRS} 
+  ${OpenCV_INCLUDE_DIRS}
+)
 
 add_library(${PROJECT_NAME}
   src/georeference.cpp
