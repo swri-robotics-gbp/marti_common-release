@@ -1,0 +1,12 @@
+Source: ros-kinetic-swri-route-util
+Section: misc
+Priority: extra
+Maintainer: Elliot Johnson <elliot.johnson@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kinetic-catkin, ros-kinetic-marti-nav-msgs, ros-kinetic-roscpp, ros-kinetic-swri-transform-util
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-swri-route-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kinetic-marti-nav-msgs, ros-kinetic-roscpp, ros-kinetic-swri-transform-util
+Description: This library provides functionality to simplify working with the navigation messages defined in marti_nav_msgs.
