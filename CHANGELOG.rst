@@ -2,19 +2,42 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.7 (2017-04-11)
+0.3.0 (2017-06-20)
 ------------------
-* Image blending jade (`#430 <https://github.com/swri-robotics/marti_common/issues/430>`_)
-  * Initial commit of image blending
-  * Adding launch file and various bug fixes
-  * Making the base and top image encoding match. Lets us do things like blend a grayscale image onto a color image
-  * Removing file globbing from CMakeLists that made QtCreator happy
-  * Adding message_filters as a ROS package dependency
+* Merge together the indigo, jade, and kinetic branches (`#443 <https://github.com/pjreed/marti_common/issues/443>`_)
+* Enable blending with transparency mask (`#439 <https://github.com/pjreed/marti_common/issues/439>`_)
+* Contributors: Jerry Towler, P. J. Reed
+
+0.2.4 (2017-04-11)
+------------------
+* Image blending kinetic (`#429 <https://github.com/swri-robotics/marti_common/issues/429>`_)
+* Initial commit of image blending
+* Adding launch file and various bug fixes
+* Making the base and top image encoding match. Lets us do things like blend a grayscale image onto a color image
+* Removing file globbing from CMakeLists that made QtCreator happy
+* Adding message_filters as a ROS package dependency
 * Fix issue with contrast stretching when a grid cell is completely masked out.
 * Contributors: Marc Alban, danthony06
 
-0.1.6 (2016-10-23)
+0.2.3 (2016-12-09)
 ------------------
+* Fix OpenCV dependencies for Kinetic build (`#400 <https://github.com/swri-robotics/marti_common/issues/400>`_)
+* Contributors: P. J. Reed
+
+0.2.2 (2016-12-07)
+------------------
+* Fix issue with contrast stretching when a grid cell is completely masked out.
+* Migrated OpenCV to 3.1 (default in Kinetic)
+* Contributors: Brian Holt, Marc Alban
+
+0.2.1 (2016-10-23)
+------------------
+
+0.2.0 (2016-06-21)
+------------------
+* Replace legacy OpenCV BruteForceMatcher with new cv::BFMatcher.
+* Upgrade Qt to version 5.
+* Contributors: Ed Venator
 
 0.1.5 (2016-05-13)
 ------------------
@@ -41,9 +64,7 @@ Changelog for package swri_image_util
   ./swri_geometry_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
   ./swri_image_util/CMakeLists.txt:find_package(OpenCV 2)
   ./swri_transform_util/CMakeLists.txt:find_package(OpenCV 2 REQUIRED)
-  Conflicts:
-  swri_geometry_util/CMakeLists.txt
-* Contributors: Kim Mathiassen, Marc Alban, P. J. Reed
+* Contributors: Kim Mathiassen, Marc Alban
 
 0.1.3 (2016-03-04)
 ------------------
@@ -57,15 +78,45 @@ Changelog for package swri_image_util
 * Adds normalize response image normalization method.
 * Contributors: Marc Alban
 
-0.1.1 (2015-11-17)
-------------------
-* Image normalization now supports normalization to a min/max range.
-* Contributors: Marc Alban
-
 0.1.0 (2015-09-29)
 ------------------
 * Removes deprecated Eigen cmake module. (Issue `#245 <https://github.com/swri-robotics/marti_common/issues/245>`_)
 * Contributors: Edward Venator
+
+0.0.14 (2017-04-11)
+-------------------
+* Image blending (`#426 <https://github.com/swri-robotics/marti_common/issues/426>`_)
+
+0.0.13 (2016-10-23)
+-------------------
+
+0.0.12 (2016-08-14)
+-------------------
+
+0.0.11 (2016-05-13)
+-------------------
+* Adds explicit dependency on pkg-config
+* Contributors: P. J. Reed
+
+0.0.10 (2016-05-12)
+-------------------
+* Update contrast stretch nodelet to automatically scale image mask to correct size.
+* Contributors: danthony06
+
+0.0.9 (2016-03-04)
+------------------
+* Properly installs the normalize_response node.
+* No longer installs the geometry_util.test file.
+* Contributors: P. J. Reed
+
+0.0.8 (2016-01-06)
+------------------
+
+0.0.7 (2015-11-18)
+------------------
+
+0.0.6 (2015-11-17)
+------------------
 
 0.0.5 (2015-09-27)
 ------------------
