@@ -2,6 +2,15 @@
 Changelog for package swri_math_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.0 (2017-08-31)
+------------------
+* Implement RANSAC and least squares model fitting for 3d geometry (`#479 <https://github.com/pjreed/marti_common/issues/479>`_)
+* Fix out-of-bounds bug in RANSAC sampling. (`#477 <https://github.com/pjreed/marti_common/issues/477>`_)
+* Contributors: Edward Venator, Marc Alban, P. J. Reed
+
+1.0.0 (2017-08-02)
+------------------
+
 0.3.0 (2017-06-20)
 ------------------
 * Merge together the indigo, jade, and kinetic branches (`#443 <https://github.com/pjreed/marti_common/issues/443>`_)
