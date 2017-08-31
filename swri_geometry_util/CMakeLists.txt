@@ -46,6 +46,16 @@ add_library(${PROJECT_NAME}
 )
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${GEOS_LIBRARIES})
 
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+
+  add_rostest_gtest(test_intersection test/intersection.test test/test_intersection.cpp)
+  target_link_libraries(test_intersection ${PROJECT_NAME})
+
+  add_rostest_gtest(test_geometry_util test/geometry_util.test test/test_geometry_util.cpp)
+  target_link_libraries(test_geometry_util ${PROJECT_NAME})
+endif()
+
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
