@@ -1,6 +1,6 @@
 // *****************************************************************************
 //
-// Copyright (c) 2014, Southwest Research Institute® (SwRI®)
+// Copyright (c) 2017, Southwest Research Institute® (SwRI®)
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -27,77 +27,21 @@
 //
 // *****************************************************************************
 
-#include <swri_geometry_util/geometry_util.h>
+#ifndef IMAGE_UTIL_REPLACE_COLORS_H_
+#define IMAGE_UTIL_REPLACE_COLORS_H_
 
-namespace swri_geometry_util
+#include <opencv2/core/core.hpp>
+
+namespace swri_image_util
 {
-  double DistanceFromPlane(
-      const tf::Vector3& plane_normal,
-      const tf::Vector3& plane_point,
-      const tf::Vector3& point)
-  {
-    return plane_normal.normalized().dot(point - plane_point);
-  }
-  
-  double DistanceFromLineSegment(
-      const tf::Vector3& line_start,
-      const tf::Vector3& line_end,
-      const tf::Vector3& point)
-  {    
-    return point.distance(ProjectToLineSegment(line_start, line_end, point));
-  }
-  
-  tf::Vector3 ProjectToLineSegment(
-      const tf::Vector3& line_start,
-      const tf::Vector3& line_end,
-      const tf::Vector3& point)
-  {
-    tf::Vector3 v = line_end - line_start;
-    tf::Vector3 r = point - line_start;
-    
-    double t = r.dot(v);
-    if (t <= 0)
-    {
-      return line_start;
-    }
-    
-    double b = v.dot(v);
-    if (t >= b)
-    {
-      return line_end;
-    }
-    
-    return line_start + (t / b) * v;
-  }
-
-  bool ClosestPointToLines(
-      const tf::Vector3& a1,
-      const tf::Vector3& a2,
-      const tf::Vector3& b1,
-      const tf::Vector3& b2,
-      tf::Vector3& point)
-  {
-    tf::Vector3 u = a1 - a2;
-    tf::Vector3 v = b1 - b2;
-    if (u.length() == 0 || v.length() == 0)
-    {
-      return false;
-    }
-    tf::Vector3 w = u.cross(v);
-    tf::Vector3 s = b1 - a1;
-    if (s.length() == 0)
-    {
-      point = a1;
-      return true;
-    }
-    double f = w.dot(w);
-    if (f == 0)
-    {
-      return false;
-    }
-    tf::Vector3 x = a1 + u * (s.cross(v).dot(w) / f);
-    tf::Vector3 y = b1 + v * (s.cross(u).dot(w) / f);
-    point = (x + y) / 2;
-    return true;
-  }
+  /**
+   * Replaces the colors in original_image with the values from the look up 
+   * table in lut. The modified image is stored in modified_image
+   */
+  void replaceColors(
+    const cv::Mat& original_image,
+    const cv::Mat& lut,
+    cv::Mat& modified_image);
 }
+
+#endif // IMAGE_UTIL_REPLACE_COLORS_H_
