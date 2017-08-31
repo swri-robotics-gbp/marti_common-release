@@ -9,6 +9,10 @@
         <description> Nodelet to contrast stretch an image.
         </description>
     </class>
+    <class name="swri_image_util/crosshairs" type="swri_image_util::CrosshairsNodelet" base_class_type="nodelet::Nodelet">
+        <description> Nodelet that draws a crosshairs on an image.
+        </description>
+    </class>
     <class name="swri_image_util/draw_text" type="swri_image_util::DrawTextNodelet"
         base_class_type="nodelet::Nodelet">
         <description> Nodelet to draw text on an image.
@@ -17,6 +21,11 @@
     <class name="swri_image_util/normalize_response" type="swri_image_util::NormalizeResponseNodelet"
         base_class_type="nodelet::Nodelet">
         <description> Nodelet to normalize the response of an image.
+        </description>
+    </class>
+    <class name="swri_image_util/replace_colors" type="swri_image_util::ReplaceColorsNodelet" 
+        base_class_type="nodelet::Nodelet">
+        <description> Nodelet that replaces colors in an input image
         </description>
     </class>
     <class name="swri_image_util/rotate_image" type="swri_image_util::RotateImageNodelet"
