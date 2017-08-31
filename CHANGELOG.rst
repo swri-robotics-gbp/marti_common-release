@@ -2,6 +2,12 @@
 Changelog for package swri_console_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.0 (2017-08-31)
+------------------
+
+1.0.0 (2017-08-02)
+------------------
+
 0.3.0 (2017-06-20)
 ------------------
 * Merge together the indigo, jade, and kinetic branches (`#443 <https://github.com/pjreed/marti_common/issues/443>`_)
