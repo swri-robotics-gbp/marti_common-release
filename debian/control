@@ -1,0 +1,12 @@
+Source: ros-indigo-swri-image-util
+Section: misc
+Priority: extra
+Maintainer: Kris Kozak <kkozak@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, pkg-config, ros-indigo-camera-calibration-parsers, ros-indigo-catkin, ros-indigo-cv-bridge, ros-indigo-geometry-msgs, ros-indigo-image-geometry, ros-indigo-image-transport, ros-indigo-message-filters, ros-indigo-nav-msgs, ros-indigo-nodelet, ros-indigo-roscpp, ros-indigo-rospy, ros-indigo-rostest, ros-indigo-std-msgs, ros-indigo-swri-geometry-util, ros-indigo-swri-math-util, ros-indigo-swri-nodelet, ros-indigo-swri-opencv-util, ros-indigo-swri-roscpp, ros-indigo-tf
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-indigo-swri-image-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libeigen3-dev, ros-indigo-camera-calibration-parsers, ros-indigo-cv-bridge, ros-indigo-geometry-msgs, ros-indigo-image-geometry, ros-indigo-image-transport, ros-indigo-message-filters, ros-indigo-nav-msgs, ros-indigo-nodelet, ros-indigo-roscpp, ros-indigo-rospy, ros-indigo-std-msgs, ros-indigo-swri-geometry-util, ros-indigo-swri-math-util, ros-indigo-swri-opencv-util, ros-indigo-swri-roscpp, ros-indigo-tf
+Description: swri_image_util
