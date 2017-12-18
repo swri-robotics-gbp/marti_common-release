@@ -27,88 +27,91 @@
 //
 // *****************************************************************************
 
+#include <algorithm>
+
+#include <boost/make_shared.hpp>
+
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
 #include <image_transport/publisher.h>
 #include <image_transport/subscriber.h>
 #include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <nodelet/nodelet.h>
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
+#include <sensor_msgs/image_encodings.h>
 #include <swri_roscpp/parameters.h>
 
 namespace swri_image_util
 {
-  class WarpImageNodelet : public nodelet::Nodelet
+  class ImagePubNodelet : public nodelet::Nodelet
   {
     public:
-      WarpImageNodelet(): use_input_size_(false)
+      virtual void onInit()
       {
+        ros::NodeHandle node = getNodeHandle();
+
+        init_timer_ = node.createTimer(
+            ros::Duration(1.0), &ImagePubNodelet::initialize, this, true);
       }
 
-      ~WarpImageNodelet()
-      {
-      }
-
-      void onInit()
+      void initialize(const ros::TimerEvent& unused)
       {
         ros::NodeHandle &node = getNodeHandle();
         ros::NodeHandle &priv = getPrivateNodeHandle();
 
-        std::vector<double> transform;
-        if (priv.hasParam("width") && priv.hasParam("height"))
+        std::string image_file;
+        swri::param(priv, "image_file", image_file, image_file);
+
+        std::string mode;
+        swri::param(priv, "mode", mode, sensor_msgs::image_encodings::BGR8);
+
+        double rate = 1;
+        swri::param(priv, "rate", rate, rate);
+        rate = std::max(0.1, rate);
+
+        cv_image.header.stamp = ros::Time::now();
+        if (mode == sensor_msgs::image_encodings::BGR8)
         {
-          use_input_size_ = false;
-          swri::getParam(priv, "width", output_size_.width);
-          swri::getParam(priv, "height", output_size_.height);
+          cv_image.image = cv::imread(image_file, CV_LOAD_IMAGE_COLOR);
+          cv_image.encoding = sensor_msgs::image_encodings::BGR8;
         }
         else
         {
-          use_input_size_ = true;
-          NODELET_INFO("No ~width and ~height parameters given. Output images will be same size as input.");
+          cv_image.image = cv::imread(image_file, CV_LOAD_IMAGE_GRAYSCALE);
+          cv_image.encoding = sensor_msgs::image_encodings::MONO8;
         }
-        priv.param("transform", transform, transform);
-        if (transform.size() != 9)
-        {
-          NODELET_FATAL("~transform must be a 9-element list of doubles (3x3 matrix, row major)");
-          // Return without setting up callbacks
-          // Don't shut down, because that would bring down all other nodelets as well
-          return;
-        }
-        m_ = cv::Mat(transform, true).reshape(0, 3);
-        NODELET_INFO_STREAM("Transformation matrix:" << std::endl << m_);
 
-        image_transport::ImageTransport it(node);
-        image_pub_ = it.advertise("warped_image", 1);
-        image_sub_ = it.subscribe("image", 1, &WarpImageNodelet::handleImage, this);
+        if (!cv_image.image.empty())
+        {
+          image_transport::ImageTransport it(node);
+          image_pub_ = it.advertise("image", 2, true);
+          pub_timer_ = node.createTimer(
+              ros::Duration(1.0 / rate), &ImagePubNodelet::publish, this);
+        }
+        else
+        {
+          ROS_FATAL("Failed to load image.");
+          ros::requestShutdown();
+        }
       }
 
-      void handleImage(sensor_msgs::ImageConstPtr const& image)
+      void publish(const ros::TimerEvent& e)
       {
-        cv_bridge::CvImageConstPtr cv_image = cv_bridge::toCvShare(image);
-
-        cv_bridge::CvImagePtr cv_warped = boost::make_shared<cv_bridge::CvImage>();
-        if (use_input_size_)
-        {
-          output_size_ = cv_image->image.size();
-        }
-        cv::warpPerspective(cv_image->image, cv_warped->image, m_, output_size_, CV_INTER_LANCZOS4);
-
-        cv_warped->encoding = cv_image->encoding;
-        cv_warped->header = cv_image->header;
-
-        image_pub_.publish(cv_warped->toImageMsg());
+        cv_image.header.stamp = e.current_real;
+        image_pub_.publish(cv_image.toImageMsg());
       }
 
     private:
-      image_transport::Subscriber image_sub_;
+      ros::Timer init_timer_;
+      ros::Timer pub_timer_;
       image_transport::Publisher image_pub_;
-      cv::Mat m_;
-      bool use_input_size_;
-      cv::Size output_size_;
+
+      cv_bridge::CvImage cv_image;
   };
 }
 
 // Register nodelet plugin
 #include <swri_nodelet/class_list_macros.h>
-SWRI_NODELET_EXPORT_CLASS(swri_image_util, WarpImageNodelet)
+SWRI_NODELET_EXPORT_CLASS(swri_image_util, ImagePubNodelet)
