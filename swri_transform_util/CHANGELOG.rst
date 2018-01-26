@@ -2,6 +2,9 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.1.0 (2018-01-26)
+------------------
+
 2.0.0 (2017-12-18)
 ------------------
 * expose TransformManager::LocalXyUtil() and LocalXyWgs84Util::ResetInitialization() (`#501 <https://github.com/swri-robotics/marti_common/issues/501>`_)
