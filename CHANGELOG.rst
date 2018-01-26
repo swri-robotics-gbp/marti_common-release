@@ -2,6 +2,9 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.1.0 (2018-01-26)
+------------------
+
 2.0.0 (2017-12-18)
 ------------------
 * Add nodelet for drawing a polygon on an image. (`#500 <https://github.com/swri-robotics/marti_common/issues/500>`_)
