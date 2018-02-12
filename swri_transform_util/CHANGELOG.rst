@@ -2,6 +2,11 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.0 (2018-02-12)
+------------------
+* Add gps_transform_publisher. (`#509 <https://github.com/swri-robotics/marti_common/issues/509>`_)
+* Contributors: Marc Alban
+
 2.1.0 (2018-01-26)
 ------------------
 
