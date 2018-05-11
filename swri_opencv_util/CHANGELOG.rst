@@ -2,6 +2,11 @@
 Changelog for package swri_opencv_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.1 (2018-05-11)
+------------------
+* Support ROS Melodic (`#514 <https://github.com/swri-robotics/marti_common/issues/514>`_)
+* Contributors: P. J. Reed
+
 2.2.0 (2018-02-12)
 ------------------
 
