@@ -1,0 +1,12 @@
+Source: ros-melodic-swri-image-util
+Section: misc
+Priority: extra
+Maintainer: Kris Kozak <kkozak@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, pkg-config, ros-melodic-camera-calibration-parsers, ros-melodic-catkin, ros-melodic-cv-bridge, ros-melodic-geometry-msgs, ros-melodic-image-geometry, ros-melodic-image-transport, ros-melodic-message-filters, ros-melodic-nav-msgs, ros-melodic-nodelet, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-rostest, ros-melodic-std-msgs, ros-melodic-swri-geometry-util, ros-melodic-swri-math-util, ros-melodic-swri-nodelet, ros-melodic-swri-opencv-util, ros-melodic-swri-roscpp, ros-melodic-tf
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-melodic-swri-image-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libeigen3-dev, ros-melodic-camera-calibration-parsers, ros-melodic-cv-bridge, ros-melodic-geometry-msgs, ros-melodic-image-geometry, ros-melodic-image-transport, ros-melodic-message-filters, ros-melodic-nav-msgs, ros-melodic-nodelet, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-std-msgs, ros-melodic-swri-geometry-util, ros-melodic-swri-math-util, ros-melodic-swri-opencv-util, ros-melodic-swri-roscpp, ros-melodic-tf
+Description: swri_image_util
