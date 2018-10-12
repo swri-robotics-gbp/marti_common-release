@@ -2,6 +2,9 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2018-10-12)
+------------------
+
 2.4.0 (2018-10-09)
 ------------------
 * Handle invalid fixes properly (`#519 <https://github.com/swri-robotics/marti_common/issues/519>`_)
