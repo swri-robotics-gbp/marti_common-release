@@ -1,0 +1,12 @@
+Source: ros-indigo-swri-route-util
+Section: misc
+Priority: extra
+Maintainer: Marc Alban <malban@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-catkin, ros-indigo-marti-common-msgs, ros-indigo-marti-nav-msgs, ros-indigo-roscpp, ros-indigo-swri-geometry-util, ros-indigo-swri-math-util, ros-indigo-swri-transform-util, ros-indigo-visualization-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-indigo-swri-route-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-marti-common-msgs, ros-indigo-marti-nav-msgs, ros-indigo-roscpp, ros-indigo-swri-geometry-util, ros-indigo-swri-math-util, ros-indigo-swri-transform-util, ros-indigo-visualization-msgs
+Description: This library provides functionality to simplify working with the navigation messages defined in marti_nav_msgs.
