@@ -1,0 +1,63 @@
+ros-lunar-swri-dbw-interface (2.7.2-0xenial) xenial; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.7.1-0xenial) xenial; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.7.0-0xenial) xenial; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.6.0-0xenial) xenial; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.5.0-0xenial) xenial; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.4.0-0xenial) xenial; urgency=high
+
+  * Update package maintainers (#520 <https://github.com/swri-robotics/marti_common/issues/520>)
+  * Contributors: P. J. Reed
+
+ -- Marc Alban <malban@swri.org>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.3.0-0xenial) xenial; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.2.1-0xenial) xenial; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.2.0-0xenial) xenial; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-lunar-swri-dbw-interface (2.1.0-0xenial) xenial; urgency=high
+
+  * Add swri_dbw_interface package. (#503 <https://github.com/swri-robotics/marti_common/issues/503>)
+  * Contributors: Marc Alban
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 26 Jan 2018 06:00:00 -0000
+
+
