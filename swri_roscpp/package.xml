@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<package format="2">
+  <name>swri_roscpp</name>
+  <version>2.7.1</version>
+  <description>
+
+     swri_roscpp
+
+  </description>
+  <maintainer email="preed@swri.org">P. J. Reed</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>diagnostic_updater</depend>
+  <test_depend>gtest</test_depend>
+  <depend>marti_common_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>roscpp</depend>
+  <test_depend>rostest</test_depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <export/>
+</package>
+
