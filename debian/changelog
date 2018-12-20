@@ -1,0 +1,261 @@
+ros-melodic-swri-yaml-util (2.7.2-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.7.1-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.7.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.6.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.5.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.4.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.3.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.2.1-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 26 Jan 2018 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (2.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Mon, 18 Dec 2017 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (1.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 13 Oct 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (1.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Thu, 31 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (1.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Wed, 02 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.3.0-0stretch) stretch; urgency=high
+
+  * Merge together the indigo, jade, and kinetic branches (#443 <https://github.com/pjreed/marti_common/issues/443>)
+  * Contributors: P. J. Reed
+
+ -- Marc Alban <malban@swri.org>  Tue, 20 Jun 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.2.4-0stretch) stretch; urgency=high
+
+  * Make swri_yaml_util build out-of-source.
+  * Contributors: Marc Alban
+
+ -- Marc Alban <malban@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.2.3-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 09 Dec 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.2.2-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Wed, 07 Dec 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.2.1-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 21 Jun 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.5-0stretch) stretch; urgency=high
+
+  * Add an explicit dependency on pkg-config
+  * Contributors: P. J. Reed
+
+ -- Marc Alban <malban@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.4-0stretch) stretch; urgency=high
+
+  * Add support to load YAML from string and dictionary.
+  * Fix linking with yaml-cpp.
+  * Contributors: Elliot Johnson, Marc Alban
+
+ -- Marc Alban <malban@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.3-0stretch) stretch; urgency=high
+
+  * Adds uint16 support to swri_yaml_util
+  * Contributors: P. J. Reed
+
+ -- Marc Alban <malban@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.2-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.1-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 29 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.14-0stretch) stretch; urgency=high
+
+  * Add develspace include directory to swri_yaml_util
+    Otherwise, version.h is missing and the package fails to build
+  * Make swri_yaml_util build out-of-source
+    Fixes #411 <https://github.com/swri-robotics/marti_common/issues/411> by generating version.h in the devel space include folder instead of the source space.
+    Based heavily on http://answers.ros.org/question/123221/
+  * Contributors: Edward Venator
+
+ -- Marc Alban <malban@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.13-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.12-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Sun, 14 Aug 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.11-0stretch) stretch; urgency=high
+
+  * Adding an explicit dependency on pkg-config
+  * Contributors: P. J. Reed
+
+ -- Marc Alban <malban@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.10-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.9-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.8-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.7-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Wed, 18 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.6-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.5-0stretch) stretch; urgency=high
+
+  * Adds missing package dependency and find_package() for boost in
+    swri_yaml_util. See issue #240 <https://github.com/evenator/marti_common/issues/240>
+  * Cleans up all catkin_lint by adding a proper package description
+    and fixing some formatting in CMakeLists.txt.
+  * Contributors: Ed Venator
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.4-0stretch) stretch; urgency=high
+
+  * Adds boost include directories to yaml_util because yaml-cpp uses boost and doesn't export the include directory.
+  * Contributors: Ed Venator
+
+ -- Marc Alban <malban@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.3-0stretch) stretch; urgency=high
+
+  * Fixes missing yaml-cpp dependency in swri_yaml_util.
+    Refs #233 <https://github.com/swri-robotics/marti_common/issues/233>.
+  * Contributors: Ed Venator
+
+ -- Marc Alban <malban@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.2-0stretch) stretch; urgency=high
+
+  * Renames yaml_util to swri_yaml_util. Refs #231 <https://github.com/swri-robotics/marti_common/issues/231>.
+  * Contributors: Edward Venator
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-yaml-util (0.0.1-0stretch) stretch; urgency=high
+
+
+
+ -- Marc Alban <malban@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
