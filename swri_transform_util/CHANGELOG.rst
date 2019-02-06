@@ -2,6 +2,15 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.0 (2019-02-06)
+------------------
+* Reduce the number of local_xy subscribers from 3 per transform manager to 1 (`#537 <https://github.com/swri-robotics/marti_common/issues/537>`_)
+* Add dynamic parameters (`#532 <https://github.com/swri-robotics/marti_common/issues/532>`_)
+* Contributors: Matthew
+
+2.7.3 (2019-01-03)
+------------------
+
 2.7.2 (2018-12-20)
 ------------------
 * Fix the unit test that intermittently breaks (`#534 <https://github.com/swri-robotics/marti_common/issues/534>`_)
