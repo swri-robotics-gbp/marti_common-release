@@ -1,3 +1,43 @@
+## marti_common (indigo) - 2.8.0-0
+
+The packages in the `marti_common` repository were released into the `indigo` distro by running `/usr/bin/bloom-release -r indigo -t indigo marti_common` on `Wed, 06 Feb 2019 15:55:27 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_nodelet`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_rospy`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `2.7.2-0`
+- old version: `2.7.2-0`
+- new version: `2.8.0-0`
+
+Versions of tools used:
+
+- bloom version: `0.7.2`
+- catkin_pkg version: `0.4.10`
+- rosdep version: `0.15.0`
+- rosdistro version: `0.7.2`
+- vcstools version: `0.1.40`
+
+
 ## marti_common (melodic) - 2.7.2-0
 
 The packages in the `marti_common` repository were released into the `melodic` distro by running `/usr/bin/bloom-release -r melodic -t melodic marti_common` on `Thu, 20 Dec 2018 21:32:48 -0000`
