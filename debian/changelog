@@ -1,0 +1,278 @@
+ros-melodic-swri-nodelet (2.8.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Wed, 06 Feb 2019 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.7.3-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Thu, 03 Jan 2019 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.7.2-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.7.1-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.7.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.6.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-melodic-swri-nodelet (2.5.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.org>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-nodelet (2.4.0-0stretch) stretch; urgency=high
+
+  * Update package maintainers (#520 <https://github.com/swri-robotics/marti_common/issues/520>)
+  * Contributors: P. J. Reed
+
+ -- P. J. Reed <preed@swri.org>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-nodelet (2.3.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-melodic-swri-nodelet (2.2.1-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-melodic-swri-nodelet (2.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 26 Jan 2018 06:00:00 -0000
+
+ros-melodic-swri-nodelet (2.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Mon, 18 Dec 2017 06:00:00 -0000
+
+ros-melodic-swri-nodelet (1.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 13 Oct 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (1.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Thu, 31 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (1.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Wed, 02 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.3.0-0stretch) stretch; urgency=high
+
+  * Merge together the indigo, jade, and kinetic branches (#443 <https://github.com/pjreed/marti_common/issues/443>)
+  * Contributors: P. J. Reed
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 20 Jun 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.2.4-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.2.3-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 09 Dec 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.2.2-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Wed, 07 Dec 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.2.1-0stretch) stretch; urgency=high
+
+  * Add C++ and CMake macros for wrapper nodes
+    Defines a C++ macro to replace the normal nodelet export wrapper that
+    also creates a factory function returning a pointer to that nodelet.
+    Defines a CMake macro
+    swri_nodelet_add_node(NODELET_NODENAME NODELET_NAMESPACE NODELET_CLASS)
+    that automatically generates the c++ code for a node wrapper with node
+    name NODELET_NODENAME that wraps the nodelet and makes a CMake target
+    to build the node.
+  * Add tests for swri_nodelet with manager and standalone
+  * Contributors: Ed Venator
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 21 Jun 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.5-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.4-0stretch) stretch; urgency=high
+
+  * Add swri_nodelet package.
+    This package simplifies launch files that can easily change between
+    running nodelets in a shared manager or as standalone processes.
+  * Contributors: Elliot Johnson
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.3-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.2-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.1-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 29 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.14-0stretch) stretch; urgency=high
+
+  * Include boost/make_shared.hpp
+    This header is necessary in the unlikely event that the using cpp file hasn't included boost/make_shared.hpp anywhere else. Also, it's good practice to include what you use.
+  * Fix include_directories order in swri_roscpp
+    Include package-local header files before catkin header files
+    so that source is always built against source header files, even
+    if the same package exists elsewhere in the catkin tree.
+  * Contributors: Edward Venator
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.13-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.12-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sun, 14 Aug 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.11-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.10-0stretch) stretch; urgency=high
+
+  * Update version numbers for new packages.
+  * Version 0.0.10 changelogs.
+  * Add swri_nodelet package.
+    This package simplifies launch files that can easily change between
+    running nodelets in a shared manager or as standalone processes.
+  * Contributors: Edward Venator, Elliot Johnson
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.9-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.8-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.7-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Wed, 18 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.6-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.5-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sun, 27 Sep 2015 20:27:00 -0000
+
+ros-melodic-swri-nodelet (0.0.4-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sun, 27 Sep 2015 16:35:00 -0000
+
+ros-melodic-swri-nodelet (0.0.3-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.2-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 Sep 2015 20:00:00 -0000
+
+ros-melodic-swri-nodelet (0.0.1-0stretch) stretch; urgency=high
+
+
+
+ -- Elliot Johnson <elliot.johnson@swri.org>  Fri, 25 Sep 2015 14:06:00 -0000
+
+
