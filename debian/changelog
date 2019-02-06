@@ -1,0 +1,234 @@
+ros-melodic-swri-rospy (2.8.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Wed, 06 Feb 2019 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.7.3-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Thu, 03 Jan 2019 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.7.2-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.7.1-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.7.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.6.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-melodic-swri-rospy (2.5.0-0stretch) stretch; urgency=high
+
+
+
+ -- P. J. Reed <preed@swri.edu>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-rospy (2.4.0-0stretch) stretch; urgency=high
+
+  * Update package maintainers (#520 <https://github.com/swri-robotics/marti_common/issues/520>)
+  * Contributors: P. J. Reed
+
+ -- P. J. Reed <preed@swri.edu>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-melodic-swri-rospy (2.3.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-melodic-swri-rospy (2.2.1-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-melodic-swri-rospy (2.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 26 Jan 2018 06:00:00 -0000
+
+ros-melodic-swri-rospy (2.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Mon, 18 Dec 2017 06:00:00 -0000
+
+ros-melodic-swri-rospy (1.2.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 13 Oct 2017 05:00:00 -0000
+
+ros-melodic-swri-rospy (1.1.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Thu, 31 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-rospy (1.0.0-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Wed, 02 Aug 2017 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.3.0-0stretch) stretch; urgency=high
+
+  * Merge together the indigo, jade, and kinetic branches (#443 <https://github.com/pjreed/marti_common/issues/443>)
+  * Contributors: P. J. Reed
+
+ -- Ed Venator <evenator@swri.edu>  Tue, 20 Jun 2017 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.14-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.13-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.12-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Sun, 14 Aug 2016 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.11-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.10-0stretch) stretch; urgency=high
+
+  * Adds swri_rospy subclasses for Subscriber, Service, and Timer
+    These classes are drop-in replacements for their rospy counterparts,
+    except that their constructor has an additional parameter
+    asynchronous, which defaults to False. If asynchronous is false, the
+    callback is wrapped with the single_threaded decorator. (This means
+    that all of these classes use the single-thread callback queue by
+    default.)
+    Also, swri_rospy.spin is now injected into the rospy namespace to
+    override rospy.spin. This is done to prevent users from accidentally
+    using rospy.spin, which does not process the callback queue.
+  * Adds deadlock protection to single_threaded decorator.
+    Decorating a function with single_threaded more than once would cause the
+    callback queue to deadlock. This prevents recursive decoration.
+  * Adds exception handling to single_threaded decorator.
+  * Makes single_threaded decorator work for arbitrary ags
+  * Adds service_wrapper decorator.
+    Also fixes line endings.
+  * Updates swri_rospy single_threaded example.
+    Also fixes line-endings.
+  * Creates a new package swri_rospy.
+    swri_rospy adds a new callback-based subscription, timer, and service
+    capability to rospy.
+  * Contributors: Ed Venator, Edward Venator
+  * Adds swri_rospy subclasses for Subscriber, Service, and Timer
+    These classes are drop-in replacements for their rospy counterparts,
+    except that their constructor has an additional parameter
+    asynchronous, which defaults to False. If asynchronous is false, the
+    callback is wrapped with the single_threaded decorator. (This means
+    that all of these classes use the single-thread callback queue by
+    default.)
+    Also, swri_rospy.spin is now injected into the rospy namespace to
+    override rospy.spin. This is done to prevent users from accidentally
+    using rospy.spin, which does not process the callback queue.
+  * Adds deadlock protection to single_threaded decorator.
+    Decorating a function with single_threaded more than once would cause the
+    callback queue to deadlock. This prevents recursive decoration.
+  * Adds exception handling to single_threaded decorator.
+  * Makes single_threaded decorator work for arbitrary ags
+  * Adds service_wrapper decorator.
+    Also fixes line endings.
+  * Updates swri_rospy single_threaded example.
+    Also fixes line-endings.
+  * Creates a new package swri_rospy.
+    swri_rospy adds a new callback-based subscription, timer, and service
+    capability to rospy.
+  * Contributors: Ed Venator
+
+ -- Ed Venator <evenator@swri.edu>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.9-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.8-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.7-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Wed, 18 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.6-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.5-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Sun, 27 Sep 2015 20:27:00 -0000
+
+ros-melodic-swri-rospy (0.0.4-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Sun, 27 Sep 2015 16:35:00 -0000
+
+ros-melodic-swri-rospy (0.0.3-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.2-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 25 Sep 2015 20:00:00 -0000
+
+ros-melodic-swri-rospy (0.0.1-0stretch) stretch; urgency=high
+
+
+
+ -- Ed Venator <evenator@swri.edu>  Fri, 25 Sep 2015 14:06:00 -0000
+
+
