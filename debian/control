@@ -1,0 +1,12 @@
+Source: ros-indigo-swri-transform-util
+Section: misc
+Priority: extra
+Maintainer: Marc Alban <malban@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, libgeos++-dev, libproj-dev, libyaml-cpp-dev, pkg-config, ros-indigo-catkin, ros-indigo-cv-bridge, ros-indigo-diagnostic-msgs, ros-indigo-geographic-msgs, ros-indigo-geometry-msgs, ros-indigo-gps-common, ros-indigo-nodelet, ros-indigo-roscpp, ros-indigo-rospy, ros-indigo-rostest, ros-indigo-swri-math-util, ros-indigo-swri-nodelet, ros-indigo-swri-roscpp, ros-indigo-swri-yaml-util, ros-indigo-tf, ros-indigo-topic-tools
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-indigo-swri-transform-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, libgeos++-dev, libproj-dev, libyaml-cpp-dev, ros-indigo-cv-bridge, ros-indigo-diagnostic-msgs, ros-indigo-geographic-msgs, ros-indigo-geometry-msgs, ros-indigo-gps-common, ros-indigo-nodelet, ros-indigo-roscpp, ros-indigo-rospy, ros-indigo-sensor-msgs, ros-indigo-swri-math-util, ros-indigo-swri-nodelet, ros-indigo-swri-roscpp, ros-indigo-swri-yaml-util, ros-indigo-tf, ros-indigo-topic-tools
+Description: The swri_transform_util package contains utility functions and classes for transforming between coordinate frames.
