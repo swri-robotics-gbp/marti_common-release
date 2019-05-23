@@ -1,0 +1,266 @@
+ros-lunar-marti-data-structures (2.9.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 23 May 2019 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.8.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 06 Feb 2019 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.7.3-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 03 Jan 2019 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.7.2-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.7.1-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.7.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.6.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.5.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.4.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.3.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.2.1-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-lunar-marti-data-structures (2.2.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.1.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 26 Jan 2018 06:00:00 -0000
+
+ros-lunar-marti-data-structures (2.0.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Mon, 18 Dec 2017 06:00:00 -0000
+
+ros-lunar-marti-data-structures (1.2.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 13 Oct 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (1.1.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 31 Aug 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (1.0.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 02 Aug 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.3.0-1xenial) xenial; urgency=high
+
+  * Merge together the indigo, jade, and kinetic branches (#443 <https://github.com/pjreed/marti_common/issues/443>)
+  * Contributors: P. J. Reed
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 20 Jun 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.2.4-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.2.3-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 09 Dec 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.2.2-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 07 Dec 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.2.1-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.2.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 21 Jun 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.5-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.4-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.3-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.2-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.1-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.1.0-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 29 Sep 2015 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.14-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.13-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.12-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 14 Aug 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.11-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.10-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.9-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.8-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.7-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Wed, 18 Nov 2015 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.6-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.5-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.4-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sun, 27 Sep 2015 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.3-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.2-1xenial) xenial; urgency=high
+
+
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+ros-lunar-marti-data-structures (0.0.1-1xenial) xenial; urgency=high
+
+  * update cmake version to squash the CMP0003 warning
+  * remove dependencies on build_tools
+  * use format 2 package definition
+  * fix missing organization in license text
+  * catkinize marti_common
+  * change license to BSD
+  * Contributors: Marc Alban
+
+ -- Kris Kozak <kkozak@swri.org>  Fri, 25 Sep 2015 05:00:00 -0000
+
+
