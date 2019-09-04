@@ -1,0 +1,12 @@
+Source: ros-melodic-swri-console-util
+Section: misc
+Priority: extra
+Maintainer: Marc Alban <malban@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-catkin, ros-melodic-roscpp, ros-melodic-swri-math-util
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-melodic-swri-console-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-roscpp, ros-melodic-swri-math-util
+Description: swri_console_util
