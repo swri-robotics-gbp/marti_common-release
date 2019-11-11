@@ -1,6 +1,6 @@
 <package format="3">
   <name>swri_image_util</name>
-  <version>3.0.2</version>
+  <version>3.0.3</version>
   <description>
 
      swri_image_util
@@ -33,6 +33,8 @@
   <depend>swri_opencv_util</depend>
   <depend>swri_roscpp</depend>
   <depend>tf2</depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
