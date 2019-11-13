@@ -1,3 +1,43 @@
+## marti_common (melodic) - 2.11.0-1
+
+The packages in the `marti_common` repository were released into the `melodic` distro by running `/usr/bin/bloom-release -r melodic marti_common` on `Wed, 13 Nov 2019 23:09:16 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_nodelet`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_rospy`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `2.10.0-1`
+- old version: `2.10.0-1`
+- new version: `2.11.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.0`
+- catkin_pkg version: `0.4.14`
+- rosdep version: `0.17.1`
+- rosdistro version: `0.7.5`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (kinetic) - 2.11.0-1
 
 The packages in the `marti_common` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release -r kinetic marti_common` on `Wed, 13 Nov 2019 22:42:32 -0000`
