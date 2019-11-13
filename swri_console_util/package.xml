@@ -1,21 +1,19 @@
-<package format="3">
+<package format="2">
   <name>swri_console_util</name>
-  <version>3.0.3</version>
+  <version>2.11.0</version>
   <description>
 
      swri_console_util
 
   </description>
   <author>Marc Alban</author>
-  <maintainer email="preed@swri.org">P. J. Reed</maintainer>
+  <maintainer email="malban@swri.org">Marc Alban</maintainer>
   <license>BSD</license>
   <url>https://github.com/swri-robotics/marti_common</url>
   
-  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>catkin</buildtool_depend>
   
-  <depend>rclcpp</depend>
+  <depend>roscpp</depend>
+  <depend>swri_math_util</depend>
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
 </package>

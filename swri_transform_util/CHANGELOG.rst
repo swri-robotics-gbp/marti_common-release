@@ -2,23 +2,11 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.3 (2019-11-11)
-------------------
-
-3.0.2 (2019-11-11)
-------------------
-* Comment out ament_cmake_gtest (`#555 <https://github.com/pjreed/marti_common/issues/555>`_)
-* Contributors: P. J. Reed
-
-3.0.1 (2019-11-11)
-------------------
-* Add missing dependency on Boost::thread to swri_transform_util (`#554 <https://github.com/pjreed/marti_common/issues/554>`_)
-* Contributors: P. J. Reed
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
-* Contributors: P. J. Reed
+2.11.0 (2019-11-13)
+-------------------
+* Add a nodelet that transforms ObstacleArrays
+* Install gps_transform_publisher node (`#551 <https://github.com/pjreed/marti_common/issues/551>`_)
+* Contributors: Matthew, P. J. Reed
 
 2.10.0 (2019-09-04)
 -------------------
