@@ -2,10 +2,26 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2019-11-13)
--------------------
-* Fix incorrect type for strings in dynamic params (`#553 <https://github.com/pjreed/marti_common/issues/553>`_)
-* Contributors: jgassaway
+3.0.4 (2020-03-05)
+------------------
+* ROS 2 Eloquent compatibility (`#568 <https://github.com/swri-robotics/marti_common/issues/568>`_)
+* Contributors: P. J. Reed
+
+3.0.3 (2019-11-11)
+------------------
+* Replace deprecated functions in swri_roscpp
+* Contributors: P. J. Reed
+
+3.0.2 (2019-11-11)
+------------------
+
+3.0.1 (2019-11-11)
+------------------
+
+3.0.0 (2019-11-08)
+------------------
+* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
+* Contributors: P. J. Reed
 
 2.10.0 (2019-09-04)
 -------------------
