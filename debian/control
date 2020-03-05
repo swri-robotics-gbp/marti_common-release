@@ -1,0 +1,12 @@
+Source: ros-eloquent-swri-transform-util
+Section: misc
+Priority: optional
+Maintainer: P. J. Reed <preed@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, libgeos++-dev, libproj-dev, libyaml-cpp-dev, pkg-config, ros-eloquent-ament-cmake, ros-eloquent-ament-cmake-python, ros-eloquent-cv-bridge, ros-eloquent-diagnostic-msgs, ros-eloquent-geographic-msgs, ros-eloquent-geometry-msgs, ros-eloquent-gps-msgs, ros-eloquent-marti-nav-msgs, ros-eloquent-rcl-interfaces, ros-eloquent-rclcpp, ros-eloquent-rclcpp-components, ros-eloquent-rclpy, ros-eloquent-swri-math-util, ros-eloquent-swri-roscpp, ros-eloquent-tf2, ros-eloquent-tf2-geometry-msgs, ros-eloquent-tf2-ros, ros-eloquent-ros-workspace
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-swri-transform-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, libgeos++-dev, libproj-dev, libyaml-cpp-dev, ros-eloquent-cv-bridge, ros-eloquent-diagnostic-msgs, ros-eloquent-geographic-msgs, ros-eloquent-geometry-msgs, ros-eloquent-gps-msgs, ros-eloquent-marti-nav-msgs, ros-eloquent-rcl-interfaces, ros-eloquent-rclcpp, ros-eloquent-rclcpp-components, ros-eloquent-rclpy, ros-eloquent-sensor-msgs, ros-eloquent-swri-math-util, ros-eloquent-swri-roscpp, ros-eloquent-tf2, ros-eloquent-tf2-geometry-msgs, ros-eloquent-tf2-ros, ros-eloquent-ros-workspace
+Description: The swri_transform_util package contains utility functions and classes for transforming between coordinate frames.
