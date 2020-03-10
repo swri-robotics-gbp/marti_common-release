@@ -1,0 +1,12 @@
+Source: ros-dashing-swri-roscpp
+Section: misc
+Priority: optional
+Maintainer: P. J. Reed <preed@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, libgtest-dev, ros-dashing-ament-cmake, ros-dashing-ament-cmake-gtest, ros-dashing-diagnostic-updater, ros-dashing-marti-common-msgs, ros-dashing-nav-msgs, ros-dashing-rclcpp, ros-dashing-rosidl-cmake, ros-dashing-rosidl-default-generators, ros-dashing-std-msgs, ros-dashing-std-srvs, ros-dashing-ros-workspace, ros-dashing-rmw-connext-cpp, ros-dashing-rmw-fastrtps-cpp, ros-dashing-rmw-implementation, ros-dashing-rmw-opensplice-cpp, ros-dashing-rosidl-typesupport-connext-c, ros-dashing-rosidl-typesupport-connext-cpp, ros-dashing-rosidl-typesupport-opensplice-c, ros-dashing-rosidl-typesupport-opensplice-cpp
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-dashing-swri-roscpp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, ros-dashing-diagnostic-updater, ros-dashing-marti-common-msgs, ros-dashing-nav-msgs, ros-dashing-rclcpp, ros-dashing-rosidl-default-runtime, ros-dashing-std-msgs, ros-dashing-std-srvs, ros-dashing-ros-workspace
+Description: swri_roscpp
