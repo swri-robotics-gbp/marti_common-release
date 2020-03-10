@@ -2,6 +2,9 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.0.5 (2020-03-10)
+------------------
+
 3.0.4 (2020-03-05)
 ------------------
 * ROS 2 Eloquent compatibility (`#568 <https://github.com/swri-robotics/marti_common/issues/568>`_)
