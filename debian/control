@@ -1,0 +1,12 @@
+Source: ros-eloquent-swri-console-util
+Section: misc
+Priority: optional
+Maintainer: P. J. Reed <preed@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-rclcpp, ros-eloquent-ros-workspace
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-swri-console-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-rclcpp, ros-eloquent-ros-workspace
+Description: swri_console_util
