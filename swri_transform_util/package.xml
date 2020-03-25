@@ -1,6 +1,6 @@
-<package format="3">
+<package format="2">
   <name>swri_transform_util</name>
-  <version>3.0.5</version>
+  <version>2.12.0</version>
   <description>
 
      The swri_transform_util package contains utility functions and classes for
@@ -8,12 +8,11 @@
 
   </description>
   <author>Marc Alban</author>
-  <maintainer email="preed@swri.org">P. J. Reed</maintainer>
+  <maintainer email="malban@swri.org">Marc Alban</maintainer>
   <license>BSD</license>
   <url>https://github.com/swri-robotics/marti_common</url>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
-  <buildtool_depend>ament_cmake_python</buildtool_depend>
+  <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>pkg-config</buildtool_depend>
 
   <depend>boost</depend>
@@ -21,34 +20,27 @@
   <depend>diagnostic_msgs</depend>
   <depend>geographic_msgs</depend>
   <depend>geometry_msgs</depend>
-  <depend>gps_msgs</depend>
+  <depend>gps_common</depend>
   <depend>libgeos++-dev</depend>
   <depend>marti_nav_msgs</depend>
+  <depend>nodelet</depend>
   <depend>proj</depend>
-  <depend>rclcpp_components</depend>
-  <depend>rclcpp</depend>
-  <depend>rcl_interfaces</depend>
-  <depend>rclpy</depend>
-  <depend>sensor_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
   <depend>swri_math_util</depend>
+  <depend>swri_nodelet</depend>
   <depend>swri_roscpp</depend>
-  <depend>tf2</depend>
-  <depend>tf2_geometry_msgs</depend>
-  <depend>tf2_ros</depend>
+  <depend>swri_yaml_util</depend>
+  <depend>tf</depend>
+  <depend>topic_tools</depend>
   <depend>yaml-cpp</depend>
 
-  <!--
-  When we've got tf support for Python...
-  <exec_depend>tf2_py</exec_depend>
-  -->
+  <exec_depend>sensor_msgs</exec_depend>
 
-  <!--
-  After the unit tests are converted...
-  <test_depend>ament_cmake_gtest</test_depend>
-  -->
+  <test_depend>rostest</test_depend>
 
   <export>
-    <build_type>ament_cmake</build_type>
+    <nodelet plugin="${prefix}/nodelet_plugins.xml" />
     <rosdoc config="rosdoc.yaml" />
   </export>
 </package>

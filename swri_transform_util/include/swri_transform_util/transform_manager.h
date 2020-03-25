@@ -33,16 +33,11 @@
 #include <map>
 #include <string>
 
-#include <rclcpp/logger.hpp>
-
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <geometry_msgs/msg/transform_stamped.hpp>
-
-#include <tf2/transform_datatypes.h>
-#include <tf2_ros/buffer.h>
-#include <tf2_ros/transform_listener.h>
+#include <tf/transform_datatypes.h>
+#include <tf/transform_listener.h>
 
 #include <swri_transform_util/local_xy_util.h>
 #include <swri_transform_util/transform.h>
@@ -50,7 +45,7 @@
 
 namespace swri_transform_util
 {
-  typedef std::map<std::string, std::shared_ptr<Transformer> > TransformerMap;
+  typedef std::map<std::string, boost::shared_ptr<Transformer> > TransformerMap;
   typedef std::map<std::string, TransformerMap> SourceTargetMap;
 
   /**
@@ -67,7 +62,8 @@ namespace swri_transform_util
   class TransformManager
   {
   public:
-    explicit TransformManager(rclcpp::Node::SharedPtr node);
+    TransformManager();
+    ~TransformManager();
 
     /**
      * Initialize the TransformManager with a tf::TransformListener
@@ -77,7 +73,8 @@ namespace swri_transform_util
      * @param tf A shared pointer to a tf::TransformListener that the
      *    Transformer wraps.
      */
-    void Initialize();
+    void Initialize(boost::shared_ptr<tf::TransformListener> tf
+        = boost::make_shared<tf::TransformListener>());
 
     /**
      * Get the Transform between two frames at a specified time
@@ -94,7 +91,7 @@ namespace swri_transform_util
      * @param[in] target_frame The TF (or special) frame id of the target
      * @param[in] source_frame The TF (or special) frame id of the source
      * @param[in] time         The requested time to request the transform.
-     *    tf2::TimePoint(0) means the most recent time for which a valid transform
+     *    ros::Time(0) means the most recent time for which a valid transform
      *    is available.
      * @param[out] transform   The transform requested. If the function returns
      *    false, transform is not mutated.
@@ -104,7 +101,7 @@ namespace swri_transform_util
     bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        const tf2::TimePoint& time,
+        const ros::Time& time,
         Transform& transform) const;
 
     /**
@@ -158,7 +155,7 @@ namespace swri_transform_util
      * @param[in] target_frame The TF frame id of the target
      * @param[in] source_frame The TF frame id of the source
      * @param[in] time         The requested time to request the transform.
-     *    tf2::TimePoint(0) means the most recent time for which a valid transform
+     *    ros::Time(0) means the most recent time for which a valid transform
      *    is available.
      * @param[out] transform   The transform requested. If the function returns
      *    false, transform is not mutated.
@@ -168,8 +165,8 @@ namespace swri_transform_util
     bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        const tf2::TimePoint& time,
-        geometry_msgs::msg::TransformStamped& transform) const;
+        const ros::Time& time,
+        tf::StampedTransform& transform) const;
 
     /**
      * Get the most recent tf::Transform between two frames
@@ -189,7 +186,7 @@ namespace swri_transform_util
     bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        geometry_msgs::msg::TransformStamped& transform) const;
+        tf::StampedTransform& transform) const;
 
     /**
      * Get the tf::Transform between two frames at a specified time
@@ -203,7 +200,7 @@ namespace swri_transform_util
      * @param[in] target_frame The TF frame id of the target
      * @param[in] source_frame The TF frame id of the source
      * @param[in] time         The requested time to request the transform.
-     *    tf2::TimePoint(0) means the most recent time for which a valid transform
+     *    ros::Time(0) means the most recent time for which a valid transform
      *    is available.
      * @param[in] timeout      How long to wait for the transform to be
      *    available before returning False.
@@ -215,9 +212,9 @@ namespace swri_transform_util
     bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        const tf2::TimePoint& time,
-        const tf2::Duration& timeout,
-        geometry_msgs::msg::TransformStamped& transform) const;
+        const ros::Time& time,
+        const ros::Duration& timeout,
+        tf::StampedTransform& transform) const;
 
     /**
      * Get the most recent tf::Transform between two frames
@@ -239,8 +236,8 @@ namespace swri_transform_util
     bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        const tf2::Duration& timeout,
-        geometry_msgs::msg::TransformStamped& transform) const;
+        const ros::Duration& timeout,
+        tf::StampedTransform& transform) const;
 
     /**
      * @brief LocalXyUtil exposes the private instance of LocalXyWgs84Util
@@ -249,14 +246,13 @@ namespace swri_transform_util
     const LocalXyWgs84UtilPtr& LocalXyUtil() const;
 
   private:
-    rclcpp::Node::SharedPtr node_;
-    std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+    boost::shared_ptr<tf::TransformListener> tf_listener_;
 
     LocalXyWgs84UtilPtr local_xy_util_;
 
     SourceTargetMap transformers_;
   };
-  typedef std::shared_ptr<TransformManager> TransformManagerPtr;
+  typedef boost::shared_ptr<TransformManager> TransformManagerPtr;
 }
 
 #endif  // TRANSFORM_UTIL_TRANSFORM_MANAGER_H_

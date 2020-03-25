@@ -29,7 +29,7 @@
 #ifndef SWRI_ROSCPP_TOPIC_SERVICE_CLIENT_H_
 #define SWRI_ROSCPP_TOPIC_SERVICE_CLIENT_H_
 
-#include <rclcpp/rclcpp.hpp>
+#include <ros/node_handle.h>
 
 #include <boost/thread/mutex.hpp>
 #include <boost/uuid/random_generator.hpp>
@@ -45,40 +45,36 @@ class TopicServiceClientRaw
 private:
   typedef
   boost::mutex request_lock_;
-  std::shared_ptr<rclcpp::Subscription<MRes> > response_sub_;
-  std::shared_ptr<rclcpp::Publisher<MReq> > request_pub_;
-  std::shared_ptr<MRes> response_;
+  ros::Subscriber response_sub_;
+  ros::Publisher request_pub_;
+  boost::shared_ptr<MRes> response_;
 
-  rclcpp::Duration timeout_;
+  ros::Duration timeout_;
   std::string name_;
   std::string service_name_;
 
   int sequence_;
 
 public:
-  TopicServiceClientRaw() :
-    timeout_(std::chrono::duration<float>(4.0)),
-    sequence_(0),
-    node_(nullptr)
+  TopicServiceClientRaw() : sequence_(0), timeout_(ros::Duration(4.0))
   {
 
   }
 
-  void initialize(rclcpp::Node &nh,
+  void initialize(ros::NodeHandle &nh,
                 const std::string &service,
                 const std::string &client_name = "")
   {
-    node_ = &nh;
     //Converts using string stream instead of to_string so non C++ 11 nodes won't fail
     boost::uuids::random_generator gen;
     boost::uuids::uuid u = gen();
     std::string random_str = boost::uuids::to_string(u);
-    name_ = client_name.length() ? client_name : (nh.get_name() + random_str);
-    service_name_ = service;
+    name_ = client_name.length() ? client_name : (ros::this_node::getName() + random_str);
+    std::string rservice = nh.resolveName(service);
+    service_name_ = rservice;
 
-    request_pub_ = nh.create_publisher<MReq>(service + "/request", 10);
-    response_sub_ = nh.create_subscription<MRes>(service + "/response",
-        10, std::bind(&TopicServiceClientRaw<MReq, MRes>::response_callback, this, std::placeholders::_1));
+    request_pub_ = nh.advertise<MReq>(rservice + "/request", 10);
+    response_sub_ = nh.subscribe(rservice + "/response", 10, &TopicServiceClientRaw<MReq, MRes>::response_callback, this);
   }
 
   bool call(MReq& request, MRes& response)
@@ -86,30 +82,30 @@ public:
     boost::mutex::scoped_lock scoped_lock(request_lock_);
 
     // block for response
-    request.srv_header.stamp = node_->now();
+    request.srv_header.stamp = ros::Time::now();
     request.srv_header.sequence = sequence_;
     request.srv_header.sender = name_;
 
     // Wait until we get a subscriber and publisher
-    while (request_pub_->get_subscription_count() == 0 || response_sub_->get_publisher_count() == 0)
+    while (request_pub_.getNumSubscribers() == 0 || response_sub_.getNumPublishers() == 0)
     {
-      rclcpp::sleep_for(std::chrono::milliseconds(2));
-      rclcpp::spin_some(node_->shared_from_this());
+      ros::Duration(0.002).sleep();
+      ros::spinOnce();
 
-      if (node_->now() - request.srv_header.stamp > timeout_)
+      if (ros::Time::now() - request.srv_header.stamp > timeout_)
       {
-        RCLCPP_ERROR(node_->get_logger(), "Topic service timeout exceeded");
+        ROS_ERROR("Topic service timeout exceeded");
         return false;
       }
     }
     response_.reset();
-    request_pub_->publish(request);
+    request_pub_.publish(request);
 
     // Wait until we get a response
-    while (!response_ && node_->now() - request.srv_header.stamp < timeout_)
+    while (!response_ && ros::Time::now() - request.srv_header.stamp < timeout_)
     {
-      rclcpp::sleep_for(std::chrono::milliseconds(2));
-      rclcpp::spin_some(node_->shared_from_this());
+      ros::Duration(0.002).sleep();
+      ros::spinOnce();
     }
 
     sequence_++;
@@ -129,7 +125,7 @@ public:
 
   bool exists()
   {
-    return request_pub_->get_subscription_count() > 0 && response_sub_->get_publisher_count() > 0;
+    return request_pub_.getNumSubscribers() > 0 && response_sub_.getNumPublishers() > 0;
   }
 
   // The service server can output a console log message when the
@@ -138,28 +134,26 @@ public:
   bool logCalls() const;
 private:
 
-  void response_callback(const std::shared_ptr<MRes> message)
+  void response_callback(const boost::shared_ptr<MRes>& message)
   {
-    RCLCPP_DEBUG(node_->get_logger(), "Got response for %s with sequence %i",
+    ROS_DEBUG("Got response for %s with sequence %i",
              message->srv_header.sender.c_str(), message->srv_header.sequence);
 
     if (message->srv_header.sender != name_)
     {
-      RCLCPP_DEBUG(node_->get_logger(), "Got response from another client, ignoring..");
+      ROS_DEBUG("Got response from another client, ignoring..");
       return;
     }
     
     if (message->srv_header.sequence != sequence_)
     {
-      RCLCPP_WARN(node_->get_logger(), "Got wrong sequence number, ignoring..");
-      RCLCPP_DEBUG(node_->get_logger(), "message seq:%i vs current seq: %i", message->srv_header.sequence, sequence_);
+      ROS_WARN("Got wrong sequence number, ignoring..");
+      ROS_DEBUG("message seq:%i vs current seq: %i", message->srv_header.sequence, sequence_);
       return;
     }
 
     response_ = message;
   }
-
-  rclcpp::Node* node_;
 };  // class TopicServiceClientRaw
 
 template<class MReq>
