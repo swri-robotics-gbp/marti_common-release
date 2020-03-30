@@ -32,8 +32,6 @@
 #include <cmath>
 #include <functional>
 
-#include <boost/make_shared.hpp>
-
 #include <tf2/utils.h>
 
 #include <swri_math_util/constants.h>
@@ -102,24 +100,13 @@ namespace swri_transform_util
     initialized_(false)
   {
     RCLCPP_INFO(node->get_logger(), "Subscribing to /local_xy_origin");
+
     ResetInitialization();
   }
 
   void LocalXyWgs84Util::ResetInitialization()
   {
-    //ros::NodeHandle node;
-    gps_sub_ = node_->create_subscription<gps_msgs::msg::GPSFix>(
-        "/local_xy_origin",
-        1,
-        std::bind(&LocalXyWgs84Util::HandleGpsFix, this, std::placeholders::_1));
-    navsatfix_sub_ = node_->create_subscription<sensor_msgs::msg::NavSatFix>(
-        "/local_xy_origin",
-        1,
-        std::bind(&LocalXyWgs84Util::HandleNavSatFix, this, std::placeholders::_1));
-    point_sub_ = node_->create_subscription<geographic_msgs::msg::GeoPose>(
-        "/local_xy_origin",
-        1,
-        std::bind(&LocalXyWgs84Util::HandleGeoPose, this, std::placeholders::_1));
+    std::string type;
     pose_sub_ = node_->create_subscription<geometry_msgs::msg::PoseStamped>(
         "/local_xy_origin",
         1,
@@ -146,33 +133,6 @@ namespace swri_transform_util
     rho_lat_ = rho_e - depth;
     rho_lon_ = (rho_n - depth) * std::cos(reference_latitude_);
     initialized_ = true;
-  }
-
-  void LocalXyWgs84Util::HandleGpsFix(const gps_msgs::msg::GPSFix::UniquePtr fix)
-  {
-    HandleOrigin(fix->latitude,
-        fix->longitude,
-        fix->altitude,
-        ToYaw(fix->track),
-        fix->header.frame_id);
-  }
-
-  void LocalXyWgs84Util::HandleGeoPose(const geographic_msgs::msg::GeoPose::UniquePtr point)
-  {
-    HandleOrigin(point->position.latitude,
-        point->position.longitude,
-        point->position.altitude,
-        tf2::getYaw(point->orientation),
-        frame_);
-  }
-
-  void LocalXyWgs84Util::HandleNavSatFix(sensor_msgs::msg::NavSatFix::UniquePtr fix)
-  {
-    HandleOrigin(fix->latitude,
-        fix->longitude,
-        fix->altitude,
-        0,
-        fix->header.frame_id);
   }
 
   void LocalXyWgs84Util::HandlePoseStamped(const geometry_msgs::msg::PoseStamped::UniquePtr pose)
@@ -213,10 +173,7 @@ namespace swri_transform_util
       frame_ = frame;
 
       Initialize();
-      gps_sub_.reset();
-      navsatfix_sub_.reset();
       pose_sub_.reset();
-      point_sub_.reset();
       return;
     }
   }
