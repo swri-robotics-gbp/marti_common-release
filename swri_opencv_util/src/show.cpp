@@ -38,8 +38,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include <ros/ros.h>
-
 namespace swri_opencv_util
 {
   class CvWindows
@@ -64,7 +62,7 @@ namespace swri_opencv_util
       }
     }
 
-#if (BOOST_VERSION / 100 % 1000) >= 65
+#if (BOOST_VERSION / 100 % 1000) >= 65 && (BOOST_VERSION / 100 % 1000) < 69
     friend class boost::serialization::singleton<CvWindows>;
 #else
     friend class boost::serialization::detail::singleton_wrapper<CvWindows>;
