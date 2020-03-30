@@ -1,3 +1,38 @@
+## marti_common (dashing) - 3.1.0-1
+
+The packages in the `marti_common` repository were released into the `dashing` distro by running `/usr/bin/bloom-release -r dashing marti_common` on `Mon, 30 Mar 2020 21:14:54 -0000`
+
+These packages were released:
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_system_util`
+- `swri_transform_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `3.0.5-2`
+- old version: `3.0.5-2`
+- new version: `3.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.3`
+- catkin_pkg version: `0.4.16`
+- rosdep version: `0.18.0`
+- rosdistro version: `0.8.0`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (melodic) - 2.12.0-1
 
 The packages in the `marti_common` repository were released into the `melodic` distro by running `/usr/bin/bloom-release -r melodic marti_common` on `Wed, 25 Mar 2020 20:03:40 -0000`
