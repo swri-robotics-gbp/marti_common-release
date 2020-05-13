@@ -2,6 +2,9 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.0 (2020-05-13)
+------------------
+
 3.1.0 (2020-03-30)
 ------------------
 * Fix swri_transform_util::TransformManager initialization issues
