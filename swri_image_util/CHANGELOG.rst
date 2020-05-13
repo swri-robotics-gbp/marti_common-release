@@ -2,16 +2,33 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.13.0 (2020-05-13)
--------------------
-* Rename swri_image_util test (`#575 <https://github.com/swri-robotics/marti_common/issues/575>`_)
+3.2.0 (2020-05-13)
+------------------
+
+3.1.0 (2020-03-30)
+------------------
+
+3.0.5 (2020-03-10)
+------------------
+
+3.0.4 (2020-03-05)
+------------------
+
+3.0.3 (2019-11-11)
+------------------
+* Fix dependencies for swri_image_util (`#556 <https://github.com/pjreed/marti_common/issues/556>`_)
 * Contributors: P. J. Reed
 
-2.12.0 (2020-03-25)
--------------------
+3.0.2 (2019-11-11)
+------------------
 
-2.11.0 (2019-11-13)
--------------------
+3.0.1 (2019-11-11)
+------------------
+
+3.0.0 (2019-11-08)
+------------------
+* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
+* Contributors: P. J. Reed
 
 2.10.0 (2019-09-04)
 -------------------
