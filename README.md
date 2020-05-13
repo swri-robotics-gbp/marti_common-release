@@ -1,3 +1,43 @@
+## marti_common (melodic) - 2.13.0-1
+
+The packages in the `marti_common` repository were released into the `melodic` distro by running `/usr/bin/bloom-release -r melodic marti_common` on `Wed, 13 May 2020 19:28:15 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_nodelet`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_rospy`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `2.12.0-1`
+- old version: `2.12.0-1`
+- new version: `2.13.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.18`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.1`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (eloquent) - 3.1.0-1
 
 The packages in the `marti_common` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release -r eloquent marti_common` on `Mon, 30 Mar 2020 21:22:29 -0000`
