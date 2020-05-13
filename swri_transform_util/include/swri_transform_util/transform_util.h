@@ -31,17 +31,13 @@
 #define TRANSFORM_UTIL_TRANSFORM_UTIL_H_
 
 #include <string>
-#include <array>
+#include <boost/array.hpp>
 
-#include <tf2/transform_datatypes.h>
-#include <tf2/LinearMath/Transform.h>
-#include <tf2/LinearMath/Vector3.h>
-#include <tf2/LinearMath/Quaternion.h>
-#include <tf2/LinearMath/Matrix3x3.h>
+#include <tf/transform_datatypes.h>
 
 namespace swri_transform_util
 {
-  tf2::Transform GetRelativeTransform(
+  tf::Transform GetRelativeTransform(
       double latitude,
       double longitude,
       double yaw,
@@ -73,7 +69,7 @@ namespace swri_transform_util
    *
    * @returns Distance in meters.
    */
-  double GreatCircleDistance(const tf2::Vector3& src, const tf2::Vector3& dst);
+  double GreatCircleDistance(const tf::Vector3& src, const tf::Vector3& dst);
 
   /**
    * Calculates the bearing between two points.
@@ -152,7 +148,7 @@ namespace swri_transform_util
    *
    * @returns The closest right angle rotation to the input rotation.
    */
-  tf2::Quaternion SnapToRightAngle(const tf2::Quaternion& rotation);
+  tf::Quaternion SnapToRightAngle(const tf::Quaternion& rotation);
 
   /**
    * Return an axis aligned unit vector that is nearest the provided vector.
@@ -161,7 +157,7 @@ namespace swri_transform_util
    *
    * @returns The axis aligned unit vector.
    */
-  tf2::Vector3 GetPrimaryAxis(const tf2::Vector3& vector);
+  tf::Vector3 GetPrimaryAxis(const tf::Vector3& vector);
 
   /**
    * Validate that a 3x3 matrix is a rotation.
@@ -170,7 +166,7 @@ namespace swri_transform_util
    *
    * @returns True if the matrix is a valid rotation.
    */
-  bool IsRotation(tf2::Matrix3x3 matrix);
+  bool IsRotation(tf::Matrix3x3 matrix);
 
   /**
    * Gets the upper-left 3x3 sub-matrix of a 6x6 matrix.
@@ -179,7 +175,7 @@ namespace swri_transform_util
    *
    * @returns The upper-left 3x3 sub-matrix.
    */
-  tf2::Matrix3x3 GetUpperLeft(const std::array<double, 36>& matrix);
+  tf::Matrix3x3 GetUpperLeft(const boost::array<double, 36>& matrix);
 
   /**
    * Gets the lower-right 3x3 sub-matrix of a 6x6 matrix.
@@ -188,7 +184,7 @@ namespace swri_transform_util
    *
    * @returns The lower-right 3x3 sub-matrix.
    */
-  tf2::Matrix3x3 GetLowerRight(const std::array<double, 36>& matrix);
+  tf::Matrix3x3 GetLowerRight(const boost::array<double, 36>& matrix);
 
   /**
    * Converts the 3x3 covariance matrices from Imu messages to a Matrix3x3
@@ -197,7 +193,7 @@ namespace swri_transform_util
    *
    * @retval     Returns the input matrix as a Matrix3x3 object
    */
-  tf2::Matrix3x3 Get3x3Cov(const std::array<double, 9>& matrix);
+  tf::Matrix3x3 Get3x3Cov(const boost::array<double, 9>& matrix);
 
   /**
    * Converts the Matrix3x3 matrix into a 9 element covariance matrix from Imu
@@ -207,8 +203,8 @@ namespace swri_transform_util
    * @param[out] matrix_out   The output matrix
    *
    */
-  void Set3x3Cov(const tf2::Matrix3x3& matrix_in,
-                          std::array<double, 9>& matrix_out);
+  void Set3x3Cov(const tf::Matrix3x3& matrix_in,
+                          boost::array<double, 9>& matrix_out);
   /**
    * Sets the upper-left quadrant of a 6x6 matrix with the specified 3x3
    * sub-matrix
@@ -217,8 +213,8 @@ namespace swri_transform_util
    * @param[out] matrix      The 6x6 matrix to modify.
    */
   void SetUpperLeft(
-      const tf2::Matrix3x3& sub_matrix,
-      std::array<double, 36>& matrix);
+      const tf::Matrix3x3& sub_matrix,
+      boost::array<double, 36>& matrix);
 
   /**
    * Sets the lower-right quadrant of a 6x6 matrix with the specified 3x3
@@ -228,8 +224,8 @@ namespace swri_transform_util
    * @param[out] matrix      The 6x6 matrix to modify.
    */
   void SetLowerRight(
-      const tf2::Matrix3x3& sub_matrix,
-      std::array<double, 36>& matrix);
+      const tf::Matrix3x3& sub_matrix,
+      boost::array<double, 36>& matrix);
 
   /**
    * Calculate the subtending angle of an arc (aligned with the

@@ -2,30 +2,16 @@
 Changelog for package swri_route_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.1.0 (2020-03-30)
-------------------
+2.13.0 (2020-05-13)
+-------------------
+* Add overload of generateObstacleData for tracked objects (`#578 <https://github.com/swri-robotics/marti_common/issues/578>`_)
+* Contributors: Matthew Bries <matthew.bries@swri.org>
 
-3.0.5 (2020-03-10)
-------------------
-* Fix linking bugs (`#569 <https://github.com/swri-robotics/marti_common/issues/569>`_)
-* Contributors: P. J. Reed
+2.12.0 (2020-03-25)
+-------------------
 
-3.0.4 (2020-03-05)
-------------------
-
-3.0.3 (2019-11-11)
-------------------
-
-3.0.2 (2019-11-11)
-------------------
-
-3.0.1 (2019-11-11)
-------------------
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
-* Contributors: P. J. Reed
+2.11.0 (2019-11-13)
+-------------------
 
 2.10.0 (2019-09-04)
 -------------------
