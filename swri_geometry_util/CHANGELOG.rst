@@ -2,34 +2,19 @@
 Changelog for package swri_geometry_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.2.0 (2020-05-13)
-------------------
-* Fix build with GEOS 3.8 (`#576 <https://github.com/swri-robotics/marti_common/issues/576>`_) (`#577 <https://github.com/swri-robotics/marti_common/issues/577>`_)
-  Co-authored-by: Ben Wolsieffer <benwolsieffer@gmail.com>
-* Contributors: P. J. Reed
+2.13.1 (2020-05-21)
+-------------------
 
-3.1.0 (2020-03-30)
-------------------
+2.13.0 (2020-05-13)
+-------------------
+* Fix build with GEOS 3.8 (`#576 <https://github.com/swri-robotics/marti_common/issues/576>`_)
+* Contributors: Ben Wolsieffer
 
-3.0.5 (2020-03-10)
-------------------
+2.12.0 (2020-03-25)
+-------------------
 
-3.0.4 (2020-03-05)
-------------------
-
-3.0.3 (2019-11-11)
-------------------
-
-3.0.2 (2019-11-11)
-------------------
-
-3.0.1 (2019-11-11)
-------------------
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
-* Contributors: P. J. Reed
+2.11.0 (2019-11-13)
+-------------------
 
 2.10.0 (2019-09-04)
 -------------------

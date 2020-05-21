@@ -26,12 +26,8 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // *****************************************************************************
-#ifndef SWRI_ROSCPP_TIMER_IMPL_H_
-#define SWRI_ROSCPP_TIMER_IMPL_H_
-
-#include <rclcpp/rclcpp.hpp>
-#include <rclcpp/time.hpp>
-#include <chrono>
+#ifndef SWRI_ROSCPP_H_
+#define SWRI_ROSCPP_H_
 
 namespace swri
 {
@@ -39,33 +35,30 @@ class Timer;
 class TimerImpl
 {
  protected:
-  rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Duration desired_period_ = rclcpp::Duration(0, 0);
+  ros::Timer timer_;
+  ros::Duration desired_period_;
 
   int ticks_;
 
-  typedef std::chrono::nanoseconds WallDuration;
-  typedef std::chrono::system_clock::time_point WallTime;
+  ros::WallTime tick_begin_wall_;
+  ros::Time tick_begin_normal_;
 
-  WallTime tick_begin_wall_;
-  rclcpp::Time tick_begin_normal_;
+  ros::Duration total_periods_;
+  ros::Duration min_period_;
+  ros::Duration max_period_;
 
-  rclcpp::Duration total_periods_ = rclcpp::Duration(0, 0);
-  rclcpp::Duration min_period_ = rclcpp::Duration(0, 0);
-  rclcpp::Duration max_period_ = rclcpp::Duration(0, 0);
-
-  WallDuration total_durations_;
-  WallDuration min_duration_;
-  WallDuration max_duration_;
+  ros::WallDuration total_durations_;
+  ros::WallDuration min_duration_;
+  ros::WallDuration max_duration_;
 
   void tickBegin()
   {
-    tick_begin_wall_ = std::chrono::system_clock::now();
+    tick_begin_wall_ = ros::WallTime::now();
 
-    rclcpp::Time now = rclcpp::Clock().now();
+    ros::Time now = ros::Time::now();
     if (ticks_ > 0) {
-      rclcpp::Duration period = now - tick_begin_normal_;
-      total_periods_ = total_periods_ + period;
+      ros::Duration period = now - tick_begin_normal_;
+      total_periods_ += period;
 
       if (ticks_ == 1) {
         min_period_ = period;
@@ -80,8 +73,8 @@ class TimerImpl
 
   void tickEnd()
   {
-    WallTime end_time_ = std::chrono::system_clock::now();
-    WallDuration duration = end_time_ - tick_begin_wall_;
+    ros::WallTime end_time_ = ros::WallTime::now();
+    ros::WallDuration duration = end_time_ - tick_begin_wall_;
     total_durations_ += duration;
     if (ticks_ == 0) {
       min_duration_ = duration;
@@ -99,7 +92,7 @@ class TimerImpl
     resetStatistics();
   }
 
-  rclcpp::Duration desiredPeriod() const
+  ros::Duration desiredPeriod() const
   {
     return desired_period_;
   }
@@ -120,59 +113,59 @@ class TimerImpl
     if (ticks_ < 2) {
       return 0.0;
     } else {
-      return 1e9 / meanPeriod().nanoseconds();
+      return 1e9 / meanPeriod().toNSec();
     }
   }
   
-  rclcpp::Duration meanPeriod() const
+  ros::Duration meanPeriod() const
   {
     if (ticks_ < 2) {
-      return rclcpp::Duration::max();
+      return ros::DURATION_MAX;
     } else {
-      return rclcpp::Duration(total_periods_.seconds() / (ticks_ - 1));
+      return ros::Duration(total_periods_.toSec() / (ticks_ - 1));
     }
   }
   
-  rclcpp::Duration minPeriod() const
+  ros::Duration minPeriod() const
   {
     if (ticks_ < 2) {
-      return rclcpp::Duration::max();
+      return ros::DURATION_MAX;
     } else {
       return min_period_;
     }
   }
   
-  rclcpp::Duration maxPeriod() const
+  ros::Duration maxPeriod() const
   {
     if (ticks_ < 2) {
-      return rclcpp::Duration::max();
+      return ros::DURATION_MAX;
     } else {
       return max_period_;
     }
   }
-
-  WallDuration meanDuration() const
+  
+  ros::WallDuration meanDuration() const
   {
     if (ticks_ == 0) {
-      return WallDuration(0);
+      return ros::WallDuration(0.0);
     } else {
-      return WallDuration(total_durations_.count() / 100000000 / ticks_);
+      return ros::WallDuration(total_durations_.toSec() / ticks_);
     }
   }
-
-  WallDuration minDuration() const
+  
+  ros::WallDuration minDuration() const
   {
     if (ticks_ == 0) {
-      return WallDuration(0);
+      return ros::WallDuration(0.0);
     } else {
       return min_duration_;
     }
   }
-
-  WallDuration maxDuration() const
+  
+  ros::WallDuration maxDuration() const
   {
     if (ticks_ == 0) {
-      return WallDuration(0);
+      return ros::WallDuration(0.0);
     } else {
       return max_duration_;
     }
@@ -183,30 +176,30 @@ template<class T>
 class TypedTimerImpl : public TimerImpl
 {
   T *obj_;
-  void (T::*callback_)();
+  void (T::*callback_)(const ros::TimerEvent &);
 
  public:
   TypedTimerImpl(
-    rclcpp::Node &nh,
-    rclcpp::Duration period,
-    void(T::*callback)(),
+    ros::NodeHandle &nh,
+    ros::Duration period,
+    void(T::*callback)(const ros::TimerEvent&),
     T *obj)
   {
     callback_ = callback;
     obj_ = obj;
 
     desired_period_ = period;
-    timer_ = nh.create_wall_timer(std::chrono::nanoseconds(period.nanoseconds()),
-                            std::bind(&TypedTimerImpl::handleTimer,
-                            this));
+    timer_ = nh.createTimer(period,
+                            &TypedTimerImpl::handleTimer,
+                            this);
   }
  
-  void handleTimer()
+  void handleTimer(const ros::TimerEvent &event)
   {
     tickBegin();
-    (obj_->*callback_)();
+    (obj_->*callback_)(event);
     tickEnd();
   }
 };  // class TypedTimerImpl
 }  // namespace swri
-#endif  // SWRI_ROSCPP_TIMER_IMPL_H_
+#endif  // SWRI_ROSCPP_H_

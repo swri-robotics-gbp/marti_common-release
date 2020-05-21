@@ -36,8 +36,8 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <tf2/transform_datatypes.h>
-#include <tf2_ros/transform_listener.h>
+#include <tf/transform_datatypes.h>
+#include <tf/transform_listener.h>
 
 #include <swri_transform_util/utm_util.h>
 #include <swri_transform_util/local_xy_util.h>
@@ -51,7 +51,7 @@ namespace swri_transform_util
   class UtmTransformer : public Transformer
   {
     public:
-      UtmTransformer(LocalXyWgs84UtilPtr local_xy_util);
+      UtmTransformer();
 
       /**
        * Get a map of the transforms supported by this Transformer
@@ -59,7 +59,7 @@ namespace swri_transform_util
        *   A source->destination entry does not imply that the inverse
        *   transform is supported as well.
        */
-      std::map<std::string, std::vector<std::string> > Supports() const override;
+      virtual std::map<std::string, std::vector<std::string> > Supports() const;
 
 
       /**
@@ -72,21 +72,21 @@ namespace swri_transform_util
        * @param[in] target_frame Destination frame for transform
        * @param[in] source_frame Source frame for transform
        * @param[in] time Time that the transform is valid for. To get the most
-       *    recent transform, use tf2::TimePoint(0)
+       *    recent transform, use ros::Time(0)
        * @param[out] transform Output container for the transform
        * @return True if the transform was found, false if no transform between
        *    the specified frames is available for the specified time.
        */
-      bool GetTransform(
+      virtual bool GetTransform(
         const std::string& target_frame,
         const std::string& source_frame,
-        const tf2::TimePoint& time,
-        Transform& transform) override;
+        const ros::Time& time,
+        Transform& transform);
 
     protected:
-      bool Initialize() override;
+      virtual bool Initialize();
 
-      std::shared_ptr<UtmUtil> utm_util_;
+      boost::shared_ptr<UtmUtil> utm_util_;
 
       int32_t utm_zone_;
       char utm_band_;
@@ -100,24 +100,25 @@ namespace swri_transform_util
    * This class should not be used directly. It is used internally by
    * swri_transform_util::Transform
    */
-  class UtmToTfTransform : public TransformImpl, public StampedTransformStampInterface
+  class UtmToTfTransform : public TransformImpl
   {
   public:
     UtmToTfTransform(
-      const geometry_msgs::msg::TransformStamped& transform,
-      std::shared_ptr<UtmUtil> utm_util,
-      std::shared_ptr<LocalXyWgs84Util> local_xy_util,
+      const tf::StampedTransform& transform,
+      boost::shared_ptr<UtmUtil> utm_util,
+      boost::shared_ptr<LocalXyWgs84Util> local_xy_util,
       int32_t utm_zone,
       char utm_band);
 
-    virtual void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
 
-    virtual tf2::Quaternion GetOrientation() const;
+    virtual tf::Quaternion GetOrientation() const;
     virtual TransformImplPtr Inverse() const;
 
   protected:
-    std::shared_ptr<UtmUtil> utm_util_;
-    std::shared_ptr<LocalXyWgs84Util> local_xy_util_;
+    tf::StampedTransform transform_;
+    boost::shared_ptr<UtmUtil> utm_util_;
+    boost::shared_ptr<LocalXyWgs84Util> local_xy_util_;
     int32_t utm_zone_;
     char utm_band_;
   };
@@ -129,24 +130,25 @@ namespace swri_transform_util
    * This class should not be used directly. It is used internally by
    * swri_transform_util::Transform
    */
-  class TfToUtmTransform : public TransformImpl, public StampedTransformStampInterface
+  class TfToUtmTransform : public TransformImpl
   {
   public:
     TfToUtmTransform(
-      const geometry_msgs::msg::TransformStamped& transform,
-      std::shared_ptr<UtmUtil> utm_util,
-      std::shared_ptr<LocalXyWgs84Util> local_xy_util,
+      const tf::StampedTransform& transform,
+      boost::shared_ptr<UtmUtil> utm_util,
+      boost::shared_ptr<LocalXyWgs84Util> local_xy_util,
       int32_t utm_zone,
       char utm_band);
 
-    virtual void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
 
-    virtual tf2::Quaternion GetOrientation() const;
+    virtual tf::Quaternion GetOrientation() const;
     virtual TransformImplPtr Inverse() const;
 
   protected:
-    std::shared_ptr<UtmUtil> utm_util_;
-    std::shared_ptr<LocalXyWgs84Util> local_xy_util_;
+    tf::StampedTransform transform_;
+    boost::shared_ptr<UtmUtil> utm_util_;
+    boost::shared_ptr<LocalXyWgs84Util> local_xy_util_;
     int32_t utm_zone_;
     char    utm_band_;
   };
@@ -158,19 +160,19 @@ namespace swri_transform_util
    * This class should not be used directly. It is used internally by
    * swri_transform_util::Transform
    */
-  class UtmToWgs84Transform : public TransformImpl, public Tf2StampStampInterface
+  class UtmToWgs84Transform : public TransformImpl
   {
   public:
     UtmToWgs84Transform(
-        std::shared_ptr<UtmUtil> utm_util,
+        boost::shared_ptr<UtmUtil> utm_util,
         int32_t utm_zone,
         char utm_band);
 
-    virtual void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
     virtual TransformImplPtr Inverse() const;
 
   protected:
-    std::shared_ptr<UtmUtil> utm_util_;
+    boost::shared_ptr<UtmUtil> utm_util_;
     int32_t utm_zone_;
     char    utm_band_;
   };
@@ -181,19 +183,19 @@ namespace swri_transform_util
    * This class should not be used directly. It is used internally by
    * swri_transform_util::Transform
    */
-  class Wgs84ToUtmTransform : public TransformImpl, public Tf2StampStampInterface
+  class Wgs84ToUtmTransform : public TransformImpl
   {
   public:
     explicit Wgs84ToUtmTransform(
-        std::shared_ptr<UtmUtil> utm_util,
+        boost::shared_ptr<UtmUtil> utm_util,
         int32_t utm_zone,
         char utm_band);
 
-    virtual void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
     virtual TransformImplPtr Inverse() const;
 
   protected:
-    std::shared_ptr<UtmUtil> utm_util_;
+    boost::shared_ptr<UtmUtil> utm_util_;
     int32_t utm_zone_;
     char    utm_band_;
   };

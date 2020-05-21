@@ -1,37 +1,27 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 2.8.3)
 project(swri_serial_util)
 
-set(CMAKE_CXX_STANDARD 14)
+find_package(catkin REQUIRED)
 
-find_package(ament_cmake REQUIRED)
-find_package(Boost REQUIRED)
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+)
 
-include_directories(include)
+include_directories(include ${catkin_INCLUDE_DIRS})
   
 add_library(${PROJECT_NAME} 
-  src/serial_port.cpp
-)
-set_property(TARGET ${PROJECT_NAME}
-  PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(${PROJECT_NAME}
-  Boost::boost
-)
+    src/serial_port.cpp)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
-install(DIRECTORY include/
-  DESTINATION include
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
 )
 
 install(TARGETS ${PROJECT_NAME}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 
-ament_export_dependencies(ament_cmake)
-ament_export_dependencies(Boost)
-ament_export_include_directories(include
-  ${Boost_INCLUDE_DIRS}
-)
-ament_export_libraries(${PROJECT_NAME})
-
-ament_package()

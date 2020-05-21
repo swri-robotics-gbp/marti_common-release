@@ -1,15 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 2.8.3)
 project(swri_dbw_interface)
 
-set(CMAKE_CXX_STANDARD 14)
+find_package(catkin REQUIRED)
 
-find_package(ament_cmake REQUIRED)
-
-install(DIRECTORY include/
-  DESTINATION include
+catkin_package(
+  INCLUDE_DIRS include
 )
 
-ament_export_dependencies(ament_cmake)
-ament_export_include_directories(include)
-
-ament_package()
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+)

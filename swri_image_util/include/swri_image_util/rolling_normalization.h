@@ -32,6 +32,9 @@
 
 #include <vector>
 
+// ROS Libraries
+#include <ros/ros.h>
+
 // OpenCV Libraries
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
