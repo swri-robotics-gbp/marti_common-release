@@ -1,3 +1,38 @@
+## marti_common (foxy) - 3.2.1-1
+
+The packages in the `marti_common` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy marti_common` on `Wed, 10 Jun 2020 21:52:09 -0000`
+
+These packages were released:
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_system_util`
+- `swri_transform_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `3.2.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.20`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (noetic) - 2.13.2-1
 
 The packages in the `marti_common` repository were released into the `noetic` distro by running `/usr/bin/bloom-release -r noetic marti_common` on `Wed, 10 Jun 2020 18:02:26 -0000`
