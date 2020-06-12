@@ -2,6 +2,11 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.13.3 (2020-06-12)
+-------------------
+* Use setuptools instead of distutils
+* Contributors: P. J. Reed
+
 2.13.2 (2020-06-10)
 -------------------
 * Support ROS Noetic (`#581 <https://github.com/swri-robotics/marti_common/issues/581>`_)
