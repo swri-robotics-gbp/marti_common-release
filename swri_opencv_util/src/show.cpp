@@ -38,6 +38,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include <ros/ros.h>
+
 namespace swri_opencv_util
 {
   class CvWindows

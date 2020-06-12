@@ -2,36 +2,29 @@
 Changelog for package swri_opencv_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.2.1 (2020-06-10)
-------------------
-* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
+2.13.3 (2020-06-12)
+-------------------
+* Bump minimum cmake version
 * Contributors: P. J. Reed
 
-3.2.0 (2020-05-13)
-------------------
-
-3.1.0 (2020-03-30)
-------------------
-
-3.0.5 (2020-03-10)
-------------------
-
-3.0.4 (2020-03-05)
-------------------
-
-3.0.3 (2019-11-11)
-------------------
-
-3.0.2 (2019-11-11)
-------------------
-
-3.0.1 (2019-11-11)
-------------------
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
+2.13.2 (2020-06-10)
+-------------------
+* Support ROS Noetic (`#581 <https://github.com/swri-robotics/marti_common/issues/581>`_)
 * Contributors: P. J. Reed
+
+2.13.1 (2020-05-21)
+-------------------
+
+2.13.0 (2020-05-13)
+-------------------
+* Fix build with Boost >=1.69 (`#574 <https://github.com/swri-robotics/marti_common/issues/574>`_)
+* Contributors: Ben Wolsieffer
+
+2.12.0 (2020-03-25)
+-------------------
+
+2.11.0 (2019-11-13)
+-------------------
 
 2.10.0 (2019-09-04)
 -------------------

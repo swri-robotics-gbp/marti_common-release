@@ -1,16 +1,24 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.0.2)
 project(swri_opencv_util)
 
-set(CMAKE_CXX_STANDARD 14)
-
-find_package(ament_cmake REQUIRED)
-
-find_package(cv_bridge REQUIRED)
-find_package(swri_math_util REQUIRED)
+find_package(catkin REQUIRED COMPONENTS cv_bridge swri_math_util)
 
 find_package(OpenCV REQUIRED core imgproc highgui)
 
+# The Boost Random library headers and namespaces changed between version
+# 1.46 and 1.47
 find_package(Boost REQUIRED COMPONENTS serialization thread) 
+if(${Boost_LIB_VERSION} MATCHES "1_46*")
+  add_definitions( -DBOOST_1_46 )
+endif(${Boost_LIB_VERSION} MATCHES "1_46*")
+
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS cv_bridge swri_math_util
+)
+
+include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
   
 add_library(${PROJECT_NAME}
   src/blend.cpp
@@ -18,39 +26,16 @@ add_library(${PROJECT_NAME}
   src/model_fit.cpp
   src/show.cpp
   src/convert.cpp)
-target_include_directories(${PROJECT_NAME}
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-target_link_libraries(${PROJECT_NAME}
-  Boost::boost
-  Boost::serialization
-  Boost::thread
-  ${OpenCV_LIBS}
-)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${OpenCV_LIBS})
 target_compile_definitions(${PROJECT_NAME} PUBLIC "-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H")
-set_property(TARGET ${PROJECT_NAME}
-  PROPERTY POSITION_INDEPENDENT_CODE ON)
-ament_target_dependencies(${PROJECT_NAME}
-  cv_bridge
-  swri_math_util
-)
 
-install(DIRECTORY include/
-  DESTINATION include
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
 )
 
 install(TARGETS ${PROJECT_NAME}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
-
-ament_export_dependencies(ament_cmake)
-ament_export_dependencies(cv_bridge)
-ament_export_dependencies(swri_math_util)
-ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
-
-ament_package()

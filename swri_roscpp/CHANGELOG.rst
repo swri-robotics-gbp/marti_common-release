@@ -2,40 +2,34 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.2.1 (2020-06-10)
-------------------
-* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
+2.13.3 (2020-06-12)
+-------------------
+* Use setuptools instead of distutils
 * Contributors: P. J. Reed
 
-3.2.0 (2020-05-13)
-------------------
-
-3.1.0 (2020-03-30)
-------------------
-
-3.0.5 (2020-03-10)
-------------------
-
-3.0.4 (2020-03-05)
-------------------
-* ROS 2 Eloquent compatibility (`#568 <https://github.com/swri-robotics/marti_common/issues/568>`_)
+2.13.2 (2020-06-10)
+-------------------
+* Support ROS Noetic (`#581 <https://github.com/swri-robotics/marti_common/issues/581>`_)
 * Contributors: P. J. Reed
 
-3.0.3 (2019-11-11)
-------------------
-* Replace deprecated functions in swri_roscpp
-* Contributors: P. J. Reed
+2.13.1 (2020-05-21)
+-------------------
+* Fix the directory argument and correctly call add_message_files to avoid weird extra installed files (`#580 <https://github.com/swri-robotics/marti_common/issues/580>`_)
+* Contributors: Matthew Bries
 
-3.0.2 (2019-11-11)
-------------------
+2.13.0 (2020-05-13)
+-------------------
 
-3.0.1 (2019-11-11)
-------------------
+2.12.0 (2020-03-25)
+-------------------
+* Add Enum Support to DynamicParameters (`#564 <https://github.com/swri-robotics/marti_common/issues/564>`_)
+* Use safe_execute_process to generate messages instead and prevent it from running every build (`#563 <https://github.com/swri-robotics/marti_common/issues/563>`_)
+* Contributors: Matthew Bries
 
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
-* Contributors: P. J. Reed
+2.11.0 (2019-11-13)
+-------------------
+* Fix incorrect type for strings in dynamic params (`#553 <https://github.com/pjreed/marti_common/issues/553>`_)
+* Contributors: jgassaway
 
 2.10.0 (2019-09-04)
 -------------------
