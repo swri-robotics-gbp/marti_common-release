@@ -2,6 +2,9 @@
 Changelog for package marti_data_structures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.13.4 (2020-06-16)
+-------------------
+
 2.13.3 (2020-06-12)
 -------------------
 * Use setuptools instead of distutils
