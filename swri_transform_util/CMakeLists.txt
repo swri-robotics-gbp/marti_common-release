@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(swri_transform_util)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -20,8 +20,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_python_setup()
 
-find_package(OpenCV  REQUIRED core highgui imgproc video)
-find_package(Boost REQUIRED)
+find_package(OpenCV  REQUIRED calib3d core highgui imgproc video)
+find_package(Boost REQUIRED COMPONENTS filesystem serialization thread)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PROJ proj)
@@ -51,14 +51,12 @@ catkin_package(
     swri_yaml_util
     tf
     topic_tools
-  DEPENDS PROJ
+  DEPENDS Boost PROJ
 )
 
 include_directories(include)
 include_directories(SYSTEM
   ${catkin_INCLUDE_DIRS} 
-  ${Boost_INCLUDE_DIRS} 
-  ${OpenCV_INCLUDE_DIRS}
   ${PROJ_INCLUDE_DIRS}
 )
 
@@ -72,8 +70,19 @@ add_library(${PROJECT_NAME}
   src/transform_util.cpp
   src/utm_transformer.cpp
   src/wgs84_transformer.cpp)
-link_directories(${OpenCV_LIBRARY_DIRS})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OpenCV_LIBS} ${PROJ_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  ${PROJ_LIBRARIES}
+  Boost::filesystem
+  Boost::serialization
+  Boost::thread
+  opencv_calib3d
+  opencv_core
+  opencv_highgui
+  opencv_imgproc
+  opencv_video
+)
+target_compile_definitions(${PROJECT_NAME} PUBLIC "-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H")
 
 add_library(${PROJECT_NAME}_nodelets
   src/nodelets/dynamic_publisher.cpp
