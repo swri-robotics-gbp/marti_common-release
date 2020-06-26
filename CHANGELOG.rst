@@ -2,6 +2,35 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.13.7 (2020-06-26)
+-------------------
+* Improve object transformer to take into account the pose of the object (`#589 <https://github.com/swri-robotics/marti_common/issues/589>`_)
+* Contributors: Matthew Bries
+
+2.13.6 (2020-06-17)
+-------------------
+* Update catkin dependencies (`#588 <https://github.com/swri-robotics/marti_common/issues/588>`_)
+* Contributors: P. J. Reed
+
+2.13.5 (2020-06-17)
+-------------------
+
+2.13.4 (2020-06-16)
+-------------------
+* Clean up Boost usage (`#584 <https://github.com/swri-robotics/marti_common/issues/584>`_)
+* Contributors: P. J. Reed
+
+2.13.3 (2020-06-12)
+-------------------
+* Use setuptools instead of distutils (`#583 <https://github.com/swri-robotics/marti_common/issues/583>`_)
+* Bump minimum cmake version
+* Contributors: Shane Loretz, P. J. Reed
+
+2.13.2 (2020-06-10)
+-------------------
+* Support ROS Noetic (`#581 <https://github.com/swri-robotics/marti_common/issues/581>`_)
+* Contributors: P. J. Reed
+
 2.13.1 (2020-05-21)
 -------------------
 
