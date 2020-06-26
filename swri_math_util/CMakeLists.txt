@@ -1,31 +1,31 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(swri_math_util)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
 )
 
-# The Boost Random library headers and namespaces changed between version
-# 1.46 and 1.47
-find_package(Boost COMPONENTS random) 
-if(${Boost_LIB_VERSION} MATCHES "1_46*")
-  add_definitions( -DBOOST_1_46 )
-endif(${Boost_LIB_VERSION} MATCHES "1_46*")
+find_package(Boost REQUIRED COMPONENTS random thread)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS roscpp
+  DEPENDS Boost
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS})
   
 add_library(${PROJECT_NAME}
   src/math_util.cpp
   src/trig_util.cpp
   src/random.cpp
   src/interpolation_1d.cpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  Boost::random
+  Boost::thread
+)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
