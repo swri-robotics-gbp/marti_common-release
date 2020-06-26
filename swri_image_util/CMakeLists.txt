@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(swri_image_util)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -25,13 +25,12 @@ find_package(OpenCV REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Boost REQUIRED COMPONENTS filesystem system random)
-
-# The Boost Random library headers and namespaces changed between version
-# 1.46 and 1.47
-if(${Boost_LIB_VERSION} MATCHES "1_46*")
-  add_definitions( -DBOOST_1_46 )
-endif(${Boost_LIB_VERSION} MATCHES "1_46*")
+find_package(Boost REQUIRED)
+# Workaround for header-only Boost issue in older versions of cmake:
+# https://gitlab.kitware.com/cmake/cmake/-/issues/18643
+add_library(${PROJECT_NAME}_boost INTERFACE IMPORTED)
+set_property(TARGET ${PROJECT_NAME}_boost PROPERTY
+  INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 
 find_package(Eigen3)
 if(NOT EIGEN3_FOUND)
@@ -44,7 +43,7 @@ endif()
 add_definitions(${EIGEN3_DEFINITIONS})
 
 catkin_package(
-  DEPENDS OpenCV EIGEN3
+  DEPENDS Boost OpenCV EIGEN3
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
@@ -69,7 +68,6 @@ include_directories(include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}
@@ -84,7 +82,7 @@ add_library(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
-  ${Boost_LIBRARIES}
+  ${PROJECT_NAME}_boost
 )
 
 add_library(${PROJECT_NAME}_nodelets
