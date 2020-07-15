@@ -26,15 +26,19 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // *****************************************************************************
+
 #include <gtest/gtest.h>
 
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 
-#include <swri_roscpp/TestTopicServiceRequest.h>
-#include <swri_roscpp/TestTopicServiceResponse.h>
+#include <swri_roscpp/msg/test_topic_service_request.hpp>
+#include <swri_roscpp/msg/test_topic_service_response.hpp>
 
 #include <swri_roscpp/topic_service_client.h>
 #include <swri_roscpp/topic_service_server.h>
+
+#include <thread>
+
 
 namespace swri_roscpp
 {
@@ -44,15 +48,18 @@ namespace swri_roscpp
    * .cmake file will not have been generated and installed at the time the
    * tests are run.
    */
-  class TestTopicService
+  namespace msg
   {
-  public:
-    typedef TestTopicServiceResponse Response;
-    typedef TestTopicServiceRequest Request;
+    class TestTopicService
+    {
+    public:
+      typedef TestTopicServiceResponse Response;
+      typedef TestTopicServiceRequest Request;
 
-    Request request;
-    Response response;
-  };
+      Request request;
+      Response response;
+    };
+  }
 
   static const std::string topic_name = "/test_topic_service";
 
@@ -65,16 +72,17 @@ namespace swri_roscpp
   class TopicServiceHandler
   {
   public:
-    TopicServiceHandler() :
+    TopicServiceHandler(rclcpp::Node* node) :
+      node_(node),
       call_count_(0),
       error_(false),
       is_running_(true)
     {}
 
-    bool handleTopicServiceRequest(const swri_roscpp::TestTopicService::Request& req,
-                                   swri_roscpp::TestTopicService::Response& resp)
+    bool handleTopicServiceRequest(const swri_roscpp::msg::TestTopicServiceRequest& req,
+                                   swri_roscpp::msg::TestTopicServiceResponse& resp)
     {
-      ROS_INFO("TopicServiceHandler::handleTopicServiceRequest");
+      RCLCPP_INFO(node_->get_logger(), "TopicServiceHandler::handleTopicServiceRequest");
       resp.response_value = req.request_value;
 
       if (call_count_ >= value_count || (test_values[call_count_] != req.request_value))
@@ -93,89 +101,115 @@ namespace swri_roscpp
       return is_running_;
     }
 
+    rclcpp::Node* node_;
     int call_count_;
     bool error_;
     bool is_running_;
   };
 }
 
-TEST(TopicServiceClientTests, testTopicServiceClient)
+class TopicServiceServerTests : public rclcpp::Node
 {
-  ros::NodeHandle nh("~");
+public:
+  TopicServiceServerTests() :
+    rclcpp::Node("topic_service_server_test")
+  {}
 
-  swri::TopicServiceClient<swri_roscpp::TestTopicService> client;
-  client.initialize(nh, swri_roscpp::topic_name, "test_client");
-
-  ros::Duration one_second(1.0);
-  int checks = 0;
-  // Wait up to 20s for the server to exist (it should be much faster than that)
-  while (!client.exists() && checks < 20)
+  void DoStuff()
   {
-    ROS_INFO("Waiting for server to exist...");
-    one_second.sleep();
-    checks++;
-  }
-  ASSERT_TRUE(client.exists());
+    swri_roscpp::TopicServiceHandler handler(this);
 
-  swri_roscpp::TestTopicService srv;
+    swri::TopicServiceServer server;
+    server.initialize(
+        *this,
+        swri_roscpp::topic_name,
+        &swri_roscpp::TopicServiceHandler::handleTopicServiceRequest,
+        &handler);
 
-  // Iterate through our tests values and test submitting all of them
-  for (size_t i = 0; i < swri_roscpp::value_count; i++)
-  {
-    srv.request.request_value = swri_roscpp::test_values[i];
-    bool result = client.call(srv);
+    RCLCPP_INFO(this->get_logger(), "Initializing server.");
 
-    if (i + 1 < swri_roscpp::value_count)
+    rclcpp::Rate rate(50);
+    rclcpp::Time start = this->now();
+    // Wait up to 20s for the client to complete; it should be much faster than that
+    while (handler.is_running_ && (this->now() - start) < std::chrono::seconds(20))
     {
-      ASSERT_TRUE(result);
+      // If the server encounters any errors, it will set error_ to true
+      //ASSERT_FALSE(handler.error_);
+      rclcpp::spin_some(this->shared_from_this());
+      rate.sleep();
     }
-    else
-    {
-      // The very last value should cause the server to return false
-      ASSERT_FALSE(result);
-    }
-    ASSERT_EQ(swri_roscpp::test_values[i], srv.response.response_value);
-  }
-}
 
-TEST(TopicServiceServerTests, testTopicServiceServer)
+    RCLCPP_INFO(this->get_logger(), "Server is exiting.");
+  }
+};
+
+class TopicServiceClientTests : public rclcpp::Node
 {
-  ros::NodeHandle nh("~");
-  swri_roscpp::TopicServiceHandler handler;
+public:
+  TopicServiceClientTests() :
+      rclcpp::Node("topic_service_client_test")
+  {}
 
-  swri::TopicServiceServer server;
-
-  ROS_INFO("Initializing server.");
-
-  server.initialize(
-      nh,
-      swri_roscpp::topic_name,
-      &swri_roscpp::TopicServiceHandler::handleTopicServiceRequest,
-      &handler);
-
-  ros::Rate rate(50);
-  ros::Time start = ros::Time::now();
-  // Wait up to 20s for the client to complete; it should be much faster than that
-  while (handler.is_running_ && (ros::Time::now() - start) < ros::Duration(20))
+  void DoStuff()
   {
-    // If the server encounters any errors, it will set error_ to true
-    ASSERT_FALSE(handler.error_);
-    ros::spinOnce();
-    rate.sleep();
-  }
+    swri::TopicServiceClient<swri_roscpp::msg::TestTopicService> client;
+    client.initialize(*this, swri_roscpp::topic_name, "test_client");
 
-  ROS_INFO("Server is exiting.");
+    int checks = 0;
+    // Wait up to 20s for the server to exist (it should be much faster than that)
+    while (!client.exists() && checks < 20)
+    {
+      RCLCPP_INFO(this->get_logger(), "Waiting for server to exist...");
+      rclcpp::sleep_for(std::chrono::seconds(1));
+      checks++;
+    }
+    ASSERT_TRUE(client.exists());
+
+    swri_roscpp::msg::TestTopicService srv;
+
+    // Iterate through our tests values and test submitting all of them
+    for (size_t i = 0; i < swri_roscpp::value_count; i++)
+    {
+      srv.request.request_value = swri_roscpp::test_values[i];
+      bool result = client.call(srv);
+
+      if (i + 1 < swri_roscpp::value_count)
+      {
+        ASSERT_TRUE(result);
+      }
+      else
+      {
+        // The very last value should cause the server to return false
+        ASSERT_FALSE(result);
+      }
+      ASSERT_EQ(swri_roscpp::test_values[i], srv.response.response_value);
+    }
+  }
+};
+
+TEST(SwriRoscppTests, TopicServiceClient)
+{
+  auto client = std::shared_ptr<TopicServiceClientTests>(new TopicServiceClientTests);
+
+  client->DoStuff();
 }
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "topic_service_test", ros::init_options::AnonymousName);
-
-  int retval = 0;
-  ros::start();
   testing::InitGoogleTest(&argc, argv);
-  retval = RUN_ALL_TESTS();
-  ros::shutdown();
 
-  return retval;
+  rclcpp::init(argc, argv);
+
+  std::shared_ptr<TopicServiceServerTests> server(new TopicServiceServerTests);
+
+  std::thread server_thread([&]()
+  {
+    server->DoStuff();
+  });
+
+  int res = RUN_ALL_TESTS();
+
+  server_thread.join();
+
+  return res;
 }
