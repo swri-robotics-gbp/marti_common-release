@@ -34,72 +34,74 @@
 namespace swri_transform_util
 {
   Transform::Transform() :
-    transform_(std::make_shared<IdentityTransform>())
+    transform_(boost::make_shared<IdentityTransform>())
   {
   }
 
-  Transform::Transform(const tf2::Transform& transform) :
-    transform_(std::make_shared<TfTransform>(transform))
+  Transform::Transform(const tf::Transform& transform) :
+    transform_(boost::make_shared<TfTransform>(transform))
   {
   }
   
-  Transform::Transform(const tf2::Stamped<tf2::Transform>& transform) :
-    transform_(std::make_shared<TfTransform>(transform))
+  Transform::Transform(const tf::StampedTransform& transform) :
+    transform_(boost::make_shared<TfTransform>(transform))
   {
   }
 
-  Transform::Transform(std::shared_ptr<TransformImpl> transform) :
+  Transform::Transform(boost::shared_ptr<TransformImpl> transform) :
     transform_(transform)
   {
   }
 
-  Transform& Transform::operator=(const tf2::Transform transform)
+  Transform& Transform::operator=(const tf::Transform transform)
   {
-    transform_ = std::make_shared<TfTransform>(transform);
+    transform_ = boost::make_shared<TfTransform>(transform);
 
     return *this;
   }
 
-  Transform& Transform::operator=(std::shared_ptr<TransformImpl> transform)
+  Transform& Transform::operator=(boost::shared_ptr<TransformImpl> transform)
   {
     transform_ = transform;
 
     return *this;
   }
 
-  tf2::Vector3 Transform::operator()(const tf2::Vector3& v) const
+  tf::Vector3 Transform::operator()(const tf::Vector3& v) const
   {
-    tf2::Vector3 transformed;
+    tf::Vector3 transformed;
 
     transform_->Transform(v, transformed);
 
     return transformed;
   }
 
-  tf2::Vector3 Transform::operator*(const tf2::Vector3& v) const
+  tf::Vector3 Transform::operator*(const tf::Vector3& v) const
   {
-    tf2::Vector3 transformed;
+    tf::Vector3 transformed;
 
     transform_->Transform(v, transformed);
 
     return transformed;
   }
   
-  tf2::Quaternion Transform::operator*(const tf2::Quaternion& q) const
+  tf::Quaternion Transform::operator*(const tf::Quaternion& q) const
   {
+    tf::Quaternion transformed = q;
+
     return q * GetOrientation();
   }
 
-  tf2::Vector3 Transform::GetOrigin() const
+  tf::Vector3 Transform::GetOrigin() const
   {
-    tf2::Vector3 origin;
+    tf::Vector3 origin;
 
-    transform_->Transform(tf2::Vector3(0, 0, 0), origin);
+    transform_->Transform(tf::Vector3(0, 0, 0), origin);
 
     return origin;
   }
 
-  tf2::Quaternion Transform::GetOrientation() const
+  tf::Quaternion Transform::GetOrientation() const
   {
     return transform_->GetOrientation();
   }
@@ -109,42 +111,42 @@ namespace swri_transform_util
     return Transform(transform_->Inverse());
   }
 
-  tf2::Transform Transform::GetTF() const
+  tf::Transform Transform::GetTF() const
   {
-    return tf2::Transform(GetOrientation(),GetOrigin());
+    return tf::Transform(GetOrientation(),GetOrigin());
   }
 
-  void IdentityTransform::Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const
+  void IdentityTransform::Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const
   {
     v_out = v_in;
   }
   
-  std::shared_ptr<TransformImpl> IdentityTransform::Inverse() const
+  boost::shared_ptr<TransformImpl> IdentityTransform::Inverse() const
   {
     TransformImplPtr inverse = 
-        std::make_shared<IdentityTransform>();
-    inverse->SetStamp(stamp_);
+        boost::make_shared<IdentityTransform>();
+    inverse->stamp_ = stamp_;
     return inverse;
   }
 
-  TfTransform::TfTransform(const tf2::Transform& transform) :
+  TfTransform::TfTransform(const tf::Transform& transform) :
     transform_(transform)
   {
-    Tf2StampStampInterface::SetStamp(std::chrono::system_clock::now());
+    stamp_ = ros::Time::now();
   }
   
-  TfTransform::TfTransform(const tf2::Stamped<tf2::Transform>& transform) :
+  TfTransform::TfTransform(const tf::StampedTransform& transform) :
     transform_(transform)
   {
-    Tf2StampStampInterface::SetStamp(transform.stamp_);
+    stamp_ = transform.stamp_;
   }
 
-  void TfTransform::Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const
+  void TfTransform::Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const
   {
     v_out = transform_ * v_in;
   }
   
-  tf2::Quaternion TfTransform::GetOrientation() const
+  tf::Quaternion TfTransform::GetOrientation() const
   {
     return transform_.getRotation();
   }
@@ -152,8 +154,8 @@ namespace swri_transform_util
   TransformImplPtr TfTransform::Inverse() const
   {
     TransformImplPtr inverse = 
-        std::make_shared<TfTransform>(transform_.inverse());
-    inverse->SetStamp(stamp_);
+        boost::make_shared<TfTransform>(transform_.inverse());
+    inverse->stamp_ = stamp_;
     return inverse;
   }
 }

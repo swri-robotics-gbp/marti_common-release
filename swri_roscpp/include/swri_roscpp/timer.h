@@ -29,9 +29,8 @@
 #ifndef SWRI_ROSCPP_TIMER_H_
 #define SWRI_ROSCPP_TIMER_H_
 
-#include <chrono>
-#include <rclcpp/rclcpp.hpp>
-#include <diagnostic_updater/diagnostic_status_wrapper.hpp>
+#include <ros/node_handle.h>
+#include <diagnostic_updater/DiagnosticStatusWrapper.h>
 #include <swri_roscpp/timer_impl.h>
 
 namespace swri
@@ -39,20 +38,20 @@ namespace swri
 class Timer
 {
  private:
-  std::shared_ptr<TimerImpl> impl_;
+  boost::shared_ptr<TimerImpl> impl_;
 
  public:
   Timer();
 
   template<class T>
-  Timer(rclcpp::Node& nh,
-        rclcpp::Duration period,
-        void(T::*callback)(),
+  Timer(ros::NodeHandle &nh,
+        ros::Duration period,
+        void(T::*callback)(const ros::TimerEvent&),
         T *obj);
 
   Timer& operator=(const Timer &other);
 
-  rclcpp::Duration desiredPeriod() const;
+  ros::Duration desiredPeriod() const;
   double desiredFrequency() const;
   
   void resetStatistics();
@@ -62,9 +61,9 @@ class Timer
 
   // Frequency/Period of the timer callbacks.
   double meanFrequencyHz() const;
-  rclcpp::Duration meanPeriod() const;
-  rclcpp::Duration minPeriod() const;
-  rclcpp::Duration maxPeriod() const;
+  ros::Duration meanPeriod() const;
+  ros::Duration minPeriod() const;
+  ros::Duration maxPeriod() const;
   double meanPeriodMilliseconds() const;
   double minPeriodMilliseconds() const;
   double maxPeriodMilliseconds() const;
@@ -73,9 +72,9 @@ class Timer
   // wall durations because they are typically used as a rough profile
   // of how long the callback takes to execute which is independent of
   // simulated time.
-  std::chrono::nanoseconds meanDuration() const;
-  std::chrono::nanoseconds minDuration() const;
-  std::chrono::nanoseconds maxDuration() const;
+  ros::WallDuration meanDuration() const;
+  ros::WallDuration minDuration() const;
+  ros::WallDuration maxDuration() const;
   double meanDurationMicroseconds() const;
   double minDurationMicroseconds() const;
   double maxDurationMicroseconds() const;
@@ -100,17 +99,17 @@ Timer::Timer()
 {
   // Setup an empty implementation so that we can assume impl_ is
   // non-null and avoid a lot of unnecessary NULL checks.
-  impl_ = std::shared_ptr<TimerImpl>(new TimerImpl());
+  impl_ = boost::shared_ptr<TimerImpl>(new TimerImpl());
 }
 
 template<class T>
 inline
-Timer::Timer(rclcpp::Node &nh,
-             rclcpp::Duration period,
-             void(T::*callback)(),
+Timer::Timer(ros::NodeHandle &nh,
+             ros::Duration period,
+             void(T::*callback)(const ros::TimerEvent&),
              T *obj)
 {
-  impl_ = std::shared_ptr<TimerImpl>(
+  impl_ = boost::shared_ptr<TimerImpl>(
     new TypedTimerImpl<T>(nh, period, callback, obj));
 }
 
@@ -122,7 +121,7 @@ Timer& Timer::operator=(const Timer &other)
 }
 
 inline
-rclcpp::Duration Timer::desiredPeriod() const
+ros::Duration Timer::desiredPeriod() const
 {
   return impl_->desiredPeriod();
 }
@@ -130,7 +129,7 @@ rclcpp::Duration Timer::desiredPeriod() const
 inline
 double Timer::desiredFrequency() const
 {
-  return 1.0 / desiredPeriod().seconds();
+  return 1.0 / desiredPeriod().toSec();
 }
 
 inline
@@ -152,19 +151,19 @@ double Timer::meanFrequencyHz() const
 }
 
 inline
-rclcpp::Duration Timer::meanPeriod() const
+ros::Duration Timer::meanPeriod() const
 {
   return impl_->meanPeriod();
 }
 
 inline
-rclcpp::Duration Timer::minPeriod() const
+ros::Duration Timer::minPeriod() const
 {
   return impl_->minPeriod();
 }
 
 inline
-rclcpp::Duration Timer::maxPeriod() const
+ros::Duration Timer::maxPeriod() const
 {
   return impl_->maxPeriod();
 }
@@ -172,35 +171,35 @@ rclcpp::Duration Timer::maxPeriod() const
 inline
 double Timer::meanPeriodMilliseconds() const
 {
-  return impl_->meanPeriod().nanoseconds() / 1000000.0;
+  return impl_->meanPeriod().toNSec() / 1000000.0;
 }
 
 inline
 double Timer::minPeriodMilliseconds() const
 {
-  return impl_->minPeriod().nanoseconds() / 1000000.0;
+  return impl_->minPeriod().toNSec() / 1000000.0;
 }
 
 inline
 double Timer::maxPeriodMilliseconds() const
 {
-  return impl_->maxPeriod().nanoseconds() / 1000000.0;
+  return impl_->maxPeriod().toNSec() / 1000000.0;
 }
 
 inline
-std::chrono::nanoseconds Timer::meanDuration() const
+ros::WallDuration Timer::meanDuration() const
 {
   return impl_->meanDuration();
 }
 
 inline
-std::chrono::nanoseconds Timer::minDuration() const
+ros::WallDuration Timer::minDuration() const
 {
   return impl_->minDuration();
 }
 
 inline
-std::chrono::nanoseconds Timer::maxDuration() const
+ros::WallDuration Timer::maxDuration() const
 {
   return impl_->maxDuration();
 }
@@ -208,19 +207,19 @@ std::chrono::nanoseconds Timer::maxDuration() const
 inline
 double Timer::meanDurationMicroseconds() const
 {
-  return impl_->meanDuration().count() / 1000.0;
+  return impl_->meanDuration().toNSec() / 1000.0;
 }
 
 inline
 double Timer::minDurationMicroseconds() const
 {
-  return impl_->minDuration().count() / 1000.0;
+  return impl_->minDuration().toNSec() / 1000.0;
 }
 
 inline
 double Timer::maxDurationMicroseconds() const
 {
-  return impl_->maxDuration().count() / 1000.0;
+  return impl_->maxDuration().toNSec() / 1000.0;
 }
 
 
