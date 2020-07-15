@@ -2,6 +2,14 @@
 Changelog for package swri_math_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.3.0 (2020-07-15)
+------------------
+
+3.2.1 (2020-06-10)
+------------------
+* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
+* Contributors: P. J. Reed
+
 3.2.0 (2020-05-13)
 ------------------
 
