@@ -1,6 +1,6 @@
 <package format="3">
   <name>swri_transform_util</name>
-  <version>3.2.0</version>
+  <version>3.3.0</version>
   <description>
 
      The swri_transform_util package contains utility functions and classes for
@@ -40,6 +40,8 @@
   <!-- XML-based launching and tf2_py are only supported in Eloquent -->
   <exec_depend condition="$ROS_DISTRO != dashing">launch_xml</exec_depend>
   <exec_depend condition="$ROS_DISTRO != dashing">tf2_py</exec_depend>
+
+  <exec_depend>python3-numpy</exec_depend>
 
   <!--
   After the unit tests are converted...
