@@ -1,0 +1,12 @@
+Source: ros-noetic-swri-roscpp
+Section: misc
+Priority: optional
+Maintainer: P. J. Reed <preed@swri.org>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, libgtest-dev, libyaml-cpp-dev, pkg-config, ros-noetic-catkin, ros-noetic-diagnostic-updater, ros-noetic-dynamic-reconfigure, ros-noetic-marti-common-msgs, ros-noetic-message-generation, ros-noetic-message-runtime, ros-noetic-nav-msgs, ros-noetic-roscpp, ros-noetic-rostest, ros-noetic-rosunit, ros-noetic-std-msgs, ros-noetic-std-srvs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-noetic-swri-roscpp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, libyaml-cpp-dev, ros-noetic-diagnostic-updater, ros-noetic-dynamic-reconfigure, ros-noetic-marti-common-msgs, ros-noetic-nav-msgs, ros-noetic-roscpp, ros-noetic-std-msgs, ros-noetic-std-srvs
+Description: swri_roscpp
