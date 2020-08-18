@@ -1,1 +1,1 @@
-{"trim": "", "base": "deb0b0870", "trimbase": "", "parent": "debian/melodic/swri_system_util", "previous": "6fc5f585e"}
+{"base": "69b8978c5", "parent": "debian/melodic/swri_system_util", "previous": "69be80159", "trim": "", "trimbase": ""}
