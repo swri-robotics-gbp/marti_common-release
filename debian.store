@@ -1,1 +1,1 @@
-{"trim": "", "base": "6ba68a711", "trimbase": "", "parent": "debian/noetic/swri_serial_util", "previous": "941d4c1b9"}
+{"base": "c18708ebe", "parent": "debian/noetic/swri_serial_util", "previous": "54a2699e0", "trim": "", "trimbase": ""}
