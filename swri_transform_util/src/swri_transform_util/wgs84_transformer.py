@@ -32,10 +32,21 @@ frame to a local_xy frame and vice versa."""
 
 import math
 import numpy as np
-from tf.transformations import euler_from_quaternion
 
 EARTH_ECCENTRICITY = 0.08181919084261
 EARTH_EQUATOR_RADIUS = 6378137.0
+
+
+# TODO: Use library implementation similar to euler_from_quaternion when available in ROS2
+def yaw_from_quaternion(quaternion):
+    """
+    Converts a quartenion into a yaw value
+    :param quaternion: list of quaternion values in (x,y,z,w) order
+    :return: The yaw angle (in radians) of the quaternion
+    """
+    x, y, z, w = quaternion
+    yaw = math.atan2(2 * (w * z + x * y), 1 - 2 * (y**2 + z**2))
+    return yaw
 
 
 class Wgs84Transformer(object):
@@ -52,11 +63,11 @@ class Wgs84Transformer(object):
         Constructor for the Wgs84Transformer class
         :param geometry_msgs.Pose local_origin: An initialized local origin
         """
-        self._reference_heading = euler_from_quaternion(
+        self._reference_heading = -1.0 * yaw_from_quaternion(
             quaternion=(local_origin.pose.orientation.x,
                         local_origin.pose.orientation.y,
                         local_origin.pose.orientation.z,
-                        local_origin.pose.orientation.w))[2]  # get yaw from quaternion
+                        local_origin.pose.orientation.w))  # get yaw from quaternion
         self._cos_heading = math.cos(self._reference_heading)
         self._sin_heading = math.sin(self._reference_heading)
         self._reference_latitude = local_origin.pose.position.y * math.pi / 180
@@ -87,8 +98,8 @@ class Wgs84Transformer(object):
         d = (r - [self._reference_latitude, self._reference_longitude]) * [self._rho_lat,
                                                                            self._rho_lon]
 
-        points = d.dot([[self._sin_heading, self._cos_heading],
-                        [self._cos_heading, -self._sin_heading]])
+        points = d.dot([[-self._sin_heading, self._cos_heading],
+                        [self._cos_heading, self._sin_heading]])
 
         return points
 
@@ -100,8 +111,9 @@ class Wgs84Transformer(object):
         """
         points = np.array(local_points)
 
-        d = points.dot([[self._sin_heading, self._cos_heading],
-                        [self._cos_heading, -self._sin_heading]])
+        d = points.dot([[self._sin_heading * self._cos_heading, self._cos_heading],
+                        [self._sin_heading**2, self._sin_heading]])
+        d[:, 0] = (points[:, 1] - d[:, 0]) / self._cos_heading
 
         r = d / [self._rho_lat, self._rho_lon] + [self._reference_latitude,
                                                   self._reference_longitude]
