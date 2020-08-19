@@ -2,6 +2,9 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.3.1 (2020-08-19)
+------------------
+
 3.3.0 (2020-07-15)
 ------------------
 * Implement topic services in ROS 2 (`#2893 <https://github.com/swri-robotics/marti_common/issues/2893>`_)
