@@ -2,6 +2,16 @@
 Changelog for package swri_transform_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.14.2 (2020-09-09)
+-------------------
+* stamp local_xy_origin message picked from list with now() (`#600 <https://github.com/swri-robotics/marti_common/issues/600>`_)
+* Contributors: Daniel D'Souza, P. J. Reed
+
+2.14.1 (2020-08-18)
+-------------------
+* Fix 90 deg transform (`#598 <https://github.com/swri-robotics/marti_common/issues/598>`_)
+* Contributors: Alex Youngs
+
 2.14.0 (2020-07-15)
 -------------------
 * Added python support for wgs84 transforms (`#595 <https://github.com/swri-robotics/marti_common/issues/595>`_)
