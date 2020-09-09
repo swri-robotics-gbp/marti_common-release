@@ -1,0 +1,12 @@
+Source: ros-noetic-swri-rospy
+Section: misc
+Priority: optional
+Maintainer: P. J. Reed <preed@swri.edu>
+Build-Depends: debhelper (>= 9.0.0), python3-setuptools, ros-noetic-catkin
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-noetic-swri-rospy
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-noetic-rospy, ros-noetic-std-msgs, ros-noetic-std-srvs
+Description: This package provides added functionality on top of rospy, including a single-threaded callback queue.
