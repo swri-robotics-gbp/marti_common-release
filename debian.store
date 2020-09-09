@@ -1,1 +1,1 @@
-{"base": "768efb35f", "parent": "debian/melodic/swri_roscpp", "previous": "32d633dd3", "trim": "", "trimbase": ""}
+{"trim": "", "base": "0f2c7e7f7", "trimbase": "", "parent": "debian/melodic/swri_roscpp", "previous": "9bba196fe"}
