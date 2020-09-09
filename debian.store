@@ -1,1 +1,1 @@
-{"base": "143db8db4", "parent": "debian/noetic/swri_string_util", "previous": "27939cd74", "trim": "", "trimbase": ""}
+{"trim": "", "base": "db6c7a2dd", "trimbase": "", "parent": "debian/noetic/swri_string_util", "previous": "6e22cf4a2"}
