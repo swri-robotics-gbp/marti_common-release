@@ -32,67 +32,12 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <geometry_msgs/msg/transform_stamped.hpp>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <ros/ros.h>
 
-#include <rclcpp/rclcpp.hpp>
-
-#include <tf2/transform_datatypes.h>
-#include <tf2/LinearMath/Vector3.h>
-#include <tf2/LinearMath/Quaternion.h>
-#include <tf2/LinearMath/Transform.h>
+#include <tf/transform_datatypes.h>
 
 namespace swri_transform_util
 {
-  class StampInterface
-  {
-  public:
-    virtual tf2::TimePoint GetStamp() const = 0;
-
-    virtual void SetStamp(const tf2::TimePoint&) = 0;
-  };
-
-  class StampedTransformStampInterface : virtual public StampInterface
-  {
-  public:
-    tf2::TimePoint GetStamp() const final
-    {
-      return tf2_ros::fromMsg(transform_.header.stamp);
-    }
-
-    void SetStamp(const tf2::TimePoint& time) final
-    {
-      transform_.header.stamp = tf2_ros::toMsg(time);
-    };
-
-    tf2::Stamped<tf2::Transform> GetStampedTransform() const
-    {
-      tf2::Stamped<tf2::Transform> tf;
-      tf2::fromMsg(transform_, tf);
-      return tf;
-    }
-
-  protected:
-    geometry_msgs::msg::TransformStamped transform_;
-  };
-
-  class Tf2StampStampInterface : virtual public StampInterface
-  {
-  public:
-    tf2::TimePoint GetStamp() const final
-    {
-      return stamp_;
-    }
-
-    void SetStamp(const tf2::TimePoint& time) final
-    {
-      stamp_ = time;
-    };
-
-  protected:
-    tf2::TimePoint stamp_;
-  };
-
   /**
    * Base class for Transform implementations.
    *
@@ -101,13 +46,11 @@ namespace swri_transform_util
    * TransformImpl and its descendants should not be used bare, only as part
    * of a swri_transform_util::Transform.
    */
-  class TransformImpl : virtual public StampInterface
+  class TransformImpl
   {
   public:
-    explicit TransformImpl(const rclcpp::Logger& logger = rclcpp::get_logger("swri_transform_util::TransformImpl")) :
-      logger_(logger)
-    {};
-    virtual ~TransformImpl() = default;
+    TransformImpl() {}
+    virtual ~TransformImpl() {}
 
     /**
      * Apply this transform to a 3D vector
@@ -116,7 +59,7 @@ namespace swri_transform_util
      * @param[out] v_out Transformed vector
      */
     virtual void Transform(
-      const tf2::Vector3& v_in, tf2::Vector3& v_out) const = 0;
+      const tf::Vector3& v_in, tf::Vector3& v_out) const = 0;
 
     /**
      * Get the orientation of this transform
@@ -125,40 +68,39 @@ namespace swri_transform_util
      * the origin point and a point offset 1 on the x axis.
      * @return The orientation component of the transform
      */
-    virtual tf2::Quaternion GetOrientation() const
+    virtual tf::Quaternion GetOrientation() const
     {
-      tf2::Vector3 offset;
-      Transform(tf2::Vector3(1, 0, 0), offset);
+      tf::Vector3 offset;
+      Transform(tf::Vector3(1, 0, 0), offset);
 
-      tf2::Vector3 origin;
-      Transform(tf2::Vector3(0, 0, 0), origin);
+      tf::Vector3 origin;
+      Transform(tf::Vector3(0, 0, 0), origin);
 
-      tf2::Vector3 vector = offset - origin;
+      tf::Vector3 vector = offset - origin;
 
       // Use the "half-way quaternion method" of summing and normalizing a
       // quaternion with twice the rotation between the vector and the x-axis and
       // the zero rotation.
 
-      tf2::Vector3 cross = tf2::Vector3(1, 0, 0).cross(vector);
-      double w = vector.length() + tf2::Vector3(1, 0, 0).dot(vector);
-      return tf2::Quaternion(cross.x(), cross.y(), cross.z(), w).normalized();
+      tf::Vector3 cross = tf::Vector3(1, 0, 0).cross(vector);
+      double w = vector.length() + tf::Vector3(1, 0, 0).dot(vector);
+      return tf::Quaternion(cross.x(), cross.y(), cross.z(), w).normalized();
     }
 
-    virtual std::shared_ptr<TransformImpl> Inverse() const = 0;
+    virtual boost::shared_ptr<TransformImpl> Inverse() const = 0;
 
-  protected:
-
-    rclcpp::Logger logger_;
+    /// Time stamp for this transform
+    ros::Time stamp_;
   };
-  typedef std::shared_ptr<TransformImpl> TransformImplPtr;
+  typedef boost::shared_ptr<TransformImpl> TransformImplPtr;
 
   /**
-   * An abstraction of the tf2::Transform class to support transforms in
+   * An abstraction of the tf::Transform class to support transforms in
    * addition to the rigid transforms supported by tf.
    *
    * Additional transforms are implemented through transformer plug-ins.
    *
-   * It can be used in conjunction with the tf2::Vector3 data type.
+   * It can be used in conjunction with the tf::Vector3 data type.
    */
   class Transform
   {
@@ -169,34 +111,34 @@ namespace swri_transform_util
     Transform();
 
     /**
-     * Generates a standard rigid transform from a tf2::Transform.
+     * Generates a standard rigid transform from a tf::Transform.
      *
      * @param[in]  transform  The input transform.
      */
-    explicit Transform(const tf2::Transform& transform);
+    explicit Transform(const tf::Transform& transform);
 
     /**
-     * Generates a standard rigid transform from a tf2::Transform.
+     * Generates a standard rigid transform from a tf::Transform.
      *
      * @param[in]  transform  The input transform.
      */
-    explicit Transform(const tf2::Stamped<tf2::Transform>& transform);
+    explicit Transform(const tf::StampedTransform& transform);
 
     /**
      * Defines the transform using an arbitrary transform implementation.
      *
      * @param[in]  transform  The input transform implementation.
      */
-    explicit Transform(std::shared_ptr<TransformImpl> transform);
+    explicit Transform(boost::shared_ptr<TransformImpl> transform);
 
     /**
-     * Assignment operator for tf2::Transform.
+     * Assignment operator for tf::Transform.
      *
-     * Generates a standard rigid transform from a tf2::Transform.
+     * Generates a standard rigid transform from a tf::Transform.
      *
      * @param[in]  transform  The input transform.
      */
-    Transform& operator=(const tf2::Transform transform);
+    Transform& operator=(const tf::Transform transform);
 
     /**
      * Assignment operator for TransformImpl.
@@ -205,7 +147,7 @@ namespace swri_transform_util
      *
      * @param[in]  transform  The input transform.
      */
-    Transform& operator=(std::shared_ptr<TransformImpl> transform);
+    Transform& operator=(boost::shared_ptr<TransformImpl> transform);
 
     /**
      * Apply the transform to a vector and return the result.
@@ -214,7 +156,7 @@ namespace swri_transform_util
      *
      * @returns The transformed vector.
      */
-    tf2::Vector3 operator()(const tf2::Vector3& v) const;
+    tf::Vector3 operator()(const tf::Vector3& v) const;
 
     /**
      * Apply the transform to a vector and return the result.
@@ -223,7 +165,7 @@ namespace swri_transform_util
      *
      * @returns The transformed vector.
      */
-    tf2::Vector3 operator*(const tf2::Vector3& v) const;
+    tf::Vector3 operator*(const tf::Vector3& v) const;
 
     /**
      * Apply the transform to a quaternion and return the result.
@@ -232,14 +174,14 @@ namespace swri_transform_util
      *
      * @returns The transformed quaternion.
      */
-    tf2::Quaternion operator*(const tf2::Quaternion& q) const;
+    tf::Quaternion operator*(const tf::Quaternion& q) const;
 
     /**
      * Return a TF transform equivalent to this transform
      *
-     * @return The equivalent tf2::Transform
+     * @return The equivalent tf::Transform
      */
-    tf2::Transform GetTF() const;
+    tf::Transform GetTF() const;
 
     /**
      * Return the inverse transform.
@@ -256,37 +198,37 @@ namespace swri_transform_util
      *
      * @return The origin (translation component) of the transform
      */
-    tf2::Vector3 GetOrigin() const;
+    tf::Vector3 GetOrigin() const;
 
     /**
      * Get the orientation (rotation component) of the transform
      *
      * @return The orientation (translation component) of the transform
      */
-    tf2::Quaternion GetOrientation() const;
+    tf::Quaternion GetOrientation() const;
 
     /**
      * Get the time stamp of the transform
      * @return The time stamp of the transform
      */
-    tf2::TimePoint GetStamp() { return transform_->GetStamp(); }
+    ros::Time GetStamp() { return transform_->stamp_; }
 
   private:
     /// Pointer to the implementation of the transform
-    std::shared_ptr<TransformImpl> transform_;
+    boost::shared_ptr<TransformImpl> transform_;
   };
 
   /**
    * Specialization of swri_transform_util::TransformImpl that represents
    * the identity transform
    */
-  class IdentityTransform : public TransformImpl, public Tf2StampStampInterface
+  class IdentityTransform : public TransformImpl
   {
   public:
     /**
      * Construct an identity transform.
      */
-    IdentityTransform() { Tf2StampStampInterface::SetStamp(tf2::TimePointZero); }
+    IdentityTransform() { stamp_ = ros::Time(0); }
 
     /**
      * Apply the identity tranform to a 3D vector(sets v_out=v_in)
@@ -294,28 +236,28 @@ namespace swri_transform_util
      * @param[in] v_in  Input vector
      * @param[out] v_out Ouput vector
      */
-    void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const override;
-    TransformImplPtr Inverse() const override;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
+    virtual TransformImplPtr Inverse() const;
   };
 
   /**
    * Specialization of swri_transform_util::TransformImpl that performs
    * TF transformation
    */
-  class TfTransform : public TransformImpl, public Tf2StampStampInterface
+  class TfTransform : public TransformImpl
   {
   public:
     /**
-     * Construct a TfTransform from a tf2::Transform
+     * Construct a TfTransform from a tf::Transform
      * @param transform The TF Transform that this TfTransform performs
      */
-    explicit TfTransform(const tf2::Transform& transform);
+    explicit TfTransform(const tf::Transform& transform);
 
     /**
-     * Construct a TfTransform from a tf2::StampedTransform
+     * Construct a TfTransform from a tf::StampedTransform
      * @param transform The TF StampedTransform that this TfTransform performs
      */
-    explicit TfTransform(const tf2::Stamped<tf2::Transform>& transform);
+    explicit TfTransform(const tf::StampedTransform& transform);
 
     /**
      * Apply this transform to a 3D vector using TF
@@ -323,17 +265,17 @@ namespace swri_transform_util
      * @param[in]  v_in  Input vector
      * @param[out] v_out Transformed vector
      */
-    void Transform(const tf2::Vector3& v_in, tf2::Vector3& v_out) const override;
+    virtual void Transform(const tf::Vector3& v_in, tf::Vector3& v_out) const;
 
     /**
      * Get the orientation component of this transform using TF
      * @return The orientation component of the transform
      */
-    tf2::Quaternion GetOrientation() const override;
-    TransformImplPtr Inverse() const override;
+    virtual tf::Quaternion GetOrientation() const;
+    virtual TransformImplPtr Inverse() const;
 
   protected:
-    tf2::Transform transform_;
+    tf::Transform transform_;
   };
 }
 

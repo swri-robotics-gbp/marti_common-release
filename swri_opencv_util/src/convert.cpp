@@ -31,6 +31,8 @@
 
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include <ros/ros.h>
+
 namespace swri_opencv_util
 {
   cv::Mat ToBgra8(

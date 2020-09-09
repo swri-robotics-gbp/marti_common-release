@@ -35,7 +35,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <marti_nav_msgs/msg/route.hpp>
+#include <marti_nav_msgs/Route.h>
 #include <swri_route_util/route_point.h>
 
 namespace swri_route_util
@@ -58,23 +58,23 @@ class Route
 {
  public:
   // Create a new empty route.
-  Route() = default;
+  Route();
 
   // Create a route from an existing marti_nav_msgs::Route message.
   // Warning: If a route or a specific route point contains properties
   // with duplicate keys, only one will be kept; the others are
   // silently discarded.  Don't use non-unique property keys.
-  explicit Route(const marti_nav_msgs::msg::Route &msg);
+  Route(const marti_nav_msgs::Route &msg);
 
   // Create a marti_nav_msgs::Route from the route, in place version.
-  void toMsg(marti_nav_msgs::msg::Route &msg) const;
+  void toMsg(marti_nav_msgs::Route &msg) const;
   // Create a marti_nav_msgs::Route from the route, returned as a
   // shared pointer.
-  marti_nav_msgs::msg::Route::SharedPtr toMsgPtr() const;
+  marti_nav_msgs::RoutePtr toMsgPtr() const;
 
   // The header of the route. This is exposed as field to be
   // consistent with typical ROS style.
-  std_msgs::msg::Header header;
+  std_msgs::Header header;
 
   // The points of the route.  This is exposed as a field because it's
   // much simpler (for me to write and you to use) than trying to
@@ -167,8 +167,8 @@ class Route
 
 // Typedef shared pointers to make migrating from the message types to
 // this interface more convenient.
-typedef std::shared_ptr<Route> RoutePtr;
-typedef std::shared_ptr<Route const> RouteConstPtr;
+typedef boost::shared_ptr<Route> RoutePtr;
+typedef boost::shared_ptr<Route const> RouteConstPtr;
 
 template<typename T>
 inline
@@ -178,6 +178,6 @@ T Route::getTypedProperty(const std::string &name) const
 }
 } // namespace swri_route_util
 
-// #include "route_serializer.h"
+#include "route_serializer.h"
 
 #endif  // SWRI_ROUTE_UTIL_ROUTE_H_

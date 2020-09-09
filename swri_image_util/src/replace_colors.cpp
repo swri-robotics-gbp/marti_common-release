@@ -27,6 +27,7 @@
 //
 // *****************************************************************************
 
+#include <ros/ros.h>
 #include <swri_image_util/replace_colors.h>
 
 #include <opencv2/imgproc/imgproc.hpp>

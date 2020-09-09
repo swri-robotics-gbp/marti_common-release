@@ -29,7 +29,7 @@
 
 #include <cstdlib>
 
-#include <array.hpp>
+#include <boost/array.hpp>
 
 #include <gtest/gtest.h>
 
@@ -38,6 +38,7 @@
 #include <swri_math_util/constants.h>
 #include <swri_math_util/math_util.h>
 #include <swri_transform_util/transform_util.h>
+#include <vector>
 
 TEST(TransformUtilTests, GetRelativeTransform)
 {
@@ -174,7 +175,7 @@ TEST(TransformUtilTests, TestUpperLeftLowerRight)
   tf::Matrix3x3 ul(1, 2, 3, 4, 5, 6, 7, 8, 9);
   tf::Matrix3x3 lr(10, 11, 12, 13, 14, 15, 16, 17, 18);
 
-  std::array<double, 36> array;
+  boost::array<double, 36> array;
 
   swri_transform_util::SetUpperLeft(ul, array);
   swri_transform_util::SetLowerRight(lr, array);
@@ -255,7 +256,7 @@ TEST(TransformUtilTests, InvalidIsRotation)
   tf::Matrix3x3( 0,  0,  1,   0,  0,  0,  -1,  0,  0),
   tf::Matrix3x3(-1,  1,  0,   0,  1,  0,   0,  0, -1)};
 
-  for (int i = 0; i < 24; i++)
+  for (int i = 0; i < 3; ++i)
   {
     EXPECT_FALSE(swri_transform_util::IsRotation(invalid_rotations[i]));
   }
