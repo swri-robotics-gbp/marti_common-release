@@ -1,1 +1,1 @@
-{"base": "4c188941c", "parent": "debian/noetic/swri_roscpp", "previous": "816ad0dd2", "trim": "", "trimbase": ""}
+{"trim": "", "base": "79d26619f", "trimbase": "", "parent": "debian/noetic/swri_roscpp", "previous": "9f670ddc0"}
