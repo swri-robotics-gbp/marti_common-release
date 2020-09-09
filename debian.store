@@ -1,1 +1,1 @@
-{"base": "b488cde1e", "parent": "debian/melodic/swri_rospy", "previous": "2c91fc3ce", "trim": "", "trimbase": ""}
+{"trim": "", "base": "a26df4d0b", "trimbase": "", "parent": "debian/melodic/swri_rospy", "previous": "66d885656"}
