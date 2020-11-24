@@ -116,9 +116,9 @@ class Subscriber
   // Age of the most recent message (difference between now and the
   // header stamp (or time message was received for messages that
   // don't have headers).
-  rclcpp::Duration age(const rclcpp::Time &now = rclcpp::Time(0,0)) const;
-  double ageSeconds(const rclcpp::Time &now = rclcpp::Time(0,0)) const;
-  double ageMilliseconds(const rclcpp::Time &now = rclcpp::Time(0,0)) const;
+  rclcpp::Duration age(const rclcpp::Time &now = rclcpp::Time(0,0,RCL_ROS_TIME)) const;
+  double ageSeconds(const rclcpp::Time &now = rclcpp::Time(0,0,RCL_ROS_TIME)) const;
+  double ageMilliseconds(const rclcpp::Time &now = rclcpp::Time(0,0,RCL_ROS_TIME)) const;
 
   // Average latency (time difference between the time stamp and when
   // the message is received). These will be useless for message types
@@ -293,11 +293,7 @@ int Subscriber::messageCount() const
 inline
 rclcpp::Duration Subscriber::age(const rclcpp::Time &now) const
 {
-  if (now == rclcpp::Time(0, 0)) {
-    return impl_->age(rclcpp::Clock().now());
-  } else {
-    return impl_->age(now);
-  }
+  return impl_->age(now);
 }
 
 inline
@@ -399,7 +395,7 @@ void Subscriber::setTimeout(const rclcpp::Duration &time_out)
 inline
 void Subscriber::setTimeout(const double time_out)
 {
-  setTimeout(rclcpp::Duration(time_out));
+  setTimeout(std::chrono::duration<double>(time_out));
 }
 
 inline
