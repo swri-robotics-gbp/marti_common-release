@@ -1,3 +1,38 @@
+## marti_common (foxy) - 3.3.2-1
+
+The packages in the `marti_common` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy marti_common` on `Tue, 24 Nov 2020 22:28:02 -0000`
+
+These packages were released:
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_system_util`
+- `swri_transform_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `3.3.1-1`
+- old version: `3.3.1-1`
+- new version: `3.3.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.0`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (eloquent) - 3.3.2-1
 
 The packages in the `marti_common` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release -r eloquent marti_common` on `Tue, 24 Nov 2020 22:21:24 -0000`
