@@ -31,17 +31,19 @@
 
 namespace swri_transform_util
 {
-  Transformer::Transformer() :
-    initialized_(false),
-    logger_(rclcpp::get_logger("swri_transform_util::Transformer"))
+  Transformer::Transformer() : initialized_(false)
+  {
+  }
+
+  Transformer::~Transformer()
   {
   }
 
   void Transformer::Initialize(
-      const std::shared_ptr<tf2_ros::Buffer> tf,
-      const std::shared_ptr<LocalXyWgs84Util> xy_util)
+      const boost::shared_ptr<tf::TransformListener> tf,
+      const boost::shared_ptr<LocalXyWgs84Util> xy_util)
   {
-    tf_buffer_ = tf;
+    tf_listener_ = tf;
     initialized_ = Initialize();
     local_xy_util_ = xy_util;
   }
@@ -54,10 +56,10 @@ namespace swri_transform_util
   bool Transformer::GetTransform(
       const std::string& target_frame,
       const std::string& source_frame,
-      const tf2::TimePoint& time,
-      geometry_msgs::msg::TransformStamped& transform) const
+      const ros::Time& time,
+      tf::StampedTransform& transform) const
   {
-    if (!tf_buffer_)
+    if (!tf_listener_)
     {
       return false;
     }
@@ -65,33 +67,38 @@ namespace swri_transform_util
     bool has_transform = false;
     try
     {
-      if (tf_buffer_->_frameExists(target_frame) &&
-          tf_buffer_->_frameExists(source_frame))
+      if (tf_listener_->frameExists(target_frame) &&
+          tf_listener_->frameExists(source_frame) &&
+          tf_listener_->waitForTransform(
+          target_frame,
+          source_frame,
+          time,
+          ros::Duration(0.01)))
       {
-        transform = tf_buffer_->lookupTransform(
+        tf_listener_->lookupTransform(
             target_frame,
             source_frame,
             time,
-            std::chrono::milliseconds(10));
+            transform);
 
         has_transform = true;
       }
     }
-    catch (const tf2::LookupException& e)
+    catch (const tf::LookupException& e)
     {
-      RCLCPP_ERROR(logger_, "[transformer]: %s", e.what());
+      ROS_ERROR_THROTTLE(2.0, "[transformer]: %s", e.what());
     }
-    catch (const tf2::ConnectivityException& e)
+    catch (const tf::ConnectivityException& e)
     {
-      RCLCPP_ERROR(logger_, "[transformer]: %s", e.what());
+      ROS_ERROR_THROTTLE(2.0, "[transformer]: %s", e.what());
     }
-    catch (const tf2::ExtrapolationException& e)
+    catch (const tf::ExtrapolationException& e)
     {
-      RCLCPP_ERROR(logger_, "[transformer]: %s", e.what());
+      ROS_ERROR_THROTTLE(2.0, "[transformer]: %s", e.what());
     }
     catch (...)
     {
-      RCLCPP_ERROR(logger_, "[transformer]: Exception looking up transform");
+      ROS_ERROR_THROTTLE(2.0, "[transformer]: Exception looking up transform");
     }
 
     return has_transform;

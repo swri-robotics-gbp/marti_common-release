@@ -30,11 +30,14 @@
 
 #include <swri_route_util/util.h>
 
+namespace vm = visualization_msgs;
+namespace mnm = marti_nav_msgs;
+
 namespace swri_route_util
 {
-static geometry_msgs::msg::Point makePoint(const double x, const double y)
+static geometry_msgs::Point makePoint(const double x, const double y)
 {
-  geometry_msgs::msg::Point pt;
+  geometry_msgs::Point pt;
   pt.x = x;
   pt.y = y;
   pt.z = 0.0;
@@ -42,17 +45,17 @@ static geometry_msgs::msg::Point makePoint(const double x, const double y)
 }
 
 void markerForRouteSpeeds(
-  visualization_msgs::msg::Marker &m,
+  vm::Marker &m,
   const Route &route,
-  const marti_nav_msgs::msg::RouteSpeedArray &speeds,
+  const mnm::RouteSpeedArray &speeds,
   double scale)
 {
   m.header.frame_id = route.header.frame_id;
-  m.header.stamp = rclcpp::Clock().now();
+  m.header.stamp = ros::Time::now();
   // m.ns = ;
   // m.id = ;
-  m.type = visualization_msgs::msg::Marker::LINE_LIST;
-  m.action = visualization_msgs::msg::Marker::ADD;
+  m.type = vm::Marker::LINE_LIST;
+  m.action = vm::Marker::ADD;
   m.pose.position.x = 0.0;
   m.pose.position.y = 0.0;
   m.pose.position.z = 0.0;
@@ -67,13 +70,13 @@ void markerForRouteSpeeds(
   m.color.g = 0.0;
   m.color.b = 0.0;
   m.color.a = 1.0;
-  m.lifetime = rclcpp::Duration(0);
+  m.lifetime = ros::Duration(0);
   m.frame_locked = false;
 
   m.points.reserve(speeds.speeds.size()*2);
 
   for (auto const &speed : speeds.speeds) {
-    marti_nav_msgs::msg::RoutePosition position;
+    mnm::RoutePosition position;
     position.id = speed.id;
     position.distance = speed.distance;
 
@@ -82,9 +85,9 @@ void markerForRouteSpeeds(
       continue;
     }
 
-    tf2::Vector3 p1 = p.position();
-    tf2::Vector3 v = tf2::Transform(p.orientation()) * tf2::Vector3(0.0, 1.0, 0.0);
-    tf2::Vector3 p2 = p1 + scale*speed.speed*v;
+    tf::Vector3 p1 = p.position();
+    tf::Vector3 v = tf::Transform(p.orientation()) * tf::Vector3(0.0, 1.0, 0.0);
+    tf::Vector3 p2 = p1 + scale*speed.speed*v;
 
     m.points.push_back(makePoint(p1.x(), p1.y()));
     m.points.push_back(makePoint(p2.x(), p2.y()));
