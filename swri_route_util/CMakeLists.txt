@@ -31,13 +31,20 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 ### Build Library ###
 add_library(${PROJECT_NAME} 
+  src/path_util.cpp
+  src/plan_util.cpp
   src/route.cpp
   src/route_point.cpp
   src/route_speeds.cpp
   src/util.cpp
   src/visualization.cpp
   )
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x")
+if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED ON
+  )
+endif()
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${PROJECT_NAME}_boost
