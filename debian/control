@@ -1,0 +1,12 @@
+Source: ros-melodic-rosman
+Section: misc
+Priority: optional
+Maintainer: Robert Brothers <robert.brothers@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-catkin, ros-melodic-marti-introspection-msgs
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-melodic-rosman
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-marti-introspection-msgs, ros-melodic-rosgraph, ros-melodic-rospy, ros-melodic-rostopic
+Description: rosman contains the rosman tool for introspecting ROS nodes
