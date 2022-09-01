@@ -1,0 +1,333 @@
+ros-noetic-swri-cli-tools (2.15.2-1focal) focal; urgency=high
+
+  * Renamed rosman package to swri_cli_tools. (#682 <https://github.com/swri-robotics/marti_common/issues/682>)
+  * Contributors: Robert Brothers
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 01 Sep 2022 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.15.1-1focal) focal; urgency=high
+
+  * Merge branch 'master' into PR644
+  * Merge pull request #643 <https://github.com/swri-robotics/marti_common/issues/643> from rookie80/rosman_check_improvement
+    added xlmrpc support for rosman check, changed output for rosman check
+  * removed dead code
+  * added xlmrpc support for rosman check, changed output for rosman check
+  * Merge branch 'master' into setParam_getParam_support
+  * Contributors: David Anthony, Justus
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 26 Aug 2022 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.15.0-1focal) focal; urgency=high
+
+  * Merge pull request #639 <https://github.com/swri-robotics/marti_common/issues/639> from danthony06/bump_version_number
+    Bumping version numbers for new release
+  * Bumping version numbers for new release
+  * Merge branch 'master' into add-swri-serviceserver-support
+  * Merge pull request #629 <https://github.com/swri-robotics/marti_common/issues/629> from rookie80/rosman_check_parameter
+    Rosman check undocumented and documented
+  * fixed spacing
+  * fixing formatting
+  * adding -v flag for reverse search
+  * Merge pull request #625 <https://github.com/swri-robotics/marti_common/issues/625> from matt-attack/autodoc-cli
+    Add swri::NodeHandle wrapper which allows self-documenting introspectable nodes
+  * Remove commented out lines and fixup package.xml
+  * Fallback to service clients/subscribers if no service services/pubs exist for a topic/service
+  * Handle grouped services correctly and also display service clients
+  * Swap to use marti introspection messages
+  * Fix fallback for parameter values and add support for groupings and min and max param values
+    Also add support for XMLRPC type
+    Also add support for namespaced nodehandles
+  * removing extra quote mark from environment hooks file
+  * Added very simple fallback for rosman node tool
+  * Added and installed environment hooks for tab completion.
+  * Roughed out rosman bash completion. env-hook installation not complete
+  * Actually writing rosman service output to screen now. Added marti_common_msgs as dependency
+  * fleshed out rosman service tool
+  * Roughed out rosman param command
+  * Fleshed out rosman topic
+  * Added an output file option for rosman node tool.
+  * Added option to print yaml and made documentation style terminal output the default
+  * Removing vim temporaries and adding that file type to the gitignore
+  * Made rosman node able to dump stringified documentation messages to stdout
+  * stubbed out rosman cli command entry points
+  * Contributors: David Anthony, Justus, Matthew Bries, Robert Brothers
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 18 Nov 2021 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.14.2-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 09 Sep 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.14.1-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 18 Aug 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.14.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 15 Jul 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.7-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 26 Jun 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.6-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 17 Jun 2020 21:26:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.5-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 17 Jun 2020 17:24:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.4-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 16 Jun 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.3-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 12 Jun 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.2-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 10 Jun 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.1-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 21 May 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.13.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 13 May 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.12.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 25 Mar 2020 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.11.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 13 Nov 2019 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.10.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 04 Sep 2019 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.9.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 23 May 2019 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.8.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 06 Feb 2019 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.7.3-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 03 Jan 2019 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.7.2-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 20 Dec 2018 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.7.1-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 14 Dec 2018 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.7.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 04 Dec 2018 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.6.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sat, 03 Nov 2018 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.5.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 12 Oct 2018 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.4.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 09 Oct 2018 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.3.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 25 May 2018 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.2.1-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 11 May 2018 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.2.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Mon, 12 Feb 2018 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.1.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 26 Jan 2018 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (2.0.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Mon, 18 Dec 2017 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (1.2.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 13 Oct 2017 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (1.1.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 31 Aug 2017 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (1.0.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 02 Aug 2017 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.3.0-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 20 Jun 2017 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.14-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 11 Apr 2017 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.13-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sun, 23 Oct 2016 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.12-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sun, 14 Aug 2016 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.11-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 13 May 2016 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.10-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Thu, 12 May 2016 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.9-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 04 Mar 2016 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.8-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 06 Jan 2016 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.7-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Wed, 18 Nov 2015 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.6-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Tue, 17 Nov 2015 06:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.5-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sun, 27 Sep 2015 20:27:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.4-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sun, 27 Sep 2015 16:35:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.3-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Sat, 26 Sep 2015 05:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.2-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 25 Sep 2015 20:00:00 -0000
+
+ros-noetic-swri-cli-tools (0.0.1-1focal) focal; urgency=high
+
+
+
+ -- Robert Brothers <robert.brothers@swri.org>  Fri, 25 Sep 2015 14:06:00 -0000
+
+
