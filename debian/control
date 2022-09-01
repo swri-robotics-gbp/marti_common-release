@@ -1,0 +1,12 @@
+Source: ros-noetic-swri-cli-tools
+Section: misc
+Priority: optional
+Maintainer: Robert Brothers <robert.brothers@swri.org>
+Build-Depends: debhelper (>= 9.0.0), ros-noetic-catkin, ros-noetic-marti-introspection-msgs
+Homepage: https://github.com/swri-robotics/marti_common
+Standards-Version: 3.9.2
+
+Package: ros-noetic-swri-cli-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-noetic-marti-introspection-msgs, ros-noetic-rosgraph, ros-noetic-rospy, ros-noetic-rostopic
+Description: rosman contains the rosman tool for introspecting ROS nodes
