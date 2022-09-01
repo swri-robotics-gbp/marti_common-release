@@ -1,3 +1,44 @@
+## marti_common (melodic) - 2.15.2-1
+
+The packages in the `marti_common` repository were released into the `melodic` distro by running `/usr/bin/bloom-release --edit --rosdistro melodic --track melodic marti_common` on `Thu, 01 Sep 2022 18:20:49 -0000`
+
+These packages were released:
+- `marti_data_structures`
+- `swri_cli_tools`
+- `swri_console_util`
+- `swri_dbw_interface`
+- `swri_geometry_util`
+- `swri_image_util`
+- `swri_math_util`
+- `swri_nodelet`
+- `swri_opencv_util`
+- `swri_prefix_tools`
+- `swri_roscpp`
+- `swri_rospy`
+- `swri_route_util`
+- `swri_serial_util`
+- `swri_string_util`
+- `swri_system_util`
+- `swri_transform_util`
+- `swri_yaml_util`
+
+Version of package(s) in repository `marti_common`:
+
+- upstream repository: https://github.com/swri-robotics/marti_common.git
+- release repository: https://github.com/swri-robotics-gbp/marti_common-release.git
+- rosdistro version: `2.14.2-1`
+- old version: `2.15.1-4`
+- new version: `2.15.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.1`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## marti_common (noetic) - 2.15.1-2
 
 The packages in the `marti_common` repository were released into the `noetic` distro by running `/usr/bin/bloom-release --rosdistro noetic --track noetic marti_common` on `Mon, 29 Aug 2022 15:13:10 -0000`
