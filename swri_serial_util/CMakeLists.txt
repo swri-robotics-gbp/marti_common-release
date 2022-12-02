@@ -1,38 +1,40 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.10)
 project(swri_serial_util)
 
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(ament_cmake REQUIRED)
 find_package(Boost REQUIRED)
-# Workaround for header-only Boost issue in older versions of cmake:
-# https://gitlab.kitware.com/cmake/cmake/-/issues/18643
-add_library(${PROJECT_NAME}_boost INTERFACE IMPORTED)
-set_property(TARGET ${PROJECT_NAME}_boost PROPERTY
-  INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 
-find_package(catkin REQUIRED)
-
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-  DEPENDS Boost
+add_library(${PROJECT_NAME} SHARED
+  src/serial_port.cpp
 )
-
-include_directories(include ${catkin_INCLUDE_DIRS})
-  
-add_library(${PROJECT_NAME} 
-    src/serial_port.cpp)
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+set_property(TARGET ${PROJECT_NAME}
+  PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  ${PROJECT_NAME}_boost
+  Boost::boost
 )
 
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
+install(DIRECTORY include/
+  DESTINATION include
 )
 
 install(TARGETS ${PROJECT_NAME}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
 )
 
+ament_export_dependencies(ament_cmake)
+ament_export_dependencies(Boost)
+ament_export_include_directories(include
+  ${Boost_INCLUDE_DIRS}
+)
+ament_export_libraries(${PROJECT_NAME})
+
+ament_package()

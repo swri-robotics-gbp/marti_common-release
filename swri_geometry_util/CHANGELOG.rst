@@ -2,53 +2,64 @@
 Changelog for package swri_geometry_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.15.2 (2022-09-01)
--------------------
+3.5.1 (2022-11-29)
+------------------
+* Fixing how the GEOS library is found (`#697 <https://github.com/swri-robotics/marti_common/issues/697>`_)
+* Contributors: David Anthony
 
-2.14.2 (2020-09-09)
--------------------
+3.5.0 (2022-10-11)
+------------------
 
-2.14.1 (2020-08-18)
--------------------
+3.4.2 (2022-10-10)
+------------------
+* Switch to C API (`#689 <https://github.com/swri-robotics/marti_common/issues/689>`_)
+  * Switch to GEOS C API from C++ API
+* Contributors: David Anthony
 
-2.14.0 (2020-07-15)
--------------------
+3.3.2 (2020-11-24)
+------------------
 
-2.13.7 (2020-06-26)
--------------------
+3.3.1 (2020-08-19)
+------------------
 
-2.13.6 (2020-06-17)
--------------------
-
-2.13.5 (2020-06-17)
--------------------
-
-2.13.4 (2020-06-16)
--------------------
-* Clean up Boost usage (`#584 <https://github.com/swri-robotics/marti_common/issues/584>`_)
+3.3.0 (2020-07-15)
+------------------
+* Add GitHub Actions for CI (ROS2) (`#586 <https://github.com/swri-robotics/marti_common/issues/586>`_)
 * Contributors: P. J. Reed
 
-2.13.3 (2020-06-12)
--------------------
-* Use setuptools instead of distutils
+3.2.1 (2020-06-10)
+------------------
+* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
 * Contributors: P. J. Reed
 
-2.13.2 (2020-06-10)
--------------------
+3.2.0 (2020-05-13)
+------------------
+* Fix build with GEOS 3.8 (`#576 <https://github.com/swri-robotics/marti_common/issues/576>`_) (`#577 <https://github.com/swri-robotics/marti_common/issues/577>`_)
+  Co-authored-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+* Contributors: P. J. Reed
 
-2.13.1 (2020-05-21)
--------------------
+3.1.0 (2020-03-30)
+------------------
 
-2.13.0 (2020-05-13)
--------------------
-* Fix build with GEOS 3.8 (`#576 <https://github.com/swri-robotics/marti_common/issues/576>`_)
-* Contributors: Ben Wolsieffer
+3.0.5 (2020-03-10)
+------------------
 
-2.12.0 (2020-03-25)
--------------------
+3.0.4 (2020-03-05)
+------------------
 
-2.11.0 (2019-11-13)
--------------------
+3.0.3 (2019-11-11)
+------------------
+
+3.0.2 (2019-11-11)
+------------------
+
+3.0.1 (2019-11-11)
+------------------
+
+3.0.0 (2019-11-08)
+------------------
+* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
+* Contributors: P. J. Reed
 
 2.10.0 (2019-09-04)
 -------------------
