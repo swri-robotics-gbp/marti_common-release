@@ -29,161 +29,84 @@
 #ifndef SWRI_ROSCPP_TOPIC_SERVICE_CLIENT_H_
 #define SWRI_ROSCPP_TOPIC_SERVICE_CLIENT_H_
 
-#include <chrono>
+#include <ros/node_handle.h>
+#include <ros/this_node.h>
+
+#include <boost/thread/mutex.hpp>
+#include <boost/uuid/random_generator.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
 #include <map>
-#include <mutex>
-
-#include <rclcpp/rclcpp.hpp>
-
-using namespace std::chrono_literals;
 
 namespace swri
 {
 template<class MReq, class MRes>
-class TopicServiceClientRaw
+class TopicServiceClientImpl
 {
-private:
-  std::mutex request_lock_;
-  std::shared_ptr<rclcpp::Subscription<MRes> > response_sub_;
-  std::shared_ptr<rclcpp::Publisher<MReq> > request_pub_;
-  std::shared_ptr<MRes> response_;
+public:
+  typedef
+  boost::mutex request_lock_;
+  ros::Subscriber response_sub_;
+  ros::Publisher request_pub_;
+  boost::shared_ptr<MRes> response_;
 
-  std::chrono::nanoseconds timeout_;
+  ros::Duration timeout_;
   std::string name_;
   std::string service_name_;
-  bool internal_spin_;
 
   int sequence_;
 
-public:
-  TopicServiceClientRaw() :
-    timeout_(std::chrono::seconds(4)),
-    sequence_(0),
-    node_(nullptr),
-    internal_spin_(true)
+  TopicServiceClientImpl() : sequence_(0), timeout_(ros::Duration(4.0))
   {
 
   }
 
-  void initialize(rclcpp::Node::SharedPtr node,
+  void initialize(ros::NodeHandle &nh,
                 const std::string &service,
-                const std::string &client_name = "",
-                bool internal_spin = true)
+                const std::string &client_name = "")
   {
-    node_ = node;
-    internal_spin_ = internal_spin;
-    // Generate a quasi-random set of service names if the user did not
-    // provide values. std::string::compare() returns 0 if both strings
-    // have the same value. This is imperfect, but unless someone creates
-    // the same service call at exactly the same time using a multithreaded node,
-    // this should be safe
-    if (client_name.compare("") == 0)
-    {
-      auto current_time = std::chrono::time_point_cast<std::chrono::nanoseconds>(
-        std::chrono::steady_clock::now()).time_since_epoch().count();
-      name_ = node_->get_name() + std::to_string(current_time);
-    }
-    else
-    {
-      name_ = client_name;
-    }
-    service_name_ = service;
+    //Converts using string stream instead of to_string so non C++ 11 nodes won't fail
+    boost::uuids::random_generator gen;
+    boost::uuids::uuid u = gen();
+    std::string random_str = boost::uuids::to_string(u);
+    name_ = client_name.length() ? client_name : (ros::this_node::getName() + random_str);
+    std::string rservice = nh.resolveName(service);
+    service_name_ = rservice;
 
-    request_pub_ = node_->create_publisher<MReq>(service + "/request", 10);
-    response_sub_ = node_->create_subscription<MRes>(service + "/response",
-        10, std::bind(&TopicServiceClientRaw<MReq, MRes>::response_callback, this, std::placeholders::_1));
-  }
-
-  bool wait_for_service_nanoseconds(std::chrono::nanoseconds timeout)
-  {
-    // Inspired by process in ClientBase::wait_for_service_nanoseconds in client.cpp
-    auto start = std::chrono::steady_clock::now();
-
-    if (timeout == std::chrono::nanoseconds(0))
-    {
-      return false;
-    }
-
-    std::chrono::nanoseconds time_to_wait = std::chrono::nanoseconds::max();
-    if (timeout > std::chrono::nanoseconds(0))
-    {
-      time_to_wait = timeout - (std::chrono::steady_clock::now() - start);
-    }
-
-    do
-    {
-      if (!rclcpp::ok())
-      {
-        return false;
-      }
-
-      if ((request_pub_->get_subscription_count() > 0) &&
-        (response_sub_->get_publisher_count() > 0))
-      {
-        return true;
-      }
-
-      if (timeout > std::chrono::nanoseconds(0))
-      {
-        time_to_wait = timeout - (std::chrono::steady_clock::now() - start);
-        rclcpp::sleep_for(std::chrono::milliseconds(2));
-        if (internal_spin_)
-        {
-          rclcpp::spin_some(node_);
-        }
-      }
-    } while (time_to_wait > std::chrono::nanoseconds(0));
-
-    RCLCPP_ERROR(
-      node_->get_logger(),
-      "Topic service timeout exceeded");
-
-    return false;
+    request_pub_ = nh.advertise<MReq>(rservice + "/request", 10);
+    response_sub_ = nh.subscribe(rservice + "/response", 10, &TopicServiceClientImpl<MReq, MRes>::response_callback, this);
   }
 
   bool call(MReq& request, MRes& response)
   {
-    std::lock_guard<std::mutex> scoped_lock(request_lock_);
+    boost::mutex::scoped_lock scoped_lock(request_lock_);
 
     // block for response
-    request.srv_header.stamp = node_->now();
+    request.srv_header.stamp = ros::Time::now();
     request.srv_header.sequence = sequence_;
     request.srv_header.sender = name_;
 
-    response_.reset();
-    request_pub_->publish(request);
-
-    // Inspired by process in ClientBase::wait_for_service_nanoseconds in client.cpp
-    auto start = std::chrono::steady_clock::now();
-    std::chrono::nanoseconds time_to_wait = std::chrono::nanoseconds::max();
-    if (timeout_ > std::chrono::nanoseconds(0))
+    // Wait until we get a subscriber and publisher
+    while (request_pub_.getNumSubscribers() == 0 || response_sub_.getNumPublishers() == 0)
     {
-      time_to_wait = timeout_ - (std::chrono::steady_clock::now() - start);
-    }
+      ros::Duration(0.002).sleep();
+      ros::spinOnce();
 
-    // Wait until we get a response
-    do
-    {
-      if (!rclcpp::ok())
+      if (ros::Time::now() - request.srv_header.stamp > timeout_)
       {
+        ROS_ERROR("Topic service timeout exceeded");
         return false;
       }
+    }
+    response_.reset();
+    request_pub_.publish(request);
 
-      if (response_)
-      {
-        break;
-      }
-
-      if (timeout_ > std::chrono::nanoseconds(0))
-      {
-        time_to_wait = timeout_ - (std::chrono::steady_clock::now() - start);
-        rclcpp::sleep_for(std::chrono::milliseconds(2));
-        if (internal_spin_)
-        {
-          rclcpp::spin_some(node_);
-        }
-      }
-    } while (!response_ && (time_to_wait > std::chrono::nanoseconds(0)));
+    // Wait until we get a response
+    while (!response_ && ros::Time::now() - request.srv_header.stamp < timeout_)
+    {
+      ros::Duration(0.002).sleep();
+      ros::spinOnce();
+    }
 
     sequence_++;
     if (response_)
@@ -192,71 +115,64 @@ public:
       response_.reset();
       return response.srv_header.result;
     }
-    else
-    {
-      return false;
-    }
+    return false;
   }
 
-  std::string getService()
-  {
-    return service_name_;
-  }
-
-  bool exists()
-  {
-    return (request_pub_->get_subscription_count() > 0) && (response_sub_->get_publisher_count() > 0);
-  }
-
-  // The service server can output a console log message when the
-  // service is called if desired.
-  void setLogCalls(bool enable);
-  bool logCalls() const;
 private:
 
-  void response_callback(const std::shared_ptr<MRes> message)
+  void response_callback(const boost::shared_ptr<MRes>& message)
   {
-    RCLCPP_DEBUG(node_->get_logger(), "Got response for %s with sequence %i",
+    ROS_DEBUG("Got response for %s with sequence %i",
              message->srv_header.sender.c_str(), message->srv_header.sequence);
 
     if (message->srv_header.sender != name_)
     {
-      RCLCPP_DEBUG(node_->get_logger(), "Got response from another client, ignoring..");
+      ROS_DEBUG("Got response from another client, ignoring..");
       return;
     }
     
     if (message->srv_header.sequence != sequence_)
     {
-      RCLCPP_WARN(node_->get_logger(), "Got wrong sequence number, ignoring..");
-      RCLCPP_DEBUG(node_->get_logger(), "message seq:%i vs current seq: %i", message->srv_header.sequence, sequence_);
+      ROS_WARN("Got wrong sequence number, ignoring..");
+      ROS_DEBUG("message seq:%i vs current seq: %i", message->srv_header.sequence, sequence_);
       return;
     }
 
     response_ = message;
   }
-
-  rclcpp::Node::SharedPtr node_;
-};  // class TopicServiceClientRaw
+};  // class TopicServiceClientImpl
 
 template<class MReq>
-class TopicServiceClient : public TopicServiceClientRaw<typename MReq:: Request, typename MReq:: Response>
+class TopicServiceClient 
 {
+  boost::shared_ptr<TopicServiceClientImpl<typename MReq:: Request, typename MReq:: Response> > impl_;
+
 public:
-  template<typename RepT = int64_t, typename RatioT = std::nano>
-  bool
-  wait_for_service(
-    std::chrono::duration<RepT, RatioT> timeout = std::chrono::duration<RepT, RatioT>(std::chrono::nanoseconds(1s)))
+
+  void initialize(ros::NodeHandle &nh,
+                const std::string &service,
+                const std::string &client_name = "")
   {
-    return TopicServiceClientRaw<typename MReq::Request, typename MReq::Response>::wait_for_service_nanoseconds(
-      std::chrono::duration_cast<std::chrono::nanoseconds>(timeout));
+    impl_ = boost::shared_ptr<TopicServiceClientImpl<typename MReq:: Request, typename MReq:: Response> >(
+      new TopicServiceClientImpl<typename MReq:: Request, typename MReq:: Response>());
+
+    impl_->initialize(nh, service, client_name);
+  }
+
+  std::string getService()
+  {
+    return impl_->service_name_;
+  }
+
+  bool exists()
+  {
+    return impl_->request_pub_.getNumSubscribers() > 0 && impl_->response_sub_.getNumPublishers() > 0;
   }
 
   bool call(MReq& req)
   {
-    return TopicServiceClientRaw<typename MReq:: Request, typename MReq:: Response>::call(
-      req.request, req.response);
+    return impl_->call(req.request, req.response);
   }
-
 };  // class TopicServiceClient
 
 

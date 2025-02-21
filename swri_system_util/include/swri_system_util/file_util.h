@@ -54,8 +54,8 @@ namespace swri_system_util
    * @returns The relative path if valid and an empty path otherwise.
    */
   boost::filesystem::path NaiveUncomplete(
-    const boost::filesystem::path& path,
-    const boost::filesystem::path& base);
+    boost::filesystem::path const path,
+    boost::filesystem::path const base);
 
   /**
    * Return a list of all file names within a directory (handles wildcard character "*").

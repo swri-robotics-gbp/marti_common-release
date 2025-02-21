@@ -30,8 +30,8 @@
 #define SWRI_ROUTE_UTIL_VISUALIZATION_H_
 
 #include <swri_route_util/route.h>
-#include <marti_nav_msgs/msg/route_speed_array.hpp>
-#include <visualization_msgs/msg/marker.hpp>
+#include <marti_nav_msgs/RouteSpeedArray.h>
+#include <visualization_msgs/Marker.h>
 
 namespace swri_route_util
 {
@@ -43,9 +43,9 @@ namespace swri_route_util
 // line colors defaults to black but can be changed after the marker
 // has been built.
 void markerForRouteSpeeds(
-  visualization_msgs::msg::Marker &marker,
+  visualization_msgs::Marker &marker,
   const Route &route,
-    const marti_nav_msgs::msg::RouteSpeedArray &speeds,
+    const marti_nav_msgs::RouteSpeedArray &speeds,
     double scale);
 }  // namespace swri_route_util
 #endif  // SWRI_ROUTE_UTIL_VISUALIZATION_H_

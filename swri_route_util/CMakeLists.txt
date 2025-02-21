@@ -1,67 +1,64 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(swri_route_util)
 
-set(CMAKE_CXX_STANDARD 14)
+set(BUILD_DEPS 
+  marti_common_msgs
+  marti_nav_msgs
+  roscpp
+  swri_geometry_util
+  swri_math_util
+  swri_transform_util
+  visualization_msgs
+  )
 
-find_package(ament_cmake REQUIRED)
-find_package(marti_common_msgs REQUIRED)
-find_package(marti_nav_msgs REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(swri_geometry_util REQUIRED)
-find_package(swri_math_util REQUIRED)
-find_package(swri_roscpp REQUIRED)
-find_package(swri_transform_util REQUIRED)
-find_package(tf2_geometry_msgs REQUIRED)
-find_package(visualization_msgs REQUIRED)
+set(RUNTIME_DEPS ${BUILD_DEPS})
+
+find_package(Boost REQUIRED)
+# Workaround for header-only Boost issue in older versions of cmake:
+# https://gitlab.kitware.com/cmake/cmake/-/issues/18643
+add_library(${PROJECT_NAME}_boost INTERFACE IMPORTED)
+set_property(TARGET ${PROJECT_NAME}_boost PROPERTY
+  INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
+
+### Catkin ###
+find_package(catkin REQUIRED COMPONENTS ${BUILD_DEPS})
+catkin_package(CATKIN_DEPENDS ${RUNTIME_DEPS}
+  DEPENDS Boost
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME})
+
+include_directories(include ${catkin_INCLUDE_DIRS})
 
 ### Build Library ###
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} 
+  src/path_util.cpp
+  src/plan_util.cpp
   src/route.cpp
   src/route_point.cpp
   src/route_speeds.cpp
   src/util.cpp
   src/visualization.cpp
-)
-target_include_directories(${PROJECT_NAME}
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
-
-if ("$ENV{ROS_DISTRO}" STRLESS_EQUAL "galactic")
-  target_compile_definitions(${PROJECT_NAME}
-    PRIVATE "-DUSE_TF2_H_FILES")
+  )
+if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED ON
+  )
 endif()
-
-ament_target_dependencies(${PROJECT_NAME}
-  PUBLIC
-  ament_cmake
-  marti_common_msgs
-  marti_nav_msgs
-  rclcpp
-  swri_geometry_util
-  swri_math_util
-  swri_roscpp
-  swri_transform_util
-  tf2_geometry_msgs
-  visualization_msgs
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  ${PROJECT_NAME}_boost
 )
 
 ### Install Libraries and Executables ###
 install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ### Install Header Files ###
-install(DIRECTORY include/
-  DESTINATION include
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-ament_export_dependencies(ament_cmake)
-ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
-ament_package()
 

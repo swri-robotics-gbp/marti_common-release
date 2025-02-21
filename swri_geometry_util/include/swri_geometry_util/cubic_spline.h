@@ -27,13 +27,9 @@
 //
 // *****************************************************************************
 
-#ifndef SWRI_GEOMETRY_UTIL_CUBIC_SPLINE_H_
-#define SWRI_GEOMETRY_UTIL_CUBIC_SPLINE_H_
-
 #include <vector>
 #include <opencv2/core/core.hpp>
-#include <tf2/transform_datatypes.h>
-#include <tf2/LinearMath/Vector3.h>
+#include <tf/transform_datatypes.h>
 
 namespace swri_geometry_util
 {
@@ -43,9 +39,7 @@ namespace swri_geometry_util
     std::vector<std::vector<cv::Vec2d> >& splines);
 
   bool CubicSplineInterpolation(
-    const std::vector<tf2::Vector3>& points,
+    const std::vector<tf::Vector3>& points,
     double delta,
-    std::vector<std::vector<tf2::Vector3> >& splines);
+    std::vector<std::vector<tf::Vector3> >& splines);
 }
-
-#endif

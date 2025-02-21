@@ -2,63 +2,63 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.5.1 (2022-11-29)
-------------------
+2.15.3 (2025-02-21)
+-------------------
+* Increase minimum CMake version to 3.16 to satisfy the compatiblity check in newer CMake versions (`#732 <https://github.com/swri-robotics/marti_common/issues/732>`_)
+  Co-authored-by: Daniel D'Souza <daniel.dsouza@swri.org>
+* Contributors: Daniel D'Souza
 
-3.5.0 (2022-10-11)
-------------------
+2.15.2 (2022-09-01)
+-------------------
 
-3.4.2 (2022-10-10)
-------------------
-* Add Humble Support (`#691 <https://github.com/swri-robotics/marti_common/issues/691>`_)
-  * Adding Humble support based on @shrijitsingh99 PR in https://github.com/swri-robotics/marti_common/pull/685
-* Switch to C API (`#689 <https://github.com/swri-robotics/marti_common/issues/689>`_)
-  * Switch to GEOS C API from C++ API
-* Contributors: David Anthony, Shrijit Singh
+2.14.2 (2020-09-09)
+-------------------
 
-3.3.2 (2020-11-24)
-------------------
+2.14.1 (2020-08-18)
+-------------------
 
-3.3.1 (2020-08-19)
-------------------
+2.14.0 (2020-07-15)
+-------------------
 
-3.3.0 (2020-07-15)
-------------------
-* Add GitHub Actions for CI (ROS2) (`#586 <https://github.com/swri-robotics/marti_common/issues/586>`_)
+2.13.7 (2020-06-26)
+-------------------
+
+2.13.6 (2020-06-17)
+-------------------
+* Update catkin dependencies (`#588 <https://github.com/swri-robotics/marti_common/issues/588>`_)
 * Contributors: P. J. Reed
 
-3.2.1 (2020-06-10)
-------------------
-* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
+2.13.5 (2020-06-17)
+-------------------
+
+2.13.4 (2020-06-16)
+-------------------
+* Clean up Boost usage (`#584 <https://github.com/swri-robotics/marti_common/issues/584>`_)
 * Contributors: P. J. Reed
 
-3.2.0 (2020-05-13)
-------------------
-
-3.1.0 (2020-03-30)
-------------------
-
-3.0.5 (2020-03-10)
-------------------
-
-3.0.4 (2020-03-05)
-------------------
-
-3.0.3 (2019-11-11)
-------------------
-* Fix dependencies for swri_image_util (`#556 <https://github.com/pjreed/marti_common/issues/556>`_)
+2.13.3 (2020-06-12)
+-------------------
+* Use setuptools instead of distutils
 * Contributors: P. J. Reed
 
-3.0.2 (2019-11-11)
-------------------
-
-3.0.1 (2019-11-11)
-------------------
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
+2.13.2 (2020-06-10)
+-------------------
+* Support ROS Noetic (`#581 <https://github.com/swri-robotics/marti_common/issues/581>`_)
 * Contributors: P. J. Reed
+
+2.13.1 (2020-05-21)
+-------------------
+
+2.13.0 (2020-05-13)
+-------------------
+* Rename swri_image_util test (`#575 <https://github.com/swri-robotics/marti_common/issues/575>`_)
+* Contributors: P. J. Reed
+
+2.12.0 (2020-03-25)
+-------------------
+
+2.11.0 (2019-11-13)
+-------------------
 
 2.10.0 (2019-09-04)
 -------------------

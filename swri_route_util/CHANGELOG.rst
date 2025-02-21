@@ -2,64 +2,59 @@
 Changelog for package swri_route_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.5.1 (2022-11-29)
-------------------
+2.15.3 (2025-02-21)
+-------------------
+* Increase minimum CMake version to 3.16 to satisfy the compatiblity check in newer CMake versions (`#732 <https://github.com/swri-robotics/marti_common/issues/732>`_)
+  Co-authored-by: Daniel D'Souza <daniel.dsouza@swri.org>
+* Contributors: Daniel D'Souza
 
-3.5.0 (2022-10-11)
-------------------
-* Fix ament exports (`#693 <https://github.com/swri-robotics/marti_common/issues/693>`_)
-  * Fix ament exports
+2.15.2 (2022-09-01)
+-------------------
+
+2.14.2 (2020-09-09)
+-------------------
+
+2.14.1 (2020-08-18)
+-------------------
+
+2.14.0 (2020-07-15)
+-------------------
+
+2.13.7 (2020-06-26)
+-------------------
+
+2.13.6 (2020-06-17)
+-------------------
+* Update catkin dependencies (`#588 <https://github.com/swri-robotics/marti_common/issues/588>`_)
 * Contributors: P. J. Reed
 
-3.4.2 (2022-10-10)
-------------------
-* Add Humble Support (`#691 <https://github.com/swri-robotics/marti_common/issues/691>`_)
-  * Adding Humble support based on @shrijitsingh99 PR in https://github.com/swri-robotics/marti_common/pull/685
-* Contributors: David Anthony, Shrijit Singh
+2.13.5 (2020-06-17)
+-------------------
 
-3.3.2 (2020-11-24)
-------------------
+2.13.4 (2020-06-16)
+-------------------
 
-3.3.1 (2020-08-19)
-------------------
-
-3.3.0 (2020-07-15)
-------------------
-
-3.2.1 (2020-06-10)
-------------------
-* ROS Foxy support (`#582 <https://github.com/swri-robotics/marti_common/issues/582>`_)
+2.13.3 (2020-06-12)
+-------------------
+* Use setuptools instead of distutils
 * Contributors: P. J. Reed
 
-3.2.0 (2020-05-13)
-------------------
-* Add overload of generateObstacleData for tracked objects (Dashing) (`#579 <https://github.com/swri-robotics/marti_common/issues/579>`_)
-* Contributors: Matthew Bries
+2.13.2 (2020-06-10)
+-------------------
 
-3.1.0 (2020-03-30)
-------------------
+2.13.1 (2020-05-21)
+-------------------
 
-3.0.5 (2020-03-10)
-------------------
-* Fix linking bugs (`#569 <https://github.com/swri-robotics/marti_common/issues/569>`_)
-* Contributors: P. J. Reed
+2.13.0 (2020-05-13)
+-------------------
+* Add overload of generateObstacleData for tracked objects (`#578 <https://github.com/swri-robotics/marti_common/issues/578>`_)
+* Contributors: Matthew Bries <matthew.bries@swri.org>
 
-3.0.4 (2020-03-05)
-------------------
+2.12.0 (2020-03-25)
+-------------------
 
-3.0.3 (2019-11-11)
-------------------
-
-3.0.2 (2019-11-11)
-------------------
-
-3.0.1 (2019-11-11)
-------------------
-
-3.0.0 (2019-11-08)
-------------------
-* ROS2 Dashing conversion (`#549 <https://github.com/pjreed/marti_common/issues/549>`_)
-* Contributors: P. J. Reed
+2.11.0 (2019-11-13)
+-------------------
 
 2.10.0 (2019-09-04)
 -------------------

@@ -30,7 +30,7 @@
 #ifndef SERIAL_UTIL_SERIAL_PORT_H_
 #define SERIAL_UTIL_SERIAL_PORT_H_
 
-#include <cstdint>
+#include <stdint.h>
 
 #include <string>
 #include <vector>

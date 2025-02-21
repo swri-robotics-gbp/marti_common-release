@@ -1,167 +1,150 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project(swri_roscpp)
 
-set(CMAKE_CXX_STANDARD 14)
-
-find_package(ament_cmake REQUIRED)
-find_package(diagnostic_updater REQUIRED)
-find_package(marti_common_msgs REQUIRED)
-find_package(nav_msgs REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(rosidl_cmake REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
-find_package(std_msgs REQUIRED)
-find_package(std_srvs REQUIRED)
-
-# TODO pjr What to do about swri_roscpp-extras.cmake?
-add_library(${PROJECT_NAME} INTERFACE)
-
-target_include_directories(${PROJECT_NAME} INTERFACE
-  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-  "$<INSTALL_INTERFACE:include>"
-)
-
-install(TARGETS ${PROJECT_NAME}
-  EXPORT "export_${PROJECT_NAME}"
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib
-  INCLUDES DESTINATION include
-)
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION include/${PROJECT_NAME}
-)
-
-ament_export_targets("export_${PROJECT_NAME}")
-
-# ### Build Test Node ###
-add_executable(subscriber_test src/nodes/subscriber_test.cpp)
-target_include_directories(subscriber_test
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(subscriber_test
+set(BUILD_DEPS
   diagnostic_updater
+  dynamic_reconfigure 
   marti_common_msgs
+  marti_introspection_msgs
   nav_msgs
-  rclcpp
+  roscpp
   std_msgs
   std_srvs
 )
+
+set(RUNTIME_DEPS
+  diagnostic_updater 
+  dynamic_reconfigure
+  marti_common_msgs
+  marti_introspection_msgs
+  nav_msgs 
+  roscpp
+  std_msgs
+  std_srvs
+)
+
+find_package(Boost REQUIRED COMPONENTS thread)
+
+find_package(PkgConfig)
+pkg_check_modules(YamlCpp yaml-cpp)
+
+### Catkin ###
+find_package(catkin REQUIRED COMPONENTS ${BUILD_DEPS})
+include_directories(include)
+include_directories(SYSTEM
+  ${catkin_INCLUDE_DIRS}
+  ${YamlCpp_INCLUDE_DIR}
+)
+
+if (CATKIN_ENABLE_TESTING)
+  find_package(message_generation REQUIRED)
+  find_package(message_runtime REQUIRED)
+  add_message_files(DIRECTORY msg FILES
+    TestTopicServiceRequest.msg
+    TestTopicServiceResponse.msg
+    )
+  generate_messages(DEPENDENCIES marti_common_msgs)
+endif()
+
+catkin_package(CATKIN_DEPENDS ${RUNTIME_DEPS}
+  DEPENDS Boost
+  INCLUDE_DIRS include
+  LIBRARIES ${YamlCpp_LIBRARIES}
+  CFG_EXTRAS swri_roscpp-extras.cmake)
+
+### Build Test Node ###
+add_executable(dynamic_parameters_test_node src/nodes/dynamic_parameters_test_node.cpp)
+target_link_libraries(dynamic_parameters_test_node
+  ${catkin_LIBRARIES}
+  ${YamlCpp_LIBRARIES}
+  Boost::thread
+)
+if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+  set_target_properties(dynamic_parameters_test_node PROPERTIES 
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED ON
+  )
+endif()
+
+add_executable(subscriber_test src/nodes/subscriber_test.cpp)
+target_link_libraries(subscriber_test ${catkin_LIBRARIES})
+
+add_executable(latched_subscriber_test src/nodes/latched_subscriber_test.cpp)
+target_link_libraries(latched_subscriber_test ${catkin_LIBRARIES})
 
 add_executable(storing_subscriber_test src/nodes/storing_subscriber_test.cpp)
-target_include_directories(storing_subscriber_test
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(storing_subscriber_test
-  diagnostic_updater
-  marti_common_msgs
-  nav_msgs
-  rclcpp
-  std_msgs
-  std_srvs
-  )
+target_link_libraries(storing_subscriber_test ${catkin_LIBRARIES})
 
 add_executable(service_server_test src/nodes/service_server_test.cpp)
-target_include_directories(service_server_test
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
+target_link_libraries(service_server_test
+  ${catkin_LIBRARIES}
+  Boost::thread
 )
-ament_target_dependencies(service_server_test
-  diagnostic_updater
-  marti_common_msgs
-  nav_msgs
-  rclcpp
-  std_msgs
-  std_srvs
-  )
 
 add_executable(timer_test src/nodes/timer_test.cpp)
-target_include_directories(timer_test
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(timer_test
-  diagnostic_updater
-  marti_common_msgs
-  nav_msgs
-  rclcpp
-  std_msgs
-  std_srvs
-  )
+target_link_libraries(timer_test ${catkin_LIBRARIES})
 
-  # Disabling Foxy and Galactic tests until https://github.com/ros2/rosidl/pull/639 is merged
-if (BUILD_TESTING AND ("$ENV{ROS_DISTRO}" STRGREATER "galactic"))
-  find_package(ament_cmake_gtest REQUIRED)
-  find_package(Boost REQUIRED COMPONENTS system)
+add_executable(param_example src/nodes/param_example.cpp)
+target_link_libraries(param_example ${catkin_LIBRARIES})
 
-  rosidl_generate_interfaces(${PROJECT_NAME}_test
-    msg/TestTopicServiceRequest.msg
-    msg/TestTopicServiceResponse.msg
-    DEPENDENCIES std_msgs marti_common_msgs
-    LIBRARY_NAME ${PROJECT_NAME}
-  )
+if (CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(test_params
+                    test/params.test
+                    test/params.cpp)
+  target_link_libraries(test_params ${catkin_LIBRARIES})
 
-  ament_add_gtest(topic_service_test_server test/topic_service_test.cpp)
-
-  # Humble and onwards
-  if ("$ENV{ROS_DISTRO}" STRGREATER "galactic")
-    rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}_test" "rosidl_typesupport_cpp")
-    target_link_libraries(topic_service_test_server
-      Boost::system
-      "${cpp_typesupport_target}"
-    )
-  else()
-    rosidl_target_interfaces(topic_service_test_server "${PROJECT_NAME}_test" "rosidl_typesupport_cpp")
-    target_link_libraries(topic_service_test_server
-      Boost::system
-      swri_roscpp_test__rosidl_typesupport_cpp
-    )
+  add_rostest_gtest(test_dynamic_parameters
+    test/test_dynamic_parameters.test
+    test/test_dynamic_parameters.cpp)
+  target_link_libraries(test_dynamic_parameters ${catkin_LIBRARIES} ${YamlCpp_LIBRARIES})
+  if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+    set_target_properties(test_dynamic_parameters PROPERTIES 
+      CXX_STANDARD 11
+      CXX_STANDARD_REQUIRED ON)
   endif()
 
-  ament_target_dependencies(topic_service_test_server
-    rclcpp
-    marti_common_msgs
+  ### Test the TopicService server and client ###
+  # This is a little different from the way tests are normally declared because we
+  # have a single binary that contains both server and client tests, but the tests
+  # themselves are run in separate .test files.
+  add_executable(test_topic_service
+    test/topic_service_test.cpp)
+  target_link_libraries(test_topic_service
+    ${catkin_LIBRARIES}
+    ${GTEST_LIBRARIES}
+    Boost::thread
   )
-  target_include_directories(topic_service_test_server
-    PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
+  add_dependencies(test_topic_service ${${PROJECT_NAME}_EXPORTED_TARGETS})
+  add_rostest(test/topic_service_client_test.test DEPENDENCIES test_topic_service)
+  add_rostest(test/topic_service_server_test.test DEPENDENCIES test_topic_service)
 
-  ament_export_dependencies(rosidl_default_runtime)
+  add_rostest_gtest(test_swri_node_handle
+    test/swri_node_handle_test.test
+    test/swri_node_handle_test.cpp
+  )
+  target_link_libraries(test_swri_node_handle ${catkin_LIBRARIES})
+  if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+    set_target_properties(test_swri_node_handle PROPERTIES 
+      CXX_STANDARD 11
+      CXX_STANDARD_REQUIRED ON
+    )
+  endif()
 endif()
 
 ### Install Test Node and Headers ###
-install(TARGETS subscriber_test
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
+install(TARGETS subscriber_test latched_subscriber_test param_example
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-install(PROGRAMS scripts/service_splitter.py
-  DESTINATION bin
-)
-install(DIRECTORY include/
-  DESTINATION include
+catkin_install_python(PROGRAMS  scripts/service_splitter.py
+                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 install(DIRECTORY launch/
-  DESTINATION launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-ament_export_dependencies(ament_cmake)
-ament_export_dependencies(diagnostic_updater)
-ament_export_dependencies(marti_common_msgs)
-ament_export_dependencies(nav_msgs)
-ament_export_dependencies(rclcpp)
-ament_export_dependencies(std_msgs)
-ament_export_dependencies(std_srvs)
-ament_export_include_directories(include)
-
-ament_package(CONFIG_EXTRAS cmake/swri_roscpp-extras.cmake )
