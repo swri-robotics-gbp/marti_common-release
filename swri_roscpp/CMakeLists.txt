@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.16)
 
 project(swri_roscpp)
 
@@ -119,6 +119,18 @@ if (CATKIN_ENABLE_TESTING)
   add_dependencies(test_topic_service ${${PROJECT_NAME}_EXPORTED_TARGETS})
   add_rostest(test/topic_service_client_test.test DEPENDENCIES test_topic_service)
   add_rostest(test/topic_service_server_test.test DEPENDENCIES test_topic_service)
+
+  add_rostest_gtest(test_swri_node_handle
+    test/swri_node_handle_test.test
+    test/swri_node_handle_test.cpp
+  )
+  target_link_libraries(test_swri_node_handle ${catkin_LIBRARIES})
+  if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+    set_target_properties(test_swri_node_handle PROPERTIES 
+      CXX_STANDARD 11
+      CXX_STANDARD_REQUIRED ON
+    )
+  endif()
 endif()
 
 ### Install Test Node and Headers ###
